@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>USPS / UPS / FedEx Claim Guide (2025) – Lost, Damaged & Missing Packages</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description"
+        content="2025 guide to getting refunds for lost, damaged or missing USPS, UPS and FedEx shipments – exact claim steps, evidence checklist and scripts for buyers and sellers." />
+  <meta name="robots" content="index,follow" />
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="USPS / UPS / FedEx Claim Guide (2025)" />
+  <meta property="og:description"
+        content="Step-by-step guide for winning shipping claims with USPS, UPS and FedEx – lost, damaged or “delivered but not received” packages." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://skillona.ai/guides/usps-ups-fedex-claim-guide/" />
+  <meta property="og:site_name" content="Skillona.ai" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="USPS / UPS / FedEx Claim Guide (2025)" />
+  <meta name="twitter:description"
+        content="How to document, file and escalate USPS, UPS and FedEx claims so you actually get paid – not bounced between carrier and seller." />
+
+  <style>
+    :root {
+      --bg: #050814;
+      --bg-elevated: #0b1220;
+      --bg-soft: #101827;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.12);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border-subtle: #1f2937;
+      --danger: #f97373;
+      --success: #4ade80;
+      --radius-lg: 18px;
+      --radius-xl: 26px;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
+      --max-width: 900px;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 55%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
+
+    .page {
+      width: 100%;
+      max-width: var(--max-width);
+      padding: 28px 18px 40px;
+    }
+
+    @media (min-width: 768px) {
+      .page {
+        padding: 40px 0 64px;
+      }
+    }
+
+    .shell {
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(2, 6, 23, 0.98));
+      border-radius: 32px;
+      padding: 28px 20px 30px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      backdrop-filter: blur(26px);
+    }
+
+    @media (min-width: 768px) {
+      .shell {
+        padding: 32px 36px 38px;
+      }
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 26px;
+    }
+
+    .tagline {
+      font-size: 13px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tagline-pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--border-subtle);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tag-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-soft);
+    }
+
+    h1 {
+      font-size: 26px;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin: 0;
+    }
+
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 32px;
+      }
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 640px;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .meta-pill {
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(15, 23, 42, 0.85);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .meta-pill strong {
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.9fr) minmax(0, 1.1fr);
+      gap: 18px;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .article {
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(129, 140, 248, 0.12), transparent 52%),
+                  linear-gradient(145deg, #020617, #020617);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      padding: 20px 18px 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (min-width: 768px) {
+      .article {
+        padding: 22px 22px 24px;
+      }
+    }
+
+    .article::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.18), transparent 60%);
+      opacity: 0.7;
+      pointer-events: none;
+      mix-blend-mode: soft-light;
+    }
+
+    .article-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .article h2 {
+      font-size: 18px;
+      margin-top: 20px;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .article h3 {
+      font-size: 15px;
+      margin-top: 16px;
+      margin-bottom: 6px;
+    }
+
+    .article p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #d1d5db;
+      margin: 6px 0 8px;
+    }
+
+    .article ul,
+    .article ol {
+      margin: 6px 0 10px 0;
+      padding-left: 18px;
+      font-size: 14px;
+      color: #d1d5db;
+    }
+
+    .article li {
+      margin-bottom: 5px;
+    }
+
+    .callout {
+      margin: 14px 0 12px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      font-size: 13px;
+      color: #e5e7eb;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .callout-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .checklist {
+      border-radius: 16px;
+      border: 1px dashed rgba(75, 85, 99, 0.9);
+      padding: 10px 12px;
+      margin-top: 10px;
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .checklist h3 {
+      margin-top: 0;
+      font-size: 14px;
+    }
+
+    .checklist ul {
+      margin: 4px 0 0;
+      padding-left: 18px;
+    }
+
+    .checklist li::marker {
+      content: "✓ ";
+      color: var(--success);
+      font-weight: 600;
+    }
+
+    .faq {
+      margin-top: 16px;
+      border-top: 1px solid rgba(31, 41, 55, 0.9);
+      padding-top: 10px;
+    }
+
+    .faq-item + .faq-item {
+      margin-top: 8px;
+    }
+
+    .faq-q {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .faq-a {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .sidebar-card {
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 55%),
+                  linear-gradient(145deg, #020617, #020617);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      padding: 14px 14px 16px;
+    }
+
+    .sidebar-card h3 {
+      margin: 0 0 8px;
+      font-size: 14px;
+    }
+
+    .sidebar-card p {
+      margin: 0 0 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .badge span {
+      font-size: 8px;
+      color: var(--accent);
+    }
+
+    .link-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 13px;
+    }
+
+    .link-list li + li {
+      margin-top: 4px;
+    }
+
+    .link-list a {
+      color: #e5e7eb;
+      text-decoration: none;
+    }
+
+    .link-list a:hover {
+      color: var(--accent);
+    }
+
+    .ad-slot {
+      margin-top: 8px;
+      border-radius: 14px;
+      border: 1px dashed rgba(75, 85, 99, 0.9);
+      padding: 10px 8px;
+      font-size: 11px;
+      text-align: center;
+      color: var(--muted);
+      background: rgba(15, 23, 42, 0.92);
+    }
+
+    .ad-slot.small {
+      padding: 6px 6px;
+      font-size: 10px;
+    }
+
+    footer {
+      margin-top: 26px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-subtle);
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--accent);
+    }
+  </style>
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://skillona.ai/guides/usps-ups-fedex-claim-guide/"
+    },
+    "headline": "USPS / UPS / FedEx Claim Guide (2025)",
+    "description": "Step-by-step guide to filing and winning USPS, UPS and FedEx claims for lost, damaged or missing packages as a buyer or seller.",
+    "inLanguage": "en-US",
+    "author": {
+      "@type": "Organization",
+      "name": "Skillona.ai"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Skillona.ai",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://skillona.ai/logo.png"
+      }
+    },
+    "datePublished": "2025-01-01",
+    "dateModified": "2025-01-01"
+  }
+  </script>
+</head>
+<body>
+  <div class="page">
+    <div class="shell">
+      <header>
+        <div class="tagline">
+          <div class="tagline-pill">
+            <span class="tag-dot"></span>
+            SHIPPING CLAIMS · USPS · UPS · FEDEX
+          </div>
+          <span>Skillona.ai · Practical micro-guides</span>
+        </div>
+        <h1>USPS / UPS / FedEx Claim Guide (2025)</h1>
+        <p class="subtitle">
+          How to get money back when a package is lost, damaged or “delivered”
+          but never arrived – exact claim steps for USPS, UPS and FedEx,
+          evidence you must collect, and scripts for both buyers and sellers.
+        </p>
+        <div class="meta-row">
+          <div class="meta-pill">
+            ⏱️ <strong>Estimated reading:</strong>&nbsp;10–15 minutes
+          </div>
+          <div class="meta-pill">
+            📦 <strong>Covers:</strong>&nbsp;USPS, UPS &amp; FedEx (U.S. shipments)
+          </div>
+          <div class="meta-pill">
+            🎯 <strong>Focus:</strong>&nbsp;Claims, refunds, escalation
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <article class="article">
+          <div class="article-inner">
+            <div class="section-label">Overview</div>
+            <h2>1. Who should file the claim – buyer or seller?</h2>
+            <p>
+              Before you start clicking around carrier websites, decide
+              <strong>who actually files the claim</strong>. In most cases:
+            </p>
+            <ul>
+              <li>
+                The <strong>shipper (seller)</strong> is the one with the
+                contract with USPS/UPS/FedEx and should file the claim.
+              </li>
+              <li>
+                The <strong>buyer</strong> works with the seller (or marketplace
+                like Amazon/eBay/Etsy) and provides photos and statements.
+              </li>
+              <li>
+                Marketplaces often have their own refund rules that can be
+                easier to use than carrier claims – use whichever route is fastest.
+              </li>
+            </ul>
+            <p>
+              As a seller, a clean claim process makes you look professional and
+              protects your margins. As a buyer, knowing the rules stops you
+              being bounced between “talk to the seller” and “talk to the carrier”.
+            </p>
+
+            <div class="callout">
+              <div class="callout-icon">!</div>
+              <div>
+                Always start with the party you paid (store, marketplace,
+                merchant). If they refuse to help or are slow, you can then
+                push for a direct carrier claim or a payment dispute (credit card/PayPal).
+              </div>
+            </div>
+
+            <div class="section-label">Step 1 – Classify the problem</div>
+            <h2>2. Lost, damaged, or “delivered but not received”?</h2>
+            <p>Carriers treat each scenario differently:</p>
+            <ul>
+              <li>
+                <strong>Lost:</strong> Tracking stops updating, shows “in
+                transit” for too long, or carrier admits they can’t locate it.
+              </li>
+              <li>
+                <strong>Damaged:</strong> Item arrives broken, crushed, wet,
+                opened, or with missing contents.
+              </li>
+              <li>
+                <strong>Delivered, not received:</strong> Tracking shows
+                “delivered” but the package is not there.
+              </li>
+            </ul>
+            <p>
+              For each category, you want to <strong>freeze evidence</strong>
+              immediately: photos, tracking screenshots, notes of who you spoke to and when.
+            </p>
+
+            <div class="checklist">
+              <h3>Immediate evidence checklist</h3>
+              <ul>
+                <li>Screenshot of tracking page showing current status.</li>
+                <li>Photos of box, label and damage (if applicable).</li>
+                <li>Photo of packaging materials (bubble wrap, fillers, etc.).</li>
+                <li>Proof of value (invoice, order confirmation, receipt).</li>
+                <li>Short written description of what happened and when you noticed it.</li>
+              </ul>
+            </div>
+
+            <div class="section-label">Step 2 – USPS claims</div>
+            <h2>3. USPS – lost and damaged package claims</h2>
+            <p>
+              For USPS, only certain services are <strong>insured by default</strong>
+              (Priority Mail, Priority Mail Express up to a limit). Extra
+              insurance can be purchased on most services.
+            </p>
+
+            <h3>USPS lost package flow</h3>
+            <ol>
+              <li>Check tracking and wait a few days past expected delivery.</li>
+              <li>
+                File a <strong>Missing Mail Search</strong> (online form) – this
+                triggers internal tracing.
+              </li>
+              <li>
+                If it still doesn’t show up and the service was insured, file an
+                official <strong>USPS insurance claim</strong> online.
+              </li>
+            </ol>
+
+            <h3>USPS damaged package flow</h3>
+            <ol>
+              <li>
+                Take photos <strong>before discarding any packaging</strong>.
+              </li>
+              <li>
+                Keep the box and contents – USPS may ask you to bring them to a
+                post office for inspection.
+              </li>
+              <li>
+                File an online claim with photos and proof of value.
+              </li>
+            </ol>
+
+            <p><strong>USPS tip:</strong> For higher-value items, ask the buyer
+              to keep everything untouched until USPS says the inspection is complete.</p>
+
+            <div class="callout">
+              <div class="callout-icon">i</div>
+              <div>
+                USPS deadlines and documentation change occasionally. As a
+                rule, don’t wait: start Missing Mail / claim process as soon as
+                the package is clearly late or visibly damaged.
+              </div>
+            </div>
+
+            <div class="section-label">Step 3 – UPS claims</div>
+            <h2>4. UPS – lost and damaged package claims</h2>
+            <p>
+              With UPS, the <strong>shipper usually must initiate</strong> the
+              claim, especially for business accounts and marketplace labels.
+            </p>
+
+            <h3>UPS damaged package flow</h3>
+            <ol>
+              <li>
+                Document damage (photos of outside box, label, inside packing, item).
+              </li>
+              <li>
+                Contact UPS or start an online claim – provide tracking number and description.
+              </li>
+              <li>
+                UPS may send a driver to inspect and pick up the package, or ask
+                you to keep it for a period.
+              </li>
+              <li>
+                Upload proof of value and wait for their investigation and decision.
+              </li>
+            </ol>
+
+            <h3>UPS lost package flow</h3>
+            <ol>
+              <li>
+                Wait until the shipment is considered “lost” by UPS (typically a few days after last scan).
+              </li>
+              <li>File a claim online as shipper, attaching value proof.</li>
+              <li>UPS runs internal tracing; if not found, they adjudicate the claim.</li>
+            </ol>
+
+            <p>
+              UPS includes a limited liability amount by default (often around
+              $100 for many services). Extra declared value raises the maximum
+              they will pay if the claim is approved.
+            </p>
+
+            <div class="section-label">Step 4 – FedEx claims</div>
+            <h2>5. FedEx – lost and damaged package claims</h2>
+            <p>
+              FedEx claims are also typically filed by the shipper, especially
+              for commercial/online-store shipments.
+            </p>
+            <h3>FedEx damaged package flow</h3>
+            <ol>
+              <li>Take detailed photos (box, label, packing, item damage).</li>
+              <li>Start claim on FedEx site with tracking number and value.</li>
+              <li>
+                FedEx may inspect the package or ask you to keep it for a set time.
+              </li>
+              <li>
+                Upload invoice or proof of value and any repair estimates if applicable.
+              </li>
+            </ol>
+
+            <h3>FedEx lost package flow</h3>
+            <ol>
+              <li>
+                Confirm tracking has stopped updating and FedEx considers it potentially lost.
+              </li>
+              <li>File claim with description and value documentation.</li>
+              <li>FedEx traces internally; if not found, they approve or deny.</li>
+            </ol>
+
+            <p>
+              As with UPS, FedEx has a default liability cap (often around $100)
+              unless extra declared value was purchased.
+            </p>
+
+            <div class="section-label">Evidence & documentation</div>
+            <h2>6. Proof you’ll almost always be asked for</h2>
+            <p>
+              Regardless of carrier, claims usually require:
+            </p>
+            <ul>
+              <li><strong>Tracking number</strong> and shipment date.</li>
+              <li><strong>Proof of value:</strong> invoice, receipt, PayPal/Stripe order, marketplace order page.</li>
+              <li><strong>Photos:</strong> outer box, label, inner packing, damaged item.</li>
+              <li>For lost items, a description and approximate value.</li>
+            </ul>
+
+            <p><strong>Value tip:</strong> Carriers pay based on <em>actual value</em>,
+              not automatically the full declared amount. Overstating value can
+              slow or hurt your claim.</p>
+
+            <div class="checklist">
+              <h3>Claim file you should build for every shipment</h3>
+              <ul>
+                <li>Order confirmation or invoice (PDF or screenshot).</li>
+                <li>Tracking history screenshot.</li>
+                <li>Photos (or note: “no photos possible; package never arrived”).</li>
+                <li>Short explanation of what went wrong.</li>
+                <li>Claim number and all carrier correspondence.</li>
+              </ul>
+            </div>
+
+            <div class="section-label">Scripts</div>
+            <h2>7. Scripts for buyers, sellers and support calls</h2>
+            <h3>Buyer → Seller first message</h3>
+            <p style="font-size:13px; color:#e5e7eb; background:rgba(15,23,42,0.9); border-radius:10px; padding:8px 10px; border:1px solid rgba(55,65,81,0.9);">
+              Hi, my order #[order] shows [“delivered” / “in transit” with no
+              updates since [date] / arrived damaged]. I’ve attached photos /
+              tracking screenshots. Could you please help by starting a claim
+              with [USPS/UPS/FedEx] and arranging a replacement or refund
+              according to your policy?
+            </p>
+
+            <h3>Seller → Carrier claim note (damaged)</h3>
+            <p style="font-size:13px; color:#e5e7eb; background:rgba(15,23,42,0.9); border-radius:10px; padding:8px 10px; border:1px solid rgba(55,65,81,0.9);">
+              This shipment (tracking #[tracking]) was delivered on [date] and
+              reported damaged by the receiver. The attached photos show the
+              external box, label, internal packaging and the damaged product.
+              The item was new and undamaged when shipped, and was packaged with
+              [type of packing].<br /><br />
+              The commercial invoice and proof of value ($[amount]) are attached.
+              Please review for reimbursement under the service terms and
+              declared value.
+            </p>
+
+            <h3>Seller → Buyer update while claim is pending</h3>
+            <p style="font-size:13px; color:#e5e7eb; background:rgba(15,23,42,0.9); border-radius:10px; padding:8px 10px; border:1px solid rgba(55,65,81,0.9);">
+              Thanks for your patience. We’ve opened a claim with [carrier] and
+              they’re currently reviewing it (case #[case]). They may contact
+              you or ask for additional photos/inspection. We’ll keep you
+              updated and will [ship a replacement / issue a refund] as soon as
+              the claim is approved or within [X] days, whichever comes first.
+            </p>
+
+            <div class="section-label">“Delivered” but missing</div>
+            <h2>8. Handling “delivered” tracking when the package is gone</h2>
+            <p>
+              Carriers often deny responsibility if tracking says “delivered”.
+              To improve your odds:
+            </p>
+            <ul>
+              <li>Ask neighbours or building management and check around the property.</li>
+              <li>Check if there’s a photo of where the driver left it.</li>
+              <li>
+                Confirm the correct address, unit number and name on the label.
+              </li>
+              <li>
+                File a carrier inquiry (sometimes called a “driver follow-up”
+                or “proof of delivery” request).
+              </li>
+            </ul>
+
+            <p>
+              As a seller, for high-value orders, use:
+            </p>
+            <ul>
+              <li>Signature confirmation or at least “adult signature required”.</li>
+              <li>Insurance or third-party shipping protection.</li>
+              <li>
+                Clear policies explaining what happens in “delivered, not
+                received” cases (shared risk vs. seller fully covering).
+              </li>
+            </ul>
+
+            <div class="callout">
+              <div class="callout-icon">!</div>
+              <div>
+                For porch-theft scenarios, carriers usually deny claims unless
+                they clearly mis-delivered the package. At that point, the
+                decision is often between seller goodwill, marketplace policy
+                and buyer’s homeowners/renters insurance.
+              </div>
+            </div>
+
+            <div class="section-label">Escalation</div>
+            <h2>9. When to escalate – and to whom</h2>
+            <p>
+              If the carrier denies your claim and you still believe you’re
+              right, options include:
+            </p>
+            <ul>
+              <li>
+                Ask for <strong>written explanation</strong> of the denial and
+                what evidence they used.
+              </li>
+              <li>
+                If you’re the buyer, push the seller / marketplace with that denial letter.
+              </li>
+              <li>
+                For card payments, consider a <strong>chargeback</strong> if the
+                seller refuses to replace/refund and you never received the item.
+              </li>
+              <li>
+                For big losses, use a third-party shipping insurance company
+                going forward instead of relying on carrier decisions.
+              </li>
+            </ul>
+
+            <div class="section-label">Mistakes & FAQs</div>
+            <h2>10. Common mistakes that kill shipping claims</h2>
+            <ul>
+              <li>
+                Throwing away packaging and damaged goods before claim is resolved.
+              </li>
+              <li>
+                Filing under the wrong party (receiver files when only shipper can).
+              </li>
+              <li>
+                Lack of proof of value – no invoice or order confirmation uploaded.
+              </li>
+              <li>
+                Waiting weeks or months before reporting, past claim deadlines.
+              </li>
+              <li>
+                Overstating value or changing your story halfway through the process.
+              </li>
+            </ul>
+
+            <div class="faq">
+              <h2>11. Quick FAQs</h2>
+
+              <div class="faq-item">
+                <div class="faq-q">Do carriers always refund shipping cost too?</div>
+                <div class="faq-a">
+                  Not always. Sometimes they only reimburse the item value up to
+                  liability limits. Check each service’s terms to see whether
+                  postage is refundable on approved claims.
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <div class="faq-q">Can I claim if I didn’t buy extra insurance?</div>
+                <div class="faq-a">
+                  Yes, but you are usually limited to the default liability
+                  (often around $100). Higher-value shipments strongly benefit
+                  from additional insurance or third-party protection.
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <div class="faq-q">Should I refund the customer before the claim is resolved?</div>
+                <div class="faq-a">
+                  For good customer experience, many businesses do – especially
+                  for lower-value items. For high-value shipments, you might
+                  wait until the carrier at least accepts the claim or use a
+                  clear written policy on timing.
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <div class="faq-q">Can a denied claim be appealed?</div>
+                <div class="faq-a">
+                  Often you can submit new evidence and ask for reconsideration,
+                  but repeated appeals without new information usually go nowhere.
+                  Strong documentation up front is more effective.
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <aside class="sidebar">
+          <div class="sidebar-card">
+            <div class="badge"><span>●</span> ADSENSE / DISPLAY SLOT</div>
+            <h3>Primary ad position</h3>
+            <p>
+              Perfect for AdSense, third-party shipping insurance offers or
+              eCommerce tools that auto-handle claims and buyer communication.
+            </p>
+            <div class="ad-slot">
+              AdSense placeholder – USPS/UPS/FedEx claims sidebar slot.
+            </div>
+          </div>
+
+          <div class="sidebar-card">
+            <h3>Related protection guides</h3>
+            <p>Protect every step: payment, shipping and disputes.</p>
+            <ul class="link-list">
+              <li>
+                <a href="/guides/zelle-venmo-cashapp-scam-refund.html">
+                  Zelle / Venmo / CashApp Scam Refund Playbook
+                </a>
+              </li>
+              <li>
+                <a href="/guides/chargebacks-for-digital-products.html">
+                  Chargebacks for Digital Products – Win Legit Disputes
+                </a>
+              </li>
+              <li>
+                <a href="/guides/debt-collection-cease-and-desist.html">
+                  Debt Collection Cease &amp; Desist Letter Toolkit
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="sidebar-card">
+            <h3>eCom & seller toolkit</h3>
+            <p>
+              Turn this into SOPs, canned responses and claim templates your
+              VA or support team can run without you.
+            </p>
+            <div class="ad-slot small">
+              Placeholder for digital product:
+              “Shipping Claim SOP Pack – Templates, Scripts &amp; Checklists”.
+            </div>
+          </div>
+        </aside>
+      </main>
+
+      <div class="ad-slot" style="margin-top:22px;">
+        Second AdSense / banner placeholder – bottom of page, above footer.
+      </div>
+
+      <footer>
+        <div>© 2025 Skillona.ai · Educational only. Not legal, tax or financial advice.</div>
+        <div>
+          <a href="/about.html">About</a> ·
+          <a href="/disclaimer.html">Disclaimer</a> ·
+          <a href="/contact.html">Contact</a>
+        </div>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>
