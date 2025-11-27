@@ -5,7 +5,7 @@
   <title>California Supplemental Property Tax (2025 Guide) – What Homeowners Must Know</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description"
-        content="A clear 2025 guide to California Supplemental Property Tax bills: why you receive them, how they are calculated, payment deadlines and appeal options." />
+        content="Clear 2025 guide to California supplemental property tax bills: why you receive them, how they’re calculated, deadlines, escrow issues and appeal options." />
   <meta name="robots" content="index,follow" />
   <link rel="icon" href="/favicon.ico" />
 
@@ -147,12 +147,60 @@
       font-size: 13px;
     }
 
+    .callout-strong {
+      border-color: #22c55e;
+    }
+
+    .warning {
+      border-color: #f97316;
+    }
+
     .sidebar-card {
       background: radial-gradient(circle at top left, rgba(56,189,248,0.18), transparent 55%),
                   linear-gradient(#020617, #020617);
       padding: 16px;
       border-radius: var(--radius-xl);
       border: 1px solid rgba(55,65,81,0.95);
+      margin-bottom: 16px;
+    }
+
+    .sidebar-card h3 {
+      margin-top: 0;
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    .sidebar-card p,
+    .sidebar-card ul {
+      font-size: 13px;
+      color: #cbd5f5;
+    }
+
+    .sidebar-card ul {
+      padding-left: 16px;
+      margin: 6px 0 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.5);
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.22), rgba(37,99,235,0.38));
+      color: #0b1120;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .btn span {
+      font-size: 11px;
+      opacity: 0.9;
+      margin-left: 6px;
     }
 
     footer {
@@ -164,8 +212,17 @@
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
+      gap: 8px;
     }
 
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
   </style>
 
   <!-- Schema -->
@@ -186,82 +243,353 @@
 <body>
 
 <div class="page">
-<div class="shell">
+  <div class="shell">
 
-<header>
-  <h1>California Supplemental Property Tax (2025 Guide)</h1>
-  <p class="subtitle">
-    Why you received a supplemental bill after buying a home in California,
-    how the amount is calculated, and how to dispute incorrect values.
-  </p>
+    <header>
+      <h1>California Supplemental Property Tax (2025 Guide)</h1>
+      <p class="subtitle">
+        Why you received a supplemental bill after buying a home in California,
+        how the amount is calculated, and how to spot mistakes before you overpay.
+      </p>
 
-  <div class="meta">
-    <div>⏱️ 8–12 min</div>
-    <div>📍 Applies to all California counties</div>
-    <div>🏠 Buyers & investors</div>
+      <div class="meta">
+        <div>⏱️ 8–12 min</div>
+        <div>📍 Applies to all California counties</div>
+        <div>🏠 Owners & investors</div>
+      </div>
+    </header>
+
+    <main>
+      <article class="article">
+
+        <h2>1. What is a California Supplemental Property Tax Bill?</h2>
+        <p>
+          When you buy property in California, the county reassesses the value as of
+          the date you take ownership. If this <strong>new value is higher</strong>
+          than the previous owner’s assessed value, the county issues an
+          <strong>extra one-time tax bill</strong> called the
+          <strong>supplemental property tax bill</strong>.
+        </p>
+
+        <div class="callout">
+          Many buyers are surprised because this bill arrives <strong>months after closing</strong>.
+          It is separate from your regular annual property tax and separate from what your lender
+          collects for escrow.
+        </div>
+
+        <h2>2. When Will You Receive the Supplemental Bill?</h2>
+        <p>
+          The county has to process the reassessment first. Typical timing:
+        </p>
+        <ul>
+          <li><strong>2–8 months</strong> after you close, in many counties.</li>
+          <li>Sometimes sooner if the assessor’s office is caught up.</li>
+          <li>In slower counties, it can take close to a year.</li>
+        </ul>
+
+        <h3>You May Receive Two Bills</h3>
+        <p>
+          If your purchase date overlaps two fiscal years (California’s property-tax year runs
+          <strong>July 1 – June 30</strong>), the county often splits the adjustment into:
+        </p>
+        <ul>
+          <li><strong>Supplemental Bill #1</strong> – for the part of the current fiscal year.</li>
+          <li><strong>Supplemental Bill #2</strong> – for part of the next fiscal year.</li>
+        </ul>
+
+        <div class="callout warning">
+          Even if your mortgage is impounded (escrow), <strong>supplemental bills are usually mailed
+          directly to you</strong>, not to your lender. Ignoring them can lead to penalties and eventually
+          tax liens if unpaid.
+        </div>
+
+        <h2>3. How the Supplemental Tax is Calculated</h2>
+        <p>The basic idea:</p>
+
+        <p>
+          <strong>(New assessed value − Old assessed value) × tax rate × proration factor</strong>
+        </p>
+
+        <ul>
+          <li>
+            <strong>Old assessed value</strong> – the value the county had on the books for the previous owner
+            (often much lower if they owned the home for many years).
+          </li>
+          <li>
+            <strong>New assessed value</strong> – typically close to your purchase price, subject to some adjustments.
+          </li>
+          <li>
+            <strong>Tax rate</strong> – roughly <strong>1% base</strong> plus local voter-approved bonds and assessments
+            (depends on your area).
+          </li>
+          <li>
+            <strong>Proration factor</strong> – proportion of the fiscal year left from your closing date
+            through June 30.
+          </li>
+        </ul>
+
+        <h3>Example (Simple Illustration)</h3>
+        <p>
+          Previous owner’s assessed value: <strong>$450,000</strong><br>
+          Your purchase price (new assessed value): <strong>$650,000</strong><br>
+          Increase in assessed value: <strong>$200,000</strong><br>
+          Combined tax rate (base + local): <strong>1.1%</strong><br>
+          Days left in fiscal year when you bought: roughly <strong>½ the year</strong><br><br>
+          Extra annual tax on the $200,000 increase: <strong>$200,000 × 1.1% = $2,200</strong><br>
+          Supplemental for the remaining half-year: <strong>$2,200 × 0.5 = $1,100</strong>
+        </p>
+
+        <div class="callout callout-strong">
+          The actual supplemental bill on your property may include <strong>multiple line items</strong>
+          (school bonds, special assessments, Mello-Roos, etc.). Always read every line and compare
+          it with your regular tax bill.
+        </div>
+
+        <h2>4. What if the New Value is Lower?</h2>
+        <p>
+          If you purchased for <strong>less</strong> than the prior assessed value (for example, a distressed sale),
+          the reassessment may go <strong>down</strong>. In that case, you can receive a:
+        </p>
+        <ul>
+          <li><strong>Negative supplemental bill</strong> (credit), or</li>
+          <li>Refund / adjustment reducing your taxes for the remainder of the year.</li>
+        </ul>
+        <p>
+          Not every situation with a lower price leads to a credit, but it is worth checking the numbers.
+        </p>
+
+        <h2>5. Due Dates and Penalties</h2>
+        <p>
+          Supplemental bills have their <strong>own due dates</strong> printed on the face of the bill.
+          They do <strong>not</strong> follow the regular “November 1 / February 1 – delinquent December 10 / April 10”
+          schedule unless specifically stated.
+        </p>
+        <p>In general:</p>
+        <ul>
+          <li>First installment is due on the date shown; after a set deadline, penalties and interest apply.</li>
+          <li>If you choose to pay in full by the first due date, you avoid the second-installment deadline.</li>
+        </ul>
+        <p>
+          If you are unsure, call the phone number on the bill and confirm <strong>exact delinquency dates</strong>
+          so you do not miss them by a few days.
+        </p>
+
+        <h2>6. Escrow / Impound Accounts – Will My Lender Pay This?</h2>
+        <p>
+          Most loan servicers <strong>do not automatically pay supplemental bills</strong>, even if you have an
+          impound (escrow) account. They generally only pay the <strong>regular secured tax bill</strong> that arrives
+          twice per year.
+        </p>
+        <p>Typical pattern:</p>
+        <ul>
+          <li>The county mails the supplemental bill to <strong>you</strong> at your property mailing address.</li>
+          <li>You are responsible for paying it directly to the tax collector.</li>
+          <li>
+            If the bill is large, you can call your servicer and ask whether they can
+            <strong>re-analyze your escrow</strong> and help spread the impact, but policies vary.
+          </li>
+        </ul>
+
+        <div class="callout warning">
+          If you assume “the bank will handle it” and ignore the bill, the county can still apply
+          <strong>penalties, interest and tax liens</strong> even if your regular annual taxes are paid on time.
+        </div>
+
+        <h2>7. When the Number Looks Too High – Basic Checks</h2>
+        <p>
+          Before writing a big check, make sure the supplemental bill is <strong>internally consistent</strong>.
+          Quick checks you can do:
+        </p>
+        <ol>
+          <li>
+            <strong>Compare assessed value to your purchase price.</strong><br>
+            The “new value” should be close to what you actually paid, unless there were special circumstances.
+          </li>
+          <li>
+            <strong>Verify the old assessed value.</strong><br>
+            Look at the last secured tax bill in the seller’s name or use the county property-tax lookup.
+          </li>
+          <li>
+            <strong>Check the date of change in ownership.</strong><br>
+            The prorated period should start from the date you closed, not some other date.
+          </li>
+          <li>
+            <strong>Add up the rates.</strong><br>
+            If your regular secured bill is about 1.15% of the assessed value, your supplemental should line up
+            with the same total rate on the difference, adjusted for the portion of the year.
+          </li>
+        </ol>
+
+        <h2>8. Appealing the Value (Informal Review vs. Formal Assessment Appeal)</h2>
+        <p>
+          If you believe the <strong>assessed value is too high</strong> (for example, the market dropped between contract
+          and closing, or the property needs major repairs), you generally have two paths:
+        </p>
+
+        <h3>1) Informal Review by the Assessor</h3>
+        <p>
+          Many counties let you contact the assessor’s office for an <strong>informal review</strong> first.
+          You can provide:
+        </p>
+        <ul>
+          <li>your purchase contract and closing statement,</li>
+          <li>photos of condition issues, and</li>
+          <li>recent comparable sales (“comps”) that support a lower value.</li>
+        </ul>
+
+        <h3>2) Formal Assessment Appeal</h3>
+        <p>
+          If informal talks do not fix the problem, you can file a <strong>formal appeal</strong> with the county
+          Assessment Appeals Board. Key points:
+        </p>
+        <ul>
+          <li>
+            There is a <strong>strict filing deadline</strong> (often a fixed period from the mailing date of the notice
+            or from the assessment roll date).
+          </li>
+          <li>
+            You typically file a specific appeal form, attach evidence, and may need to appear at a hearing.
+          </li>
+          <li>
+            If you win, your supplemental (and sometimes regular) tax can be <strong>reduced and partially refunded</strong>.
+          </li>
+        </ul>
+
+        <div class="callout">
+          The paid Skillona.ai PDF kit includes a <strong>fillable appeal-support letter template</strong> and
+          a simple <strong>comparable-sales worksheet</strong> you can adapt for most California counties.
+        </div>
+
+        <h2>9. Investors, Flippers and New Construction</h2>
+        <p>
+          For investors and builders, supplemental bills can be more frequent or larger than expected:
+        </p>
+        <ul>
+          <li>
+            <strong>Fix-and-flip:</strong> if you buy low, remodel and the assessor later revisits the value,
+            you may see multiple supplemental events.
+          </li>
+          <li>
+            <strong>New construction / additions:</strong> major improvements (ADUs, room additions, pools) can trigger
+            separate supplemental assessments on the added value.
+          </li>
+          <li>
+            <strong>Partial year ownership:</strong> if you buy and sell within the same tax year, more than one
+            supplemental bill can be generated for different owners’ time periods.
+          </li>
+        </ul>
+        <p>
+          For those holding multiple properties, it’s worth tracking <strong>closing dates and improvement completion dates</strong>
+          in a spreadsheet so supplemental bills don’t come as a shock months later.
+        </p>
+
+        <h2>10. What Happens If You Don’t Pay?</h2>
+        <p>
+          Unpaid supplemental taxes follow a similar path as unpaid regular property taxes:
+        </p>
+        <ul>
+          <li>Penalties and interest added after the delinquency date.</li>
+          <li>Amounts become part of the <strong>secured tax lien</strong> on the property.</li>
+          <li>
+            In extreme long-term non-payment cases, properties can eventually be
+            <strong>subject to tax-sale procedures</strong> (this is a multi-year process).
+          </li>
+        </ul>
+        <p>
+          If you genuinely cannot pay the full amount by the deadline, some counties offer
+          <strong>payment-plan options</strong>. Contact the tax collector early, before the bill is delinquent,
+          and ask what programs they have in place.
+        </p>
+
+        <h2>11. Quick Checklist Before You Pay</h2>
+        <ul>
+          <li>Does the <strong>new assessed value</strong> roughly match what you actually paid?</li>
+          <li>Is the <strong>proration period</strong> consistent with your closing date?</li>
+          <li>Does the <strong>effective tax rate</strong> (total tax ÷ value) look similar to your regular bill?</li>
+          <li>Did the county mail you <strong>more than one supplemental bill</strong> for the same event?</li>
+          <li>Do you have grounds (and time) to request an <strong>informal review or formal appeal</strong>?</li>
+        </ul>
+
+        <div class="callout callout-strong">
+          Printing the bill and writing these checks by hand often makes errors jump out. If something
+          looks off, call the assessor’s office and politely ask them to walk you through the calculation
+          line by line.
+        </div>
+
+        <h2>12. If You Just Closed and Want to Plan Ahead</h2>
+        <p>
+          If you recently bought and have not yet received any supplemental bills, you can:
+        </p>
+        <ul>
+          <li>
+            Estimate your likely supplemental tax using a simple formula
+            (difference in value × local tax rate × fraction of year).
+          </li>
+          <li>
+            Set aside that amount in a separate savings account so the eventual bill doesn’t blow up your budget.
+          </li>
+          <li>
+            If you’re working with a real-estate agent or loan officer, ask them what recent buyers in your county
+            normally see and on what timeline.
+          </li>
+        </ul>
+        <p>
+          The Skillona.ai PDF kit below includes a <strong>fillable calculator</strong> you can use for rough planning
+          before the official bill arrives.
+        </p>
+
+      </article>
+
+      <aside>
+        <div class="sidebar-card">
+          <h3>TL;DR – Key Points</h3>
+          <ul>
+            <li>Supplemental = <strong>one-time catch-up bill</strong> after reassessment.</li>
+            <li>Completely separate from your escrow / impound payments.</li>
+            <li>You may get <strong>two bills</strong> if your purchase overlaps fiscal years.</li>
+            <li>You <strong>can appeal</strong> if the assessed value is wrong.</li>
+            <li>Ignoring it can lead to <strong>penalties and liens</strong>.</li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card">
+          <h3>Supplemental Tax Calculator + Appeal Kit (PDF)</h3>
+          <p>
+            Download a practical PDF bundle with:
+          </p>
+          <ul>
+            <li>fillable <strong>supplemental-tax estimator</strong></li>
+            <li>side-by-side <strong>bill comparison worksheet</strong></li>
+            <li>template letter for <strong>informal assessor review</strong></li>
+            <li>sample <strong>supporting-evidence list</strong> for appeals</li>
+          </ul>
+          <a class="btn" href="YOUR_GUMROAD_LINK_HERE">
+            Download Kit – 12 €
+            <span>one-time, no subscription</span>
+          </a>
+        </div>
+
+        <div class="sidebar-card">
+          <h3>Related Skillona.ai Guides</h3>
+          <ul>
+            <li><a href="/california-property-tax-appeal-2025/">How to Appeal Your California Property Tax</a></li>
+            <li><a href="/california-supplemental-property-tax-refund/">Supplemental Tax Refunds After Value Drops</a></li>
+            <li><a href="/airbnb-tax-optimization-foreign-owners/">Airbnb & Property Taxes for Foreign Owners</a></li>
+          </ul>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <span>© <span id="year"></span> Skillona.ai · Educational only · Not tax or legal advice.</span>
+      <span>Always confirm current rules with your county assessor and tax professional.</span>
+    </footer>
+
   </div>
-</header>
+</div>
 
-<main>
-  <article class="article">
-
-    <h2>1. What is a California Supplemental Property Tax Bill?</h2>
-    <p>
-      When you buy property in California, the county reassesses the value as of
-      the date you take ownership. If this <strong>new value is higher</strong>
-      than the previous owner’s assessed value, the county issues an
-      <strong>extra one-time tax bill</strong> called the
-      <strong>Supplemental Property Tax Bill</strong>.
-    </p>
-
-    <div class="callout">
-      Many buyers are surprised because this bill arrives <strong>months after closing</strong>.
-      It is normal, and it is separate from your regular annual property tax.
-    </div>
-
-    <h2>2. When will you receive the supplemental bill?</h2>
-    <p>
-      The county must process the reassessment first. You typically receive the
-      bill:
-    </p>
-    <ul>
-      <li>2 to 8 months after purchasing the property, or</li>
-      <li>sooner if the county processes reassessments quickly.</li>
-    </ul>
-
-    <h3>You may receive two bills</h3>
-    <p>
-      If the change overlaps two fiscal years, the county splits the
-      supplemental amount into:
-    </p>
-    <ul>
-      <li>Supplemental Bill #1 – for the current year</li>
-      <li>Supplemental Bill #2 – for next fiscal year</li>
-    </ul>
-
-    <h2>3. How the supplemental tax is calculated</h2>
-    <p>The formula is simple:</p>
-
-    <p>
-      <strong>(New assessed value − Old assessed value) × 1% base tax rate × Proration factor</strong>
-    </p>
-
-    <ul>
-      <li>
-        The <strong>old assessed value</strong> is what the previous owner was paying.
-      </li>
-      <li>
-        The <strong>new assessed value</strong> is based on your purchase price.
-      </li>
-      <li>
-        The <strong>proration factor</strong> = days remaining in the fiscal year.
-      </li>
-    </ul>
-
-    <h3>Example</h3>
-    <p>
-      Previous owner’s assessed value: <strong>$450,000</strong><br>
-      Your purchase price: <strong>$650,000</strong><br>
-      Difference: <strong>$200,000</strong><br>
-      Base tax rate: <strong>1%</strong><br>
-      Months
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
