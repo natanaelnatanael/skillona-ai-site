@@ -18,6 +18,460 @@
 
   <link rel="canonical" href="https://skillona.ai/dac8-crypto-tax-2026/" />
   <link rel="icon" href="/favicon.ico" />
+
+  <!-- Unified Skillona article styles -->
+  <style>
+    :root {
+      --bg-body: #f8fafc;
+      --bg-soft: #f1f5f9;
+      --bg-card: #ffffff;
+      --bg-dark: #020617;
+      --bg-accent: #0f172a;
+
+      --border-subtle: #e2e8f0;
+      --border-strong: #cbd5f5;
+
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-soft: #94a3b8;
+      --text-on-dark: #e5e7eb;
+
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --accent-strong: #1d4ed8;
+      --accent-ring: rgba(37, 99, 235, 0.35);
+
+      --radius-lg: 1.25rem;
+      --radius-xl: 1.75rem;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.12);
+      --shadow-subtle: 0 10px 30px rgba(15, 23, 42, 0.06);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      color: var(--text-main);
+      background: radial-gradient(circle at top, #e0f2fe 0, #f8fafc 42%, #e2e8f0 100%);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Page header */
+    .page-header {
+      padding: 3.75rem 0 2.75rem;
+    }
+
+    .page-header .container {
+      background: radial-gradient(circle at top left, #dbeafe 0, #eff6ff 35%, #ffffff 100%);
+      border-radius: var(--radius-xl);
+      padding: 2.75rem 2.5rem 2.5rem;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header .container::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0 0, rgba(59, 130, 246, 0.12) 0, transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(56, 189, 248, 0.12) 0, transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .page-header .container > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent-strong);
+      margin: 0 0 0.75rem;
+    }
+
+    h1 {
+      margin: 0 0 1.1rem;
+      font-size: 2.1rem;
+      line-height: 1.18;
+      letter-spacing: -0.03em;
+      color: #020617;
+    }
+
+    .subtitle {
+      margin: 0 0 1.5rem;
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 44rem;
+    }
+
+    .key-points {
+      margin: 0 0 1.8rem;
+      padding-left: 1.1rem;
+      color: var(--text-main);
+      font-size: 0.96rem;
+    }
+
+    .key-points li + li {
+      margin-top: 0.35rem;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      margin: 0.4rem 0 1.3rem;
+      padding: 0.7rem 1.25rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent) 0, var(--accent-strong) 100%);
+      color: #ffffff;
+      border: none;
+      box-shadow: 0 14px 30px rgba(37, 99, 235, 0.35);
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn-primary::after {
+      content: "↗";
+      font-size: 0.85em;
+      opacity: 0.9;
+    }
+
+    .btn-primary:hover {
+      text-decoration: none;
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(37, 99, 235, 0.45);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+    }
+
+    .disclaimer {
+      margin: 0;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      max-width: 40rem;
+    }
+
+    /* Main layout */
+    main {
+      padding: 0 0 4rem;
+    }
+
+    .section {
+      padding: 2.5rem 0;
+      background: transparent;
+    }
+
+    .section-alt {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(4px);
+      border-top: 1px solid rgba(226, 232, 240, 0.7);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.7);
+    }
+
+    .section.container,
+    nav.toc.container {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-subtle);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      padding: 2.1rem 2rem;
+      margin-top: 1.9rem;
+    }
+
+    .section-alt.container {
+      background: linear-gradient(135deg, #f8fafc 0, #ffffff 55%, #eef2ff 100%);
+    }
+
+    .section h2 {
+      margin-top: 0;
+      margin-bottom: 1.1rem;
+      font-size: 1.4rem;
+      letter-spacing: -0.02em;
+      color: #0f172a;
+    }
+
+    .section p {
+      margin-top: 0.3rem;
+      margin-bottom: 0.9rem;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    ul, ol {
+      padding-left: 1.1rem;
+      margin: 0.4rem 0 0.9rem;
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+
+    li + li {
+      margin-top: 0.25rem;
+    }
+
+    /* TOC */
+    .toc {
+      margin-top: 2.25rem;
+    }
+
+    .toc h2 {
+      margin-bottom: 0.75rem;
+    }
+
+    .toc ol {
+      margin: 0;
+      padding-left: 1.1rem;
+      font-size: 0.94rem;
+    }
+
+    .toc a {
+      text-decoration: none;
+      color: var(--accent-strong);
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    /* Tables */
+    .table-wrapper {
+      margin-top: 1.3rem;
+      margin-bottom: 1rem;
+      border-radius: 0.9rem;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      overflow: hidden;
+      background: #ffffff;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.03);
+    }
+
+    .code-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .code-table thead {
+      background: linear-gradient(135deg, #eff6ff 0, #e0f2fe 100%);
+    }
+
+    .code-table th,
+    .code-table td {
+      padding: 0.7rem 0.9rem;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+
+    .code-table th {
+      font-weight: 600;
+      color: #0f172a;
+      font-size: 0.86rem;
+    }
+
+    .code-table tbody tr:nth-child(even) {
+      background: #f9fafb;
+    }
+
+    .code-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Steps */
+    .steps-list {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 0.7rem;
+    }
+
+    .steps-list > li {
+      margin-bottom: 1.35rem;
+      padding-left: 0;
+    }
+
+    .steps-list h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #0f172a;
+    }
+
+    .steps-list p {
+      margin: 0.25rem 0 0.5rem;
+    }
+
+    .note {
+      background: #f1f5f9;
+      border-left: 3px solid var(--accent);
+      padding: 0.6rem 0.75rem;
+      border-radius: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Highlight / download section */
+    .section-highlight.container {
+      background: radial-gradient(circle at top left, #1d4ed8 0, #020617 55%, #020617 100%);
+      color: var(--text-on-dark);
+      border-radius: var(--radius-xl);
+      box-shadow: 0 22px 55px rgba(15, 23, 42, 0.45);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      padding: 2.3rem 2.2rem 2.1rem;
+      margin-top: 2.6rem;
+    }
+
+    .section-highlight h2 {
+      color: #e5edff;
+    }
+
+    .section-highlight p {
+      color: #cbd5f5;
+    }
+
+    .section-highlight ul {
+      color: #e5edff;
+    }
+
+    .section-highlight .btn-primary {
+      background: linear-gradient(135deg, #f97316 0, #ea580c 100%);
+      box-shadow: 0 18px 45px rgba(248, 113, 113, 0.45);
+      margin-top: 0.8rem;
+    }
+
+    .section-highlight .btn-primary:hover {
+      box-shadow: 0 22px 55px rgba(248, 113, 113, 0.6);
+    }
+
+    /* Related links */
+    .related-links ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 0.4rem;
+    }
+
+    .related-links li + li {
+      margin-top: 0.35rem;
+    }
+
+    .related-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.94rem;
+    }
+
+    .related-links a::before {
+      content: "↪";
+      font-size: 0.85em;
+      color: var(--accent-strong);
+    }
+
+    /* FAQ */
+    #faq.section.container {
+      margin-bottom: 0.5rem;
+    }
+
+    .faq-item {
+      border-top: 1px solid #e2e8f0;
+      padding: 0.85rem 0;
+    }
+
+    .faq-item:first-of-type {
+      border-top: none;
+      padding-top: 0.4rem;
+    }
+
+    .faq-item h3 {
+      margin: 0 0 0.25rem;
+      font-size: 1rem;
+      color: #0f172a;
+    }
+
+    .faq-item p {
+      margin: 0;
+      font-size: 0.94rem;
+      color: var(--text-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .page-header {
+        padding: 2.5rem 0 1.8rem;
+      }
+
+      .page-header .container {
+        padding: 1.9rem 1.5rem 1.7rem;
+        border-radius: 1.25rem;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      .section.container,
+      .section-alt.container,
+      nav.toc.container {
+        padding: 1.7rem 1.35rem;
+        border-radius: 1.1rem;
+      }
+
+      .section-highlight.container {
+        padding: 1.9rem 1.6rem 1.7rem;
+        border-radius: 1.35rem;
+      }
+
+      .table-wrapper {
+        border-radius: 0.7rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.55rem;
+      }
+
+      .btn-primary {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="page-header">
@@ -66,30 +520,30 @@
       <p>
         <strong>DAC8</strong> is the eighth update to the EU Directive on Administrative Cooperation in tax matters.
         It extends automatic information exchange rules to <strong>crypto-assets</strong>, alongside other items such
-        as certain e-money and rulings for individuals. :contentReference[oaicite:0]{index=0}
+        as certain e-money and rulings for individuals.
       </p>
       <p>
         For crypto users, the key dates are:
       </p>
       <ul>
         <li>
-          <strong>By 31 December 2025</strong> – EU countries must write DAC8 rules into their national laws. :contentReference[oaicite:1]{index=1}
+          <strong>By 31 December 2025</strong> – EU countries must write DAC8 rules into their national laws.
         </li>
         <li>
           <strong>From 1 January 2026</strong> – crypto-asset service providers (CASPs) must
-          start <strong>collecting and verifying</strong> data on reportable EU users and their transactions. :contentReference[oaicite:2]{index=2}
+          start <strong>collecting and verifying</strong> data on reportable EU users and their transactions.
         </li>
         <li>
           <strong>Between 1 January and late 2027</strong> – first DAC8 crypto reports for the 2026 year
           are filed and exchanged between tax authorities (deadlines differ slightly by country,
-          but late 2027 is typical). :contentReference[oaicite:3]{index=3}
+          but late 2027 is typical).
         </li>
       </ul>
       <p>
         At the same time, the OECD’s <strong>Crypto-Asset Reporting Framework (CARF)</strong> will make it normal
         for many non-EU countries and traditional “offshore hubs” to exchange crypto data from around 2027.
         Together, DAC8 + CARF are designed to make hidden crypto incomes and gains much harder to keep
-        off the radar. :contentReference[oaicite:4]{index=4}
+        off the radar.
       </p>
     </section>
 
@@ -118,7 +572,7 @@
             </tr>
             <tr>
               <td><strong>Non-EU exchanges with EU users</strong></td>
-              <td>Yes – if they have EU-resident customers. :contentReference[oaicite:5]{index=5}</td>
+              <td>Yes – if they have EU-resident customers.</td>
               <td>“Going offshore” does not hide you if you are an EU resident.</td>
             </tr>
             <tr>
@@ -129,12 +583,12 @@
             <tr>
               <td><strong>Non-custodial wallets (self-custody)</strong></td>
               <td>Not directly, but related on/off-ramp and trading activity may still be reported.</td>
-              <td>Transfers to and from exchanges can link your identity to on-chain activity via CARF/DAC8 data. :contentReference[oaicite:6]{index=6}</td>
+              <td>Transfers to and from exchanges can link your identity to on-chain activity via DAC8/CARF data.</td>
             </tr>
             <tr>
               <td><strong>NFT platforms and DeFi frontends</strong></td>
               <td>In scope if they qualify as CASPs or intermediaries for investment/payment-type crypto-assets.</td>
-              <td>Utility-only tokens may be outside scope, but anything with payment or investment use can be covered. :contentReference[oaicite:7]{index=7}</td>
+              <td>Utility-only tokens may be outside scope, but anything with payment or investment use can be covered.</td>
             </tr>
           </tbody>
         </table>
@@ -152,7 +606,7 @@
       <h2>3. What data exchanges will report about you from 2026</h2>
       <p>
         DAC8 aligns with the OECD CARF approach. Reports from platforms to tax authorities will typically
-        include: :contentReference[oaicite:8]{index=8}
+        include:
       </p>
       <ul>
         <li><strong>Identity data</strong> – name, address, country of residence, date of birth, TIN (tax ID), etc.</li>
@@ -170,7 +624,7 @@
       <p>
         In many countries, platforms will need to keep this data for <strong>at least five years</strong> and share it
         with tax authorities in a standardized digital format. EU tax offices will then automatically exchange
-        this data with each other, similar to existing bank-account reporting under CRS. :contentReference[oaicite:9]{index=9}
+        this data with each other, similar to existing bank-account reporting under CRS.
       </p>
     </section>
 
@@ -190,14 +644,14 @@
           when there are gaps.
         </li>
         <li>
-          Reduce the advantage of “keeping everything offshore” for EU residents. :contentReference[oaicite:10]{index=10}
+          Reduce the advantage of “keeping everything offshore” for EU residents.
         </li>
       </ul>
       <p>
         Some countries are already tightening domestic rules alongside DAC8. For example, one EU jurisdiction
         has announced a <strong>10% capital gains tax on crypto from 2026</strong>, with historical gains up to
         31 December 2025 exempted if properly documented – a clear sign of how governments may combine new
-        transparency with new taxes. :contentReference[oaicite:11]{index=11}
+        transparency with new taxes.
       </p>
       <p>
         For normal holders, the message is simple:
@@ -256,7 +710,7 @@
           </ul>
           <p>
             In countries that “grandfather” pre-2026 gains or use special transitional rules, good documentation
-            of your historical positions can be worth a lot of money. :contentReference[oaicite:12]{index=12}
+            of your historical positions can be worth a lot of money.
           </p>
         </li>
 
@@ -343,8 +797,8 @@
       </ul>
       <p>
         Trying to “escape DAC8” by using non-EU exchanges is also weak: DAC8 deliberately covers
-        <strong>non-EU platforms with EU users</strong>, and CARF extends similar reporting to many non-EU countries.
-        The direction of travel is clear: less secrecy, more automatic data flows. :contentReference[oaicite:13]{index=13}
+        <strong>non-EU platforms with EU users</strong>, and global frameworks like CARF push many countries to
+        exchange crypto data. The direction of travel is clear: less secrecy, more automatic data flows.
       </p>
     </section>
 
