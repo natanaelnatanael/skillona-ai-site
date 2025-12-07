@@ -18,12 +18,438 @@
 
   <link rel="canonical" href="https://skillona.ai/crypto-bank-withdrawal-hold-2026/" />
   <link rel="icon" href="/favicon.ico" />
+
+  <!-- Unified Skillona.ai guide styles -->
+  <style>
+    :root {
+      --bg-body: #050816;
+      --bg-elevated: #070b18;
+      --bg-alt: #0b1020;
+      --bg-highlight: #0f172a;
+      --border-subtle: #1f2937;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.12);
+      --accent-strong: #0ea5e9;
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --text-soft: #6b7280;
+      --danger: #f97373;
+      --radius-lg: 18px;
+      --radius-xl: 22px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.85);
+      --shadow-chip: 0 10px 25px rgba(15, 23, 42, 0.75);
+      --max-width: 880px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0 16px 40px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", Segoe UI, sans-serif;
+      background: radial-gradient(circle at top, #020617 0, #020617 32%, #020814 60%, #000 100%);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .page-header {
+      margin: 24px auto 28px;
+      border-radius: 26px;
+      padding: 26px 22px 24px;
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,0.16), transparent 55%),
+        radial-gradient(circle at top right, rgba(129,140,248,0.12), transparent 55%),
+        linear-gradient(135deg, #020617, #020617 52%, #020617);
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 0 0, rgba(56,189,248,0.18), transparent 55%);
+      opacity: 0.7;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .page-header > .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 22px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--accent));
+      opacity: 0.8;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(1.6rem, 3vw, 2rem);
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      color: #f9fafb;
+    }
+
+    .subtitle {
+      margin: 0 0 16px;
+      font-size: 0.97rem;
+      line-height: 1.55;
+      color: var(--text-muted);
+      max-width: 54rem;
+    }
+
+    .key-points {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 18px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .key-points li {
+      font-size: 0.9rem;
+      color: #e5e7eb;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.12), transparent 60%);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: var(--shadow-chip);
+    }
+
+    .key-points li::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent-strong);
+      box-shadow: 0 0 0 4px rgba(56,189,248,0.18);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(191, 219, 254, 0.75);
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.25), rgba(37,99,235,0.95));
+      color: #0b1220;
+      font-weight: 600;
+      font-size: 0.92rem;
+      text-decoration: none;
+      margin: 0 0 10px;
+      box-shadow:
+        0 14px 35px rgba(15, 23, 42, 0.95),
+        0 0 25px rgba(56,189,248,0.45);
+      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out, background 0.12s ease-out;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(248,250,252,0.6), transparent 55%);
+      opacity: 0;
+      transition: opacity 0.12s ease-out;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px) scale(1.01);
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.98),
+        0 0 38px rgba(56,189,248,0.65);
+    }
+
+    .btn-primary:hover::after {
+      opacity: 1;
+    }
+
+    .disclaimer {
+      margin: 4px 0 0;
+      font-size: 0.76rem;
+      line-height: 1.5;
+      color: var(--text-soft);
+      max-width: 50rem;
+    }
+
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .section {
+      background: rgba(15,23,42,0.88);
+      border-radius: var(--radius-lg);
+      padding: 20px 18px 18px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(30, 64, 175, 0.55);
+      box-shadow: 0 14px 34px rgba(15, 23, 42, 0.9);
+    }
+
+    .section-alt {
+      background: rgba(8, 14, 30, 0.95);
+      border-color: rgba(31, 41, 55, 0.9);
+    }
+
+    .section-highlight {
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.18), #020617);
+      border-color: rgba(56,189,248,0.55);
+    }
+
+    .section h2 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+      color: #f9fafb;
+    }
+
+    .section p {
+      margin: 8px 0;
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+    }
+
+    .section ul {
+      padding-left: 18px;
+      margin: 6px 0 8px;
+    }
+
+    .section li {
+      font-size: 0.9rem;
+      color: #d1d5db;
+      margin-bottom: 4px;
+    }
+
+    .toc {
+      margin-bottom: 18px;
+      padding: 16px 16px 14px;
+      border-radius: var(--radius-lg);
+      background: rgba(15,23,42,0.92);
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.95);
+    }
+
+    .toc h2 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 1rem;
+      letter-spacing: -0.01em;
+      color: #e5e7eb;
+    }
+
+    .toc ol {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .toc a {
+      color: #c7d2fe;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+    }
+
+    .steps-list {
+      list-style: none;
+      padding: 0;
+      margin: 6px 0 0;
+      counter-reset: step-counter;
+    }
+
+    .steps-list > li {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 12px;
+    }
+
+    .steps-list > li::before {
+      counter-increment: step-counter;
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 2px;
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #38bdf8, #4f46e5);
+      color: #020617;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      box-shadow: 0 0 0 4px rgba(56,189,248,0.25);
+    }
+
+    .steps-list h3 {
+      margin: 0 0 4px;
+      font-size: 0.96rem;
+      color: #e5e7eb;
+    }
+
+    .steps-list p {
+      margin: 4px 0 4px;
+    }
+
+    .note {
+      display: inline-block;
+      margin: 6px 0;
+      padding: 7px 10px;
+      border-radius: 10px;
+      background: rgba(15,23,42,0.95);
+      border: 1px dashed rgba(148, 163, 184, 0.8);
+      font-size: 0.82rem;
+      color: #e5e7eb;
+    }
+
+    .table-wrapper {
+      margin: 10px 0 8px;
+      padding: 1px;
+      border-radius: 14px;
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.18), rgba(15,23,42,1));
+      overflow: hidden;
+    }
+
+    .code-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(15,23,42,0.96);
+    }
+
+    .code-table thead {
+      background: rgba(15,23,42,0.98);
+    }
+
+    .code-table th,
+    .code-table td {
+      padding: 8px 10px;
+      font-size: 0.85rem;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid rgba(31,41,55,0.9);
+      color: #e5e7eb;
+    }
+
+    .code-table th {
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .code-table tbody tr:nth-child(even) {
+      background: rgba(15,23,42,0.95);
+    }
+
+    .code-table ul {
+      margin: 4px 0;
+      padding-left: 16px;
+    }
+
+    .related-links ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 6px 0 0;
+    }
+
+    .related-links li {
+      margin-bottom: 4px;
+    }
+
+    .related-links a {
+      font-size: 0.9rem;
+      color: #93c5fd;
+      text-decoration: none;
+    }
+
+    .related-links a:hover {
+      text-decoration: underline;
+    }
+
+    .faq-item {
+      border-top: 1px solid rgba(31, 41, 55, 0.9);
+      padding-top: 10px;
+      margin-top: 10px;
+    }
+
+    .faq-item h3 {
+      margin: 0 0 4px;
+      font-size: 0.98rem;
+      color: #e5e7eb;
+    }
+
+    .faq-item p {
+      margin: 0 0 2px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 10px 10px 28px;
+      }
+      .page-header {
+        padding: 22px 16px 18px;
+        margin-top: 18px;
+      }
+      .section {
+        padding: 16px 14px 14px;
+        border-radius: 16px;
+      }
+      .toc {
+        padding: 14px 14px 12px;
+      }
+      .key-points li {
+        border-radius: 14px;
+        white-space: normal;
+      }
+      .code-table th,
+      .code-table td {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="page-header">
     <div class="container">
-      <p class="eyebrow">2026 Guide · Crypto to Bank Transfers & AML Flags</p>
-      <h1>Crypto to Bank Withdrawal Holds 2026 – Release Frozen Transfers from Exchanges & Banks</h1>
+      <p class="eyebrow">2026 Guide · Crypto to Bank Transfers &amp; AML Flags</p>
+      <h1>Crypto to Bank Withdrawal Holds 2026 – Release Frozen Transfers from Exchanges &amp; Banks</h1>
       <p class="subtitle">
         In 2026, large crypto-to-bank withdrawals are more likely than ever to be frozen by exchanges,
         fintech apps and banks. Transfers are blocked for “compliance review”, “risk checks” or
@@ -417,7 +843,7 @@
 
     <!-- Related links -->
     <section class="section section-alt container related-links">
-      <h2>Related 2026 banking & risk guides</h2>
+      <h2>Related 2026 banking &amp; risk guides</h2>
       <ul>
         <li><a href="/bank-account-verification-2026/">Bank Account Verification in 2026 – Fast Approval Guide</a></li>
         <li><a href="/chexsystems-ews-removal/">ChexSystems &amp; EWS Removal – Rebuild U.S. Banking Access</a></li>
@@ -443,7 +869,7 @@
         <h3>Will splitting my withdrawal into smaller chunks avoid holds?</h3>
         <p>
           Not necessarily. Automated systems look at total patterns, not just single amounts.
-          A series of smaller withdrawals can still trigger reviews, and deliberately “structuring”
+          A series of smaller withdrawals can still trigger reviews, and deliberately structuring
           payments to avoid checks can itself look suspicious.
         </p>
       </div>
