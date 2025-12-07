@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Skillona.ai Micro Monopoly Guides – Hidden Money, Tax, Banking & Airbnb (2025)</title>
+  <title>Skillona.ai Micro Monopoly Guides – Hidden Money, Tax, Banking & Airbnb (2025–2026)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Skillona.ai micro monopoly guides show you exactly how to recover hidden money, fix banking & credit issues, optimize property taxes, structure US real estate and protect your cash flow – with fast, focused playbooks for 2025." />
+  <meta name="description" content="Skillona.ai micro monopoly guides show you exactly how to recover hidden money, fix banking & credit issues, optimize property taxes, structure US real estate and react fast to 2026 rule changes – with focused playbooks and optional PDF toolkits." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://skillona.ai/" />
 
@@ -13,15 +13,15 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Skillona.ai Micro Monopoly Guides – Hidden Money, Tax, Banking & Airbnb (2025)" />
-  <meta property="og:description" content="One site, one narrow problem, one money flow. Recover hidden money, fix payment & credit issues, optimize US property taxes and structure US real estate with focused micro monopoly guides." />
+  <meta property="og:title" content="Skillona.ai Micro Monopoly Guides – Hidden Money, Tax, Banking & Airbnb (2025–2026)" />
+  <meta property="og:description" content="One site, one narrow problem, one money flow. Recover hidden money, fix payment & credit issues, optimize US property taxes, react to 2026 rule changes and structure US real estate with focused micro monopoly guides." />
   <meta property="og:url" content="https://skillona.ai/" />
   <meta property="og:image" content="https://skillona.ai/og-image.png" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Skillona.ai Micro Monopoly Guides – Hidden Money, Tax, Banking & Airbnb (2025)" />
-  <meta name="twitter:description" content="Fast, focused guides for very specific money, tax, real estate and payment problems – each a self-contained playbook with optional PDF toolkit." />
+  <meta name="twitter:title" content="Skillona.ai Micro Monopoly Guides – Hidden Money, Tax, Banking & Airbnb (2025–2026)" />
+  <meta name="twitter:description" content="Fast, focused guides for very specific money, tax, real estate, banking and 2026 rule-change problems – each a self-contained playbook with optional PDF toolkit." />
   <meta name="twitter:image" content="https://skillona.ai/og-image.png" />
 
   <!-- Structured data: WebSite + Breadcrumbs + FAQ + HowTo -->
@@ -57,7 +57,7 @@
         "name": "What is Skillona.ai?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Skillona.ai is a collection of focused micro monopoly guides that solve very specific money, real estate, tax, banking and travel problems with clear, step-by-step playbooks."
+          "text": "Skillona.ai is a collection of focused micro monopoly guides that solve very specific money, real estate, tax, banking, travel and rule-change problems with clear, step-by-step playbooks."
         }
       },
       {
@@ -84,13 +84,13 @@
     "@context": "https://schema.org",
     "@type": "HowTo",
     "name": "How to use a Skillona.ai micro monopoly guide",
-    "description": "Simple process for using a Skillona.ai guide to solve a narrow money, tax, real estate or payment problem.",
+    "description": "Simple process for using a Skillona.ai guide to solve a narrow money, tax, real estate, banking, travel or rule-change problem.",
     "step": [
       {
         "@type": "HowToStep",
         "position": 1,
         "name": "Pick your exact situation",
-        "text": "On the Skillona.ai homepage, choose the guide that matches your specific situation: tax deed surplus, delayed flight, payment hold, unclaimed funds, Airbnb tax and similar."
+        "text": "On the Skillona.ai homepage, choose the guide that matches your specific situation: tax deed surplus, platform holds, unclaimed money, flight compensation, banking freeze, 2026 rule changes and similar."
       },
       {
         "@type": "HowToStep",
@@ -360,13 +360,50 @@
       color: #6b7280;
       text-align: center;
     }
+
+    /* Sticky CTA bar for 2026 rule-change guides */
+    .sticky-cta {
+      position: fixed;
+      left: 50%;
+      bottom: 12px;
+      transform: translateX(-50%);
+      width: calc(100% - 24px);
+      max-width: 1100px;
+      z-index: 40;
+    }
+    .sticky-cta-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.96);
+      border: 1px solid #1f2937;
+      box-shadow: 0 18px 40px rgba(15,23,42,0.9);
+      font-size: 0.8rem;
+      color: #9ca3af;
+      backdrop-filter: blur(10px);
+    }
+    .sticky-cta span {
+      max-width: 70%;
+    }
+    @media (max-width: 600px) {
+      .sticky-cta-inner {
+        align-items: flex-start;
+      }
+      .sticky-cta span {
+        max-width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
     <div>
       <div class="logo">Skillona<span>.ai</span></div>
-      <div class="tagline">Focused micro-guides for very specific money, tax, banking & real estate problems.</div>
+      <div class="tagline">Focused micro-guides for very specific money, tax, banking, rule-change & real estate problems.</div>
     </div>
     <nav>
       <a href="#real-estate" class="nav-link">Real Estate & Tax</a>
@@ -374,27 +411,29 @@
       <a href="#credit" class="nav-link">Credit & Banking</a>
       <a href="#student-loans" class="nav-link">Student Loans</a>
       <a href="#travel" class="nav-link">Flights & Travel</a>
-      <a href="#new-2025-guides" class="nav-link">New 2025 Guides</a>
+      <a href="#rule-changes-2026" class="nav-link">2026 Rule Changes</a>
+      <a href="#new-2025-guides" class="nav-link">2025+ Support Guides</a>
     </nav>
   </header>
 
   <main>
     <section class="hero">
       <div>
-        <div class="badge">Micro Monopoly · 2025</div>
+        <div class="badge">Micro Monopoly · 2025–2026</div>
         <h1 class="hero-title">One Site · One Problem · One Money Flow</h1>
         <p class="hero-sub">
           Each guide on Skillona.ai is a self-contained playbook for one narrow scenario:
-          tax deed surplus, platform holds, unclaimed money, flight compensation, Airbnb tax optimization and more.
-          Read free on the site – optionally grab the PDF toolkit if you want scripts, checklists and templates.
+          tax deed surplus, platform holds, unclaimed money, flight compensation, banking freezes,
+          2026 reporting rules, Airbnb tax optimization and more. Read free on the site – optionally grab
+          the PDF toolkit if you want scripts, checklists and templates.
         </p>
         <p class="hero-meta">
-          <span>Updated: 2025</span>
+          <span>Updated: 2025–2026</span>
           <span>Built for investors, freelancers and “problem solvers”.</span>
         </p>
         <div class="cta-row">
-          <a href="#real-estate" class="btn btn-primary">Start with Real Estate Guides</a>
-          <a href="#money" class="btn btn-ghost">See All Money & Refund Guides</a>
+          <a href="#rule-changes-2026" class="btn btn-primary">See 2026 Rule-Change Guides</a>
+          <a href="#money" class="btn btn-ghost">Browse Hidden Money & Refund Guides</a>
         </div>
       </div>
 
@@ -412,6 +451,205 @@
     <div class="ad-slot">
       Adsense / banner placeholder – main page
     </div>
+
+    <!-- 2026 RULE CHANGES & RISK UPDATES -->
+    <section id="rule-changes-2026" class="section">
+      <h2 class="section-title">2026 Rule Changes & Risk Updates</h2>
+      <p class="section-sub">
+        Fresh 2026 guides where laws, reporting rules, cardholder rights, tax codes or risk systems changed –
+        and where fast reaction can unlock refunds, reversals or better positioning.
+      </p>
+      <div class="grid">
+        <a href="/automatic-airline-refunds-2026/" class="card">
+          <div class="card-pill">Flights · U.S. DOT</div>
+          <div class="card-title">Automatic Airline Refunds 2026</div>
+          <p class="card-desc">
+            When U.S. airlines must issue automatic cash refunds in 2026 and scripts to force payment instead of vouchers.
+          </p>
+          <div class="card-meta">Est. 10–15 min · With PDF pack</div>
+        </a>
+
+        <a href="/dac7-dac8-platform-income-2026/" class="card">
+          <div class="card-pill">EU · Platform Income</div>
+          <div class="card-title">DAC7 / DAC8 Platform Income 2026</div>
+          <p class="card-desc">
+            How 2026 DAC7–DAC8 reporting hits platform sellers and what to change before data starts flowing to tax offices.
+          </p>
+          <div class="card-meta">Est. 10–15 min</div>
+        </a>
+
+        <a href="/dac8-crypto-tax-2026/" class="card">
+          <div class="card-pill">EU · Crypto</div>
+          <div class="card-title">DAC8 Crypto Tax Reporting 2026</div>
+          <p class="card-desc">
+            High-level view of new EU crypto reporting rules and what active traders and long-term holders should do first.
+          </p>
+          <div class="card-meta">Est. 10–15 min</div>
+        </a>
+
+        <a href="/irs-tax-refund-codes-2026/" class="card">
+          <div class="card-pill">USA · IRS</div>
+          <div class="card-title">IRS Tax Refund Codes 2026</div>
+          <p class="card-desc">
+            What new and updated IRS refund transaction codes mean and how to tell if your refund is delayed, offset or reduced.
+          </p>
+          <div class="card-meta">Est. 8–12 min</div>
+        </a>
+
+        <a href="/irs-offset-reversal-2026/" class="card">
+          <div class="card-pill">USA · Offset</div>
+          <div class="card-title">IRS Offset Reversal 2026</div>
+          <p class="card-desc">
+            When tax refund offsets can be challenged or reversed in 2026 and how to ask the right office the right questions.
+          </p>
+          <div class="card-meta">Est. 10–15 min</div>
+        </a>
+
+        <a href="/psd3-psr-cardholder-rights-2026/" class="card">
+          <div class="card-pill">EU · Cards</div>
+          <div class="card-title">PSD3 / PSR Cardholder Rights 2026</div>
+          <p class="card-desc">
+            How upcoming EU PSD3 and PSR rules change chargebacks, fraud dispute rights and liability for cardholders and merchants.
+          </p>
+          <div class="card-meta">Est. 10–15 min</div>
+        </a>
+
+        <a href="/bank-account-verification-2026/" class="card">
+          <div class="card-pill">Banking · KYC</div>
+          <div class="card-title">Bank Account Verification 2026</div>
+          <p class="card-desc">
+            New verification patterns banks use in 2026 and how to pass reviews without triggering freezes or closures.
+          </p>
+          <div class="card-meta">Est. 8–12 min</div>
+        </a>
+
+        <a href="/bank-account-closed-funds-held-2026/" class="card">
+          <div class="card-pill">Banking · Holds</div>
+          <div class="card-title">Bank Account Closed & Funds Held 2026</div>
+          <p class="card-desc">
+            What to do when a bank closes your account and holds your balance, and which departments to pressure first.
+          </p>
+          <div class="card-meta">Est. 10–15 min</div>
+        </a>
+
+        <a href="/bank-risk-rating-reset-2026/" class="card">
+          <div class="card-pill">Banking · Risk</div>
+          <div class="card-title">Bank Risk Rating Reset 2026</div>
+          <p class="card-desc">
+            How internal bank risk ratings work in 2026 and what can realistically reset a “high risk” profile over time.
+          </p>
+          <div class="card-meta">Est. 10–15 min</div>
+        </a>
+
+        <a href="/crypto-bank-withdrawal-hold-2026/" class="card">
+          <div class="card-pill">Crypto · Banking</div>
+          <div class="card-title">Crypto → Bank Withdrawal Holds 2026</div>
+          <p class="card-desc">
+            How banks treat large crypto withdrawals in 2026 and what to prepare to avoid permanent account flags.
+          </p>
+          <div class="card-meta">Est. 10–15 min</div>
+        </a>
+
+        <a href="/hard-inquiry-removal-2026/" class="card">
+          <div class="card-pill">Credit · USA</div>
+          <div class="card-title">Hard Inquiry Removal 2026</div>
+          <p class="card-desc">
+            When hard inquiries can realistically be removed in 2026 and which disputes are a waste of time.
+          </p>
+          <div class="card-meta">Est. 8–12 min</div>
+        </a>
+
+        <a href="/car-insurance-overbilling-refund-2026/" class="card">
+          <div class="card-pill">USA · Auto</div>
+          <div class="card-title">Car Insurance Overbilling Refund 2026</div>
+          <p class="card-desc">
+            How to spot premium overbilling and push your insurer or state regulators for a refund or credit.
+          </p>
+          <div class="card-meta">Est. 8–12 min</div>
+        </a>
+
+        <a href="/child-support-overpayment-refund-2026/" class="card">
+          <div class="card-pill">USA · Family</div>
+          <div class="card-title">Child Support Overpayment Refund 2026</div>
+          <p class="card-desc">
+            What to do if you overpaid child support and which agencies may process refunds or credits in 2026.
+          </p>
+          <div class="card-meta">Est. 8–12 min</div>
+        </a>
+
+        <a href="/usps-change-of-address-fraud-2026/" class="card">
+          <div class="card-pill">USA · Mail</div>
+          <div class="card-title">USPS Change-of-Address Fraud 2026</div>
+          <p class="card-desc">
+            How address-fraud scams work and the steps to reverse a fake change-of-address and lock down your mail.
+          </p>
+          <div class="card-meta">Est. 8–12 min</div>
+        </a>
+
+        <a href="/employer-wage-theft-recovery-2026/" class="card">
+          <div class="card-pill">USA · Wages</div>
+          <div class="card-title">Employer Wage Theft Recovery 2026</div>
+          <p class="card-desc">
+            Beyond the last paycheck – how to escalate systemic wage theft and which agencies now take these cases more seriously.
+          </p>
+          <div class="card-meta">Est. 10–15 min</div>
+        </a>
+
+        <a href="/tenant-blacklist-removal-2026/" class="card">
+          <div class="card-pill">Rent · USA</div>
+          <div class="card-title">Tenant Blacklist Removal 2026</div>
+          <p class="card-desc">
+            How renter screening databases work in 2026 and what to do when old eviction data keeps killing your applications.
+          </p>
+          <div class="card-meta">Est. 10–15 min</div>
+        </a>
+
+        <a href="/eviction-sealed-record-2026/" class="card">
+          <div class="card-pill">Courts · USA</div>
+          <div class="card-title">Eviction Record Sealed 2026</div>
+          <p class="card-desc">
+            When courts will seal or expunge eviction records in 2026 and basic wording to ask for that relief.
+          </p>
+          <div class="card-meta">Est. 8–12 min</div>
+        </a>
+
+        <a href="/sba-loan-personal-guarantee-release-2026/" class="card">
+          <div class="card-pill">USA · SBA</div>
+          <div class="card-title">SBA Loan Personal Guarantee Release 2026</div>
+          <p class="card-desc">
+            Scenarios where personal guarantees on SBA loans can be limited, released or negotiated down in 2026.
+          </p>
+          <div class="card-meta">Est. 10–15 min</div>
+        </a>
+
+        <a href="/bbb-tax-hacks-2026/" class="card">
+          <div class="card-pill">Tax · Small Biz</div>
+          <div class="card-title">BBB 2026 Tax “Hacks” Reality Check</div>
+          <p class="card-desc">
+            Separating clickbait “tax hacks” from real structural moves small businesses can still use in 2026.
+          </p>
+          <div class="card-meta">Est. 8–12 min</div>
+        </a>
+
+        <a href="/airbnb-2026-foreign-owners/" class="card">
+          <div class="card-pill">Airbnb · 2026</div>
+          <div class="card-title">Airbnb 2026 Rules for Foreign Owners</div>
+          <p class="card-desc">
+            New 2026 patterns foreign owners need to understand around platform reporting, taxes and account risk.
+          </p>
+          <div class="card-meta">Est. 10–15 min</div>
+        </a>
+
+        <a href="/student-loan-rap-vs-ibr-2026/" class="card">
+          <div class="card-pill">Student Loans · USA</div>
+          <div class="card-title">Student Loan RAP vs IBR 2026</div>
+          <p class="card-desc">
+            Updated 2026 comparison of income-driven student loan plans and when switching makes sense or backfires.
+          </p>
+          <div class="card-meta">Est. 10–15 min</div>
+        </a>
+      </div>
+    </section>
 
     <!-- REAL ESTATE & TAX -->
     <section id="real-estate" class="section">
@@ -539,7 +777,7 @@
       </div>
     </section>
 
-    <!-- PAYMENTS -->
+    <!-- PAYMENT PLATFORMS -->
     <section id="payments" class="section">
       <h2 class="section-title">Payment Platforms & Risk Reviews</h2>
       <p class="section-sub">
@@ -734,6 +972,14 @@
           </p>
           <div class="card-meta">Est. 12–18 min</div>
         </a>
+        <a href="/student-loan-rap-vs-ibr-2026/" class="card">
+          <div class="card-pill">Student Loans · 2026</div>
+          <div class="card-title">Student Loan RAP vs IBR 2026</div>
+          <p class="card-desc">
+            Updated 2026 comparison of repayment plans and when switching plans helps or hurts over the long term.
+          </p>
+          <div class="card-meta">Est. 10–15 min</div>
+        </a>
       </div>
     </section>
 
@@ -741,7 +987,7 @@
     <section id="travel" class="section">
       <h2 class="section-title">Travel, Flights & Compensation</h2>
       <p class="section-sub">
-        When it makes sense to claim compensation from airlines under EU261 rules and how to navigate delays and cancellations.
+        When it makes sense to claim compensation from airlines under EU261 or U.S. DOT rules and how to navigate delays and cancellations.
       </p>
       <div class="grid">
         <a href="/airline-delay-compensation-eu261/" class="card">
@@ -752,14 +998,22 @@
           </p>
           <div class="card-meta">Est. 8–12 min</div>
         </a>
+        <a href="/automatic-airline-refunds-2026/" class="card">
+          <div class="card-pill">USA · Flights</div>
+          <div class="card-title">Automatic Airline Refunds 2026</div>
+          <p class="card-desc">
+            When U.S. airlines must refund automatically under DOT rules and how to demand cash instead of vouchers.
+          </p>
+          <div class="card-meta">Est. 10–15 min</div>
+        </a>
       </div>
     </section>
 
     <!-- NEW 2025 GUIDES: DISABILITY, BENEFITS & ADAPTIVE EQUIPMENT -->
     <section id="new-2025-guides" class="section">
-      <h2 class="section-title">New 2025 Guides – Disability, Benefits & Adaptive Equipment</h2>
+      <h2 class="section-title">Support, Disability & Adaptive Equipment (2025)</h2>
       <p class="section-sub">
-        Fresh guides focused on disability placards, adaptive driving equipment and government-backed help with medical and access costs.
+        Guides focused on disability placards, adaptive driving equipment and government-backed help with medical and access costs.
       </p>
       <div class="grid">
         <a href="/disability-parking-placard/" class="card">
@@ -862,6 +1116,14 @@
   <footer>
     © <span id="year"></span> Skillona.ai · Educational only · Not legal, tax or financial advice.
   </footer>
+
+  <!-- Sticky CTA -->
+  <div class="sticky-cta">
+    <div class="sticky-cta-inner">
+      <span>New rules in 2026 are changing refunds, reporting and risk ratings. See the guides that turn those changes into cash and protection.</span>
+      <a href="#rule-changes-2026" class="btn btn-primary">Open 2026 Rule-Change Guides</a>
+    </div>
+  </div>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
