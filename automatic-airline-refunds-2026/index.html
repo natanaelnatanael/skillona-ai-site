@@ -18,10 +18,218 @@
 
   <link rel="canonical" href="https://skillona.ai/automatic-airline-refunds-2026/" />
   <link rel="icon" href="/favicon.ico" />
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #0f172a, #020617);
+      color: #e5e7eb;
+      line-height: 1.7;
+    }
+    a { color: #38bdf8; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px 16px 40px;
+    }
+
+    .page-header {
+      border-bottom: 1px solid #111827;
+      background: radial-gradient(circle at top left, rgba(15,23,42,0.98), rgba(15,23,42,0.9));
+      margin-bottom: 24px;
+    }
+    .page-header .container {
+      padding-top: 22px;
+      padding-bottom: 18px;
+    }
+
+    .eyebrow {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #9ca3af;
+      margin-bottom: 6px;
+    }
+    h1 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    @media (min-width: 720px) {
+      h1 { font-size: 2.1rem; }
+    }
+    .subtitle {
+      font-size: 0.98rem;
+      color: #9ca3af;
+      margin-bottom: 12px;
+    }
+    .subtitle strong { color: #e5e7eb; }
+
+    .key-points {
+      margin: 10px 0 14px;
+      padding-left: 18px;
+      font-size: 0.9rem;
+      color: #e5e7eb;
+    }
+    .key-points li { margin-bottom: 4px; }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 18px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      background: linear-gradient(135deg, #38bdf8, #6366f1);
+      color: #020617;
+      margin-top: 6px;
+      margin-bottom: 8px;
+      text-decoration: none;
+      transition: filter 0.18s ease;
+    }
+    .btn-primary:hover { filter: brightness(1.08); }
+
+    .disclaimer {
+      font-size: 0.8rem;
+      color: #6b7280;
+      max-width: 680px;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto 40px;
+    }
+
+    .section {
+      padding: 20px 16px;
+    }
+    .section-alt {
+      background: rgba(15,23,42,0.85);
+    }
+    .section h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .section h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-top: 12px;
+      margin-bottom: 4px;
+    }
+    .section p {
+      font-size: 0.94rem;
+      color: #e5e7eb;
+      margin-bottom: 8px;
+    }
+    .section ul, .section ol {
+      font-size: 0.9rem;
+      padding-left: 19px;
+      margin-bottom: 10px;
+      color: #e5e7eb;
+    }
+    .section li { margin-bottom: 4px; }
+
+    .toc {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #111827;
+    }
+    .toc h2 {
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+    .toc ol {
+      font-size: 0.9rem;
+      padding-left: 18px;
+    }
+    .toc li { margin-bottom: 4px; }
+
+    .steps-list > li {
+      margin-bottom: 10px;
+    }
+
+    .quote {
+      font-size: 0.9rem;
+      color: #cbd5f5;
+      padding: 7px 10px;
+      border-left: 3px solid #38bdf8;
+      background: rgba(15,23,42,0.7);
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+
+    .section-highlight {
+      background: radial-gradient(circle at top left, rgba(37,99,235,0.14), rgba(15,23,42,0.96));
+      border-top: 1px solid #1f2937;
+      border-bottom: 1px solid #1f2937;
+    }
+
+    .related-links ul {
+      list-style: disc;
+      padding-left: 18px;
+    }
+    .related-links li {
+      margin-bottom: 4px;
+    }
+
+    .faq-item {
+      margin-bottom: 12px;
+    }
+    .faq-item h3 {
+      font-size: 0.98rem;
+      margin-bottom: 4px;
+    }
+    .faq-item p {
+      font-size: 0.9rem;
+      color: #d1d5db;
+    }
+
+    .top-nav {
+      font-size: 0.8rem;
+      margin-bottom: 8px;
+      color: #9ca3af;
+    }
+
+    footer {
+      border-top: 1px solid #111827;
+      padding: 16px;
+      font-size: 0.8rem;
+      color: #6b7280;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto 12px;
+    }
+
+    /* Simple bottom CTA bar for this guide */
+    .guide-cta-bar {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid #1f2937;
+      font-size: 0.86rem;
+      color: #9ca3af;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      justify-content: space-between;
+    }
+  </style>
 </head>
 <body>
   <header class="page-header">
     <div class="container">
+      <div class="top-nav">
+        <a href="/">← Back to Skillona.ai home</a>
+      </div>
       <p class="eyebrow">2026 Guide · U.S. Airline Refund Rights</p>
       <h1>Automatic Airline Refunds in 2026 – How to Trigger Cash Refunds Under U.S. DOT Rules</h1>
       <p class="subtitle">
@@ -40,6 +248,10 @@
         This guide is general information based on current U.S. DOT rules and public sources.
         It is not legal advice. Always verify details with the airline, DOT or a qualified professional.
       </p>
+      <div class="guide-cta-bar">
+        <span>Want to be ready before your next disruption? Keep the 2026 Flight Refund Max Pack saved on your phone.</span>
+        <a href="#download-pack" class="btn-primary">Get the PDF Pack</a>
+      </div>
     </div>
   </header>
 
@@ -73,7 +285,7 @@
         </li>
         <li>
           refund certain baggage and ancillary fees when the service you paid for is not provided
-          or is significantly delayed. 
+          or is significantly delayed.
         </li>
       </ul>
       <p>
@@ -82,12 +294,12 @@
       </p>
       <ul>
         <li>within <strong>7 business days</strong> for credit card purchases, and</li>
-        <li>within <strong>20 calendar days</strong> for other payment methods. </li>
+        <li>within <strong>20 calendar days</strong> for other payment methods.</li>
       </ul>
       <p>
         Important: Separate proposals for automatic <em>cash compensation</em> for delays (extra money on top
         of refund) have been rolled back or paused. What remains for 2026 is primarily the right to get
-        your <strong>money back</strong> when the airline does not deliver the trip or service you paid for. 
+        your <strong>money back</strong> when the airline does not deliver the trip or service you paid for.
       </p>
     </section>
 
@@ -102,7 +314,7 @@
         <li>your flight is cancelled or significantly changed/delayed, and</li>
         <li>you are <strong>offered alternatives</strong> (rebooking, credit, voucher), and</li>
         <li>you <strong>do not accept</strong> those alternatives (you choose not to travel), and</li>
-        <li>the ticket falls under DOT jurisdiction (flights to, from or within the U.S.). </li>
+        <li>the ticket falls under DOT jurisdiction (flights to, from or within the U.S.).</li>
       </ul>
 
       <h3>2.1. Ticket refunds</h3>
@@ -122,13 +334,13 @@
       </p>
       <ul>
         <li>domestic bags delayed more than 12 hours, and</li>
-        <li>international bags delayed significantly longer, often 15–30+ hours. </li>
+        <li>international bags delayed significantly longer, often 15–30+ hours.</li>
       </ul>
 
       <h3>2.3. Ancillary fee refunds</h3>
       <p>
         When you pay for a specific extra (seat selection, priority boarding, Wi-Fi, pet in cabin, etc.)
-        and it is <strong>not provided</strong>, airlines are generally required to refund those fees. 
+        and it is <strong>not provided</strong>, airlines are generally required to refund those fees.
       </p>
       <p>
         Airlines may try to push vouchers for these amounts, but the default under DOT rules is a
@@ -141,7 +353,7 @@
       <h2>3. What counts as a “significant change or delay” in 2026</h2>
       <p>
         The DOT rule specifically defines what a “significant change” or “significant delay” is.
-        By 2026, typical triggers include: 
+        By 2026, typical triggers include:
       </p>
       <ul>
         <li>
@@ -158,8 +370,7 @@
           <strong>Additional connections</strong> added to your itinerary beyond what you bought.
         </li>
         <li>
-          <strong>Cabin downgrade</strong> (e.g. business to economy).
-        </li>
+          <strong>Cabin downgrade</strong> (e.g. business to economy).</li>
         <li>
           <strong>Major routing changes</strong> that materially alter your trip.
         </li>
@@ -257,7 +468,7 @@
       <p>
         DOT has recently clarified that when a flight is simply re-numbered but operates at
         the same time and in the same way, it will not always be treated as a “cancellation”
-        requiring a refund, as long as there is no significant change or delay. 
+        requiring a refund, as long as there is no significant change or delay.
       </p>
       <p>
         If the only change is the flight number and you still travel on essentially the same
@@ -270,14 +481,14 @@
         Even when the cause is outside the airline’s control, you still have a right to a refund
         if your flight is cancelled or significantly delayed and you decide not to travel.
         What you usually lose in these situations is extra compensation – not your right to get
-        your money back. 
+        your money back.
       </p>
 
       <h3>5.3. Code-share and foreign carriers</h3>
       <p>
         If your ticket is sold by a U.S. airline but operated by a foreign carrier (or the reverse),
         jurisdiction can be more complex. Generally, DOT rules cover flights to, from or within
-        the U.S. regardless of whether the airline is U.S. or foreign. 
+        the U.S. regardless of whether the airline is U.S. or foreign.
       </p>
       <p>
         It is still worth citing DOT rules in your refund request, especially if any segment
@@ -293,7 +504,7 @@
       </p>
       <ul>
         <li>within <strong>7 business days</strong> for credit card purchases, and</li>
-        <li>within <strong>20 calendar days</strong> for cash or other payment methods. </li>
+        <li>within <strong>20 calendar days</strong> for cash or other payment methods.</li>
       </ul>
       <p>
         If these deadlines pass and you see no refund:
@@ -390,7 +601,7 @@
         <p>
           Yes, if the flight is to, from or within the United States, DOT rules generally apply
           regardless of whether the carrier is U.S. or foreign. For purely non-U.S. routes,
-          local laws (such as EU261) may apply instead.
+          local laws such as EU261 may apply instead.
         </p>
       </div>
 
@@ -461,6 +672,14 @@
       }
     ]
   }
+  </script>
+
+  <footer>
+    © <span id="year"></span> Skillona.ai · Educational only · Not legal, tax or financial advice.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
