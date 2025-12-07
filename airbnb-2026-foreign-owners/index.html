@@ -25,6 +25,212 @@
 
   <link rel="canonical" href="https://skillona.ai/airbnb-2026-foreign-owners/" />
   <link rel="icon" href="/favicon.ico" />
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #0f172a, #020617);
+      color: #e5e7eb;
+      line-height: 1.7;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:hover { text-decoration: none; }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 16px 32px;
+    }
+
+    .page-header {
+      border-bottom: 1px solid #111827;
+      padding: 22px 0 18px;
+      background: radial-gradient(circle at top left, rgba(15,23,42,0.95), rgba(15,23,42,0.8));
+    }
+
+    .eyebrow {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #a5b4fc;
+      margin-bottom: 6px;
+    }
+
+    .page-header h1 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 0.96rem;
+      color: #9ca3af;
+      max-width: 720px;
+      margin-bottom: 14px;
+    }
+
+    .key-points {
+      margin-left: 18px;
+      margin-bottom: 14px;
+      font-size: 0.9rem;
+      color: #e5e7eb;
+    }
+
+    .key-points li { margin-bottom: 4px; }
+
+    .disclaimer {
+      font-size: 0.78rem;
+      color: #6b7280;
+      margin-top: 10px;
+      max-width: 720px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 18px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      background: linear-gradient(135deg, #38bdf8, #6366f1);
+      color: #020617;
+      transition: 0.18s all ease;
+      margin-top: 10px;
+    }
+    .btn-primary:hover { filter: brightness(1.08); }
+
+    .section {
+      padding-top: 26px;
+      padding-bottom: 10px;
+    }
+
+    .section-alt {
+      padding-top: 26px;
+      padding-bottom: 10px;
+      background: radial-gradient(circle at top left, rgba(15,23,42,0.96), rgba(15,23,42,0.85));
+      border-top: 1px solid #111827;
+      border-bottom: 1px solid #111827;
+    }
+
+    .section h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .section p {
+      font-size: 0.94rem;
+      color: #d1d5db;
+      margin-bottom: 10px;
+    }
+
+    .section ul {
+      margin-left: 18px;
+      font-size: 0.9rem;
+      color: #e5e7eb;
+      margin-bottom: 8px;
+    }
+    .section ul li { margin-bottom: 4px; }
+
+    .toc {
+      padding-top: 22px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #111827;
+    }
+    .toc h2 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .toc ol {
+      margin-left: 18px;
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+    .toc li { margin-bottom: 4px; }
+    .toc a { color: #a5b4fc; }
+
+    .table-wrapper {
+      margin: 10px 0 6px;
+      overflow-x: auto;
+      border-radius: 10px;
+      border: 1px solid #111827;
+      background: rgba(15,23,42,0.8);
+    }
+
+    .code-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .code-table th,
+    .code-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #111827;
+      text-align: left;
+    }
+    .code-table th {
+      background: rgba(15,23,42,0.9);
+      font-weight: 600;
+    }
+
+    .steps-list {
+      list-style: none;
+      margin-top: 6px;
+    }
+    .steps-list > li {
+      margin-bottom: 14px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid #111827;
+      background: rgba(15,23,42,0.8);
+    }
+    .steps-list h3 {
+      font-size: 0.98rem;
+      margin-bottom: 4px;
+    }
+    .steps-list p,
+    .steps-list ul {
+      font-size: 0.9rem;
+      color: #d1d5db;
+    }
+
+    .section-highlight {
+      padding-top: 26px;
+      padding-bottom: 18px;
+      border-top: 1px solid #111827;
+      border-bottom: 1px solid #111827;
+      background: radial-gradient(circle at top left, rgba(15,23,42,0.96), rgba(15,23,42,0.85));
+    }
+
+    .related-links ul {
+      margin-left: 18px;
+      font-size: 0.9rem;
+      color: #a5b4fc;
+    }
+    .related-links li { margin-bottom: 4px; }
+
+    .faq-item {
+      border-radius: 10px;
+      border: 1px solid #111827;
+      background: rgba(15,23,42,0.8);
+      padding: 10px 12px;
+      margin-bottom: 10px;
+    }
+    .faq-item h3 {
+      font-size: 0.96rem;
+      margin-bottom: 4px;
+    }
+    .faq-item p {
+      font-size: 0.9rem;
+      color: #d1d5db;
+      margin-bottom: 0;
+    }
+  </style>
 </head>
 <body>
   <header class="page-header">
@@ -55,12 +261,12 @@
     <nav class="toc container" aria-label="Table of contents">
       <h2>What you’ll learn in this 2026 Airbnb guide</h2>
       <ol>
-        <li><a href="#section-1">How Airbnb payouts & reporting work for foreign owners</a></li>
+        <li><a href="#section-1">How Airbnb payouts &amp; reporting work for foreign owners</a></li>
         <li><a href="#section-2">Where foreign owners usually pay tax on Airbnb income</a></li>
-        <li><a href="#section-3">Platform reporting rules in 2026 (data sharing & forms)</a></li>
+        <li><a href="#section-3">Platform reporting rules in 2026 (data sharing &amp; forms)</a></li>
         <li><a href="#section-4">Country scenarios – property in the U.S., EU and beyond</a></li>
         <li><a href="#section-5">Step-by-step compliance checklist for 2026</a></li>
-        <li><a href="#section-6">Legal ways to reduce the tax bill (structure & expenses)</a></li>
+        <li><a href="#section-6">Legal ways to reduce the tax bill (structure &amp; expenses)</a></li>
         <li><a href="#section-7">Risks of ignoring Airbnb tax rules in 2026</a></li>
         <li><a href="#faq">2026 Airbnb foreign owner FAQs</a></li>
       </ol>
@@ -68,7 +274,7 @@
 
     <!-- Section 1 -->
     <section id="section-1" class="section container">
-      <h2>1. How Airbnb payouts & reporting work for foreign owners in 2026</h2>
+      <h2>1. How Airbnb payouts &amp; reporting work for foreign owners in 2026</h2>
       <p>
         As a foreign owner, three different things matter in 2026:
       </p>
@@ -92,59 +298,61 @@
     </section>
 
     <!-- Section 2 -->
-    <section id="section-2" class="section section-alt container">
-      <h2>2. Where foreign owners usually pay tax on Airbnb income</h2>
-      <p>
-        Exact rules differ, but most foreign owners face some variation of the same pattern:
-      </p>
+    <section id="section-2" class="section section-alt">
+      <div class="container">
+        <h2>2. Where foreign owners usually pay tax on Airbnb income</h2>
+        <p>
+          Exact rules differ, but most foreign owners face some variation of the same pattern:
+        </p>
 
-      <div class="table-wrapper">
-        <table class="code-table">
-          <thead>
-            <tr>
-              <th>Factor</th>
-              <th>What it usually means</th>
-              <th>What to expect in 2026</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Country where the property sits</strong></td>
-              <td>Often has first taxing rights on rental income.</td>
-              <td>You may need to file a local tax return, even if you live abroad.</td>
-            </tr>
-            <tr>
-              <td><strong>Your country of residence</strong></td>
-              <td>May tax your worldwide income.</td>
-              <td>You may declare Airbnb profit again, with a credit for foreign tax paid.</td>
-            </tr>
-            <tr>
-              <td><strong>Tax treaty between countries</strong></td>
-              <td>Coordinates who taxes what.</td>
-              <td>Can prevent double taxation, but only if you file correctly.</td>
-            </tr>
-            <tr>
-              <td><strong>Type of activity</strong></td>
-              <td>Passive rent vs. business / hotel-like service.</td>
-              <td>More “service-heavy” operations may be treated as a business.</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-wrapper">
+          <table class="code-table">
+            <thead>
+              <tr>
+                <th>Factor</th>
+                <th>What it usually means</th>
+                <th>What to expect in 2026</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Country where the property sits</strong></td>
+                <td>Often has first taxing rights on rental income.</td>
+                <td>You may need to file a local tax return, even if you live abroad.</td>
+              </tr>
+              <tr>
+                <td><strong>Your country of residence</strong></td>
+                <td>May tax your worldwide income.</td>
+                <td>You may declare Airbnb profit again, with a credit for foreign tax paid.</td>
+              </tr>
+              <tr>
+                <td><strong>Tax treaty between countries</strong></td>
+                <td>Coordinates who taxes what.</td>
+                <td>Can prevent double taxation, but only if you file correctly.</td>
+              </tr>
+              <tr>
+                <td><strong>Type of activity</strong></td>
+                <td>Passive rent vs. business / hotel-like service.</td>
+                <td>More “service-heavy” operations may be treated as a business.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          Many foreign owners do nothing until they receive a letter, and that is often the
+          most expensive way to run a short-term rental. In 2026, the smarter strategy is:
+        </p>
+        <ul>
+          <li>assume the tax office can see your Airbnb income through data reporting, and</li>
+          <li>set up simple, clear reporting before they ask questions.</li>
+        </ul>
       </div>
-
-      <p>
-        Many foreign owners do nothing until they receive a letter, and that is often the
-        most expensive way to run a short-term rental. In 2026, the smarter strategy is:
-      </p>
-      <ul>
-        <li>assume the tax office can see your Airbnb income through data reporting, and</li>
-        <li>set up simple, clear reporting before they ask questions.</li>
-      </ul>
     </section>
 
     <!-- Section 3 -->
     <section id="section-3" class="section container">
-      <h2>3. Platform reporting rules in 2026 (data sharing & forms)</h2>
+      <h2>3. Platform reporting rules in 2026 (data sharing &amp; forms)</h2>
       <p>
         By 2026, Airbnb and other platforms are under pressure from multiple directions:
       </p>
@@ -177,62 +385,64 @@
     </section>
 
     <!-- Section 4 -->
-    <section id="section-4" class="section section-alt container">
-      <h2>4. Country scenarios – property in the U.S., EU and beyond</h2>
-      <p>
-        Here are three common scenarios for foreign Airbnb owners in 2026. Your situation
-        may not match exactly, but the logic is similar.
-      </p>
+    <section id="section-4" class="section section-alt">
+      <div class="container">
+        <h2>4. Country scenarios – property in the U.S., EU and beyond</h2>
+        <p>
+          Here are three common scenarios for foreign Airbnb owners in 2026. Your situation
+          may not match exactly, but the logic is similar.
+        </p>
 
-      <h3>4.1. You live outside the U.S. and own an Airbnb in the U.S.</h3>
-      <p>
-        If you are a non-U.S. person with a U.S. short-term rental, you may:
-      </p>
-      <ul>
-        <li>need a U.S. tax ID number (ITIN or EIN),</li>
-        <li>have to file a U.S. tax return reporting rental income and expenses, and</li>
-        <li>report the net profit in your home country, usually with a credit for U.S. tax.</li>
-      </ul>
-      <p>
-        The structure you use (personal ownership vs. company) can change both U.S. and
-        home-country tax outcomes, but the property’s location usually gives the U.S. some
-        taxing rights first.
-      </p>
+        <h3>4.1. You live outside the U.S. and own an Airbnb in the U.S.</h3>
+        <p>
+          If you are a non-U.S. person with a U.S. short-term rental, you may:
+        </p>
+        <ul>
+          <li>need a U.S. tax ID number (ITIN or EIN),</li>
+          <li>have to file a U.S. tax return reporting rental income and expenses, and</li>
+          <li>report the net profit in your home country, usually with a credit for U.S. tax.</li>
+        </ul>
+        <p>
+          The structure you use (personal ownership vs. company) can change both U.S. and
+          home-country tax outcomes, but the property’s location usually gives the U.S. some
+          taxing rights first.
+        </p>
 
-      <h3>4.2. You live in the EU and own an Airbnb in another EU country</h3>
-      <p>
-        In many EU setups:
-      </p>
-      <ul>
-        <li>
-          The country where the property sits taxes local rental income and may require
-          registration (tourism taxes, city registration numbers).
-        </li>
-        <li>
-          Your home country (where you are tax resident) may tax your worldwide income.
-        </li>
-        <li>
-          A tax treaty often lets you claim credit for tax already paid abroad to avoid double tax.
-        </li>
-      </ul>
-      <p>
-        Platforms in the EU tend to report income to tax authorities under data reporting rules,
-        so you should assume your home country can see your hosting income.
-      </p>
+        <h3>4.2. You live in the EU and own an Airbnb in another EU country</h3>
+        <p>
+          In many EU setups:
+        </p>
+        <ul>
+          <li>
+            The country where the property sits taxes local rental income and may require
+            registration (tourism taxes, city registration numbers).
+          </li>
+          <li>
+            Your home country (where you are tax resident) may tax your worldwide income.
+          </li>
+          <li>
+            A tax treaty often lets you claim credit for tax already paid abroad to avoid double tax.
+          </li>
+        </ul>
+        <p>
+          Platforms in the EU tend to report income to tax authorities under data reporting rules,
+          so you should assume your home country can see your hosting income.
+        </p>
 
-      <h3>4.3. You live in one country and own Airbnbs in multiple countries</h3>
-      <p>
-        This is where things get complex quickly. In 2026, serious multi-country hosts often:
-      </p>
-      <ul>
-        <li>use one or more entities to hold property or manage operations,</li>
-        <li>have separate bookkeeping per country, and</li>
-        <li>work with advisors who understand both domestic law and tax treaties.</li>
-      </ul>
-      <p>
-        For small, single-property foreign owners, a simpler, well-kept structure is usually better:
-        one property, one set of accounts, one clear reporting chain.
-      </p>
+        <h3>4.3. You live in one country and own Airbnbs in multiple countries</h3>
+        <p>
+          This is where things get complex quickly. In 2026, serious multi-country hosts often:
+        </p>
+        <ul>
+          <li>use one or more entities to hold property or manage operations,</li>
+          <li>have separate bookkeeping per country, and</li>
+          <li>work with advisors who understand both domestic law and tax treaties.</li>
+        </ul>
+        <p>
+          For small, single-property foreign owners, a simpler, well-kept structure is usually better:
+          one property, one set of accounts, one clear reporting chain.
+        </p>
+      </div>
     </section>
 
     <!-- Section 5: checklist -->
@@ -346,39 +556,41 @@
     </section>
 
     <!-- Section 6 -->
-    <section id="section-6" class="section section-alt container">
-      <h2>6. Legal ways to reduce the tax bill (structure & expenses)</h2>
-      <p>
-        The goal is not to hide income, but to use legal tools that many owners ignore.
-        Here are levers foreign owners can usually pull:
-      </p>
-      <ul>
-        <li>
-          <strong>Deduct all legitimate expenses:</strong> Cleaning, utilities, internet, supplies,
-          repairs and other operating costs often reduce taxable profit significantly.
-        </li>
-        <li>
-          <strong>Understand depreciation rules:</strong> In many systems, the building itself
-          can be depreciated over time, further reducing taxable income.
-        </li>
-        <li>
-          <strong>Separate personal and business use:</strong> Clearly track any personal stays
-          and adjust deductions accordingly, instead of mixing everything.
-        </li>
-        <li>
-          <strong>Use the right ownership structure for your scale:</strong> One small property
-          may be fine in personal name, while multiple units or higher risk setups may justify
-          an entity. The “best” choice depends on both tax and liability issues.
-        </li>
-        <li>
-          <strong>Plan before scaling:</strong> It is easier to set up a clean structure when you
-          have 1–2 properties than to fix a messy setup later with 5–10 units.
-        </li>
-      </ul>
-      <p>
-        Work with advisors who understand both countries involved. Cross-border Airbnb hosting
-        sits exactly at the point where domestic rules alone are not enough.
-      </p>
+    <section id="section-6" class="section section-alt">
+      <div class="container">
+        <h2>6. Legal ways to reduce the tax bill (structure &amp; expenses)</h2>
+        <p>
+          The goal is not to hide income, but to use legal tools that many owners ignore.
+          Here are levers foreign owners can usually pull:
+        </p>
+        <ul>
+          <li>
+            <strong>Deduct all legitimate expenses:</strong> Cleaning, utilities, internet, supplies,
+            repairs and other operating costs often reduce taxable profit significantly.
+          </li>
+          <li>
+            <strong>Understand depreciation rules:</strong> In many systems, the building itself
+            can be depreciated over time, further reducing taxable income.
+          </li>
+          <li>
+            <strong>Separate personal and business use:</strong> Clearly track any personal stays
+            and adjust deductions accordingly, instead of mixing everything.
+          </li>
+          <li>
+            <strong>Use the right ownership structure for your scale:</strong> One small property
+            may be fine in personal name, while multiple units or higher risk setups may justify
+            an entity. The “best” choice depends on both tax and liability issues.
+          </li>
+          <li>
+            <strong>Plan before scaling:</strong> It is easier to set up a clean structure when you
+            have 1–2 properties than to fix a messy setup later with 5–10 units.
+          </li>
+        </ul>
+        <p>
+          Work with advisors who understand both countries involved. Cross-border Airbnb hosting
+          sits exactly at the point where domestic rules alone are not enough.
+        </p>
+      </div>
     </section>
 
     <!-- Section 7 -->
@@ -412,33 +624,37 @@
     </section>
 
     <!-- Download CTA -->
-    <section id="download-pack" class="section section-highlight container">
-      <h2>Download the 2026 Foreign Owner Tax Pack (Optional)</h2>
-      <p>
-        Want a simple, ready-to-use toolkit specifically for foreign Airbnb owners?
-        Our <strong>2026 Foreign Owner Tax Pack</strong> includes:
-      </p>
-      <ul>
-        <li>Country-property-residency mapping worksheet.</li>
-        <li>Checklist for platform tax/KYC information.</li>
-        <li>Bookkeeping template for multi-country Airbnb income and expenses.</li>
-      </ul>
-      <p>
-        You can download it as a PDF, fill it out digitally or print it for your files.
-      </p>
-      <a href="/downloads/airbnb-foreign-owner-tax-pack-2026.pdf" class="btn-primary">
-        Get the 2026 Foreign Owner Tax Pack (PDF)
-      </a>
+    <section id="download-pack" class="section section-highlight">
+      <div class="container">
+        <h2>Download the 2026 Foreign Owner Tax Pack (Optional)</h2>
+        <p>
+          Want a simple, ready-to-use toolkit specifically for foreign Airbnb owners?
+          Our <strong>2026 Foreign Owner Tax Pack</strong> includes:
+        </p>
+        <ul>
+          <li>Country-property-residency mapping worksheet.</li>
+          <li>Checklist for platform tax/KYC information.</li>
+          <li>Bookkeeping template for multi-country Airbnb income and expenses.</li>
+        </ul>
+        <p>
+          You can download it as a PDF, fill it out digitally or print it for your files.
+        </p>
+        <a href="/downloads/airbnb-foreign-owner-tax-pack-2026.pdf" class="btn-primary">
+          Get the 2026 Foreign Owner Tax Pack (PDF)
+        </a>
+      </div>
     </section>
 
     <!-- Related links -->
-    <section class="section section-alt container related-links">
-      <h2>Related Airbnb & tax optimization guides</h2>
-      <ul>
-        <li><a href="/airbnb-tax-optimization-foreign-owners/">Airbnb Tax Optimization for Foreign Owners</a></li>
-        <li><a href="/airbnb-occupancy-tax-for-hosts/">Airbnb Occupancy Tax Guide for Hosts</a></li>
-        <li><a href="/california-supplemental-property-tax/">California Supplemental Property Tax (2025 Guide)</a></li>
-      </ul>
+    <section class="section section-alt related-links">
+      <div class="container">
+        <h2>Related Airbnb &amp; tax optimization guides</h2>
+        <ul>
+          <li><a href="/airbnb-tax-optimization-foreign-owners/">Airbnb Tax Optimization for Foreign Owners</a></li>
+          <li><a href="/airbnb-occupancy-tax-for-hosts/">Airbnb Occupancy Tax Guide for Hosts</a></li>
+          <li><a href="/california-supplemental-property-tax/">California Supplemental Property Tax (2025 Guide)</a></li>
+        </ul>
+      </div>
     </section>
 
     <!-- FAQ -->
