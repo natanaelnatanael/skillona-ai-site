@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>New York Minimum Wage 2026 – $17 Downstate, $16 Upstate (Employer Guide)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description"
+        content="New York minimum wage increase for 2026 – $17 in NYC, Long Island and Westchester; $16 in the rest of the state. Clear breakdown, dates, and compliance checklist for employers." />
+  <meta name="robots" content="index,follow" />
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="New York Minimum Wage 2026 – Employer Guide" />
+  <meta property="og:description"
+        content="What changes on Jan. 1, 2026 for New York minimum wage, who is covered, and how employers should adjust payroll and postings." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://skillona.ai/new-york-minimum-wage-2026/" />
+
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-alt: #0b1020;
+      --card: #111827;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.1);
+      --accent-strong: #0ea5e9;
+      --border-subtle: rgba(148, 163, 184, 0.3);
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --text-soft: #6b7280;
+      --danger: #f97373;
+      --success: #22c55e;
+      --warning: #fbbf24;
+      --radius-xl: 18px;
+      --radius-2xl: 24px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.75);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #020617 0, #020617 40%, #000 100%);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 32px 16px 40px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 1120px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 25% 0, #e5e7eb 0, #38bdf8 40%, #1d4ed8 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.35), 0 14px 30px rgba(15, 23, 42, 0.9);
+      font-size: 18px;
+      font-weight: 700;
+      color: #020617;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-text span:first-child {
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      font-size: 13px;
+      text-transform: uppercase;
+      color: #e5e7eb;
+    }
+
+    .brand-text span:last-child {
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .badge {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(10px);
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2);
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 3.1fr) minmax(0, 2.3fr);
+      gap: 22px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 880px) {
+      main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    .hero-card {
+      border-radius: var(--radius-2xl);
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent 55%),
+        radial-gradient(circle at bottom, rgba(15, 23, 42, 0.9), #020617 70%);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: var(--shadow-soft);
+      padding: 22px 22px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .hero-pill strong {
+      color: #e5e7eb;
+      font-weight: 600;
+    }
+
+    h1 {
+      font-size: clamp(24px, 3vw, 30px);
+      line-height: 1.15;
+      margin: 0 0 10px;
+      letter-spacing: -0.03em;
+    }
+
+    h1 span.highlight {
+      color: var(--accent-strong);
+    }
+
+    .hero-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      max-width: 540px;
+      margin-bottom: 16px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .hero-metric {
+      padding: 10px 10px 9px;
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+    }
+
+    .hero-metric-label {
+      font-size: 11px;
+      color: var(--text-soft);
+      margin-bottom: 5px;
+    }
+
+    .hero-metric-value {
+      font-size: 16px;
+      font-weight: 600;
+      color: #e5e7eb;
+      margin-bottom: 2px;
+    }
+
+    .hero-metric-note {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .hero-footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 16px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 10px;
+    }
+
+    .tag {
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      color: var(--text-muted);
+    }
+
+    .hero-footer-note {
+      font-size: 10px;
+      color: var(--text-soft);
+    }
+
+    .side-panel {
+      border-radius: var(--radius-2xl);
+      background: linear-gradient(145deg, #020617, #020617 52%, #020617 100%);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      box-shadow: var(--shadow-soft);
+      padding: 18px 18px 16px;
+      position: sticky;
+      top: 20px;
+    }
+
+    .side-section-title {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      margin-bottom: 10px;
+    }
+
+    .summary-card {
+      border-radius: 16px;
+      padding: 12px 12px 11px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      margin-bottom: 12px;
+    }
+
+    .summary-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    .summary-title span {
+      font-weight: 600;
+    }
+
+    .summary-badge {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      color: #bfdbfe;
+    }
+
+    .summary-body {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .summary-list {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin: 6px 0 0;
+      padding-left: 18px;
+    }
+
+    .summary-list li {
+      margin-bottom: 4px;
+    }
+
+    .ref-box {
+      margin-top: 10px;
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px dashed rgba(148, 163, 184, 0.7);
+      padding: 10px 11px 9px;
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .ref-box strong {
+      color: var(--accent-strong);
+    }
+
+    .download-box {
+      margin-top: 12px;
+      padding: 11px 12px 10px;
+      border-radius: 14px;
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.14), transparent 55%),
+        rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(56, 189, 248, 0.5);
+    }
+
+    .download-title {
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .download-body {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .download-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      font-size: 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      background: rgba(15, 23, 42, 0.9);
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .download-cta span {
+      font-weight: 500;
+      color: #e5e7eb;
+    }
+
+    .download-cta small {
+      color: var(--text-soft);
+      font-size: 10px;
+    }
+
+    .content {
+      margin-top: 12px;
+      padding: 18px 18px 16px;
+      border-radius: var(--radius-2xl);
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      box-shadow: 0 14px 40px rgba(15, 23, 42, 0.9);
+    }
+
+    .content h2 {
+      font-size: 16px;
+      margin: 0 0 6px;
+    }
+
+    .content h3 {
+      font-size: 14px;
+      margin: 14px 0 4px;
+    }
+
+    .content p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin: 4px 0 8px;
+    }
+
+    .content ul,
+    .content ol {
+      font-size: 13px;
+      color: var(--text-muted);
+      padding-left: 18px;
+      margin: 4px 0 10px;
+    }
+
+    .content li {
+      margin-bottom: 5px;
+    }
+
+    .inline-tag {
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+      margin-right: 6px;
+      white-space: nowrap;
+    }
+
+    .callout {
+      margin: 10px 0;
+      padding: 9px 10px;
+      border-radius: 12px;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.5);
+      font-size: 12px;
+      color: var(--text-main);
+    }
+
+    .callout strong {
+      color: var(--accent-strong);
+    }
+
+    .warning {
+      background: rgba(248, 113, 113, 0.08);
+      border-color: rgba(248, 113, 113, 0.65);
+    }
+
+    footer {
+      margin-top: 18px;
+      font-size: 11px;
+      color: var(--text-soft);
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="shell">
+      <header>
+        <div class="brand">
+          <div class="brand-mark">S</div>
+          <div class="brand-text">
+            <span>Skillona.ai</span>
+            <span>US rules that change people’s pay</span>
+          </div>
+        </div>
+        <div class="badge">
+          <div class="badge-dot"></div>
+          <span>Effective January 1, 2026</span>
+        </div>
+      </header>
+
+      <main>
+        <!-- LEFT -->
+        <section>
+          <article class="hero-card">
+            <div class="hero-pill">
+              <span>New York labor law</span> ·
+              <strong>Minimum wage increase 2026</strong>
+            </div>
+
+            <h1>
+              New York Minimum Wage 2026:
+              <span class="highlight">$17 Downstate, $16 Upstate</span> – What Employers Must Do
+            </h1>
+
+            <p class="hero-sub">
+              On January 1, 2026, New York’s minimum wage rises again. Downstate employers (NYC,
+              Long Island, Westchester) must pay at least <strong>$17.00/hour</strong>; the rest of
+              the state moves to <strong>$16.00/hour</strong>. This guide gives you the clean
+              breakdown, plus a simple compliance checklist.
+            </p>
+
+            <div class="hero-grid">
+              <div class="hero-metric">
+                <div class="hero-metric-label">NYC / Long Island / Westchester</div>
+                <div class="hero-metric-value">$17.00/hr</div>
+                <div class="hero-metric-note">from $16.50 in 2025</div>
+              </div>
+              <div class="hero-metric">
+                <div class="hero-metric-label">Rest of New York State</div>
+                <div class="hero-metric-value">$16.00/hr</div>
+                <div class="hero-metric-note">from $15.50 in 2025</div>
+              </div>
+              <div class="hero-metric">
+                <div class="hero-metric-label">Next step</div>
+                <div class="hero-metric-value">2027+</div>
+                <div class="hero-metric-note">annual CPI-based increases</div>
+              </div>
+            </div>
+
+            <div class="hero-footer">
+              <div class="tag-list">
+                <span class="tag">Small employers</span>
+                <span class="tag">Restaurants & retail</span>
+                <span class="tag">Gig & hospitality</span>
+                <span class="tag">Payroll updates</span>
+              </div>
+              <div class="hero-footer-note">
+                This is an educational summary, not legal advice. When in doubt, confirm with your
+                HR / counsel or NY Department of Labor.
+              </div>
+            </div>
+          </article>
+
+          <article class="content">
+            <h2>1. The new New York minimum wage numbers for 2026</h2>
+            <p>
+              From <strong>1 January 2026</strong>, New York keeps a two-tier structure. The key
+              change is a <strong>$0.50/hour</strong> increase in both tiers:
+            </p>
+            <ul>
+              <li>
+                <strong>Downstate (NYC, Long Island, Westchester):</strong>
+                new minimum wage is <strong>$17.00 per hour</strong>.
+              </li>
+              <li>
+                <strong>Upstate (all other counties):</strong>
+                new minimum wage is <strong>$16.00 per hour</strong>.
+              </li>
+            </ul>
+            <p>
+              These state rates remain well above the federal minimum wage of $7.25/hour. New York
+              employers must follow the <strong>higher</strong> applicable rate (state or federal),
+              which in practice means following the New York schedule.
+            </p>
+
+            <div class="callout">
+              <strong>Who is “downstate”?</strong> New York City’s five boroughs plus Nassau,
+              Suffolk and Westchester Counties. Every other county is treated as “upstate” for wage
+              purposes.
+            </div>
+
+            <h2>2. Who must be paid at least the new minimum wage?</h2>
+            <p>
+              Most employees who are covered by New York labor law and the federal Fair Labor
+              Standards Act must receive at least the applicable hourly minimum, including:
+            </p>
+            <ul>
+              <li>Full-time, part-time and temporary workers.</li>
+              <li>Most restaurant, bar, retail and hospitality staff.</li>
+              <li>Non-exempt office, warehouse and service employees.</li>
+            </ul>
+            <p>
+              Some categories (for example, <span class="inline-tag">tipped workers</span> and
+              <span class="inline-tag">exempt salaried managers</span>) follow
+              <strong>separate cash wage, tip credit and salary threshold rules</strong>. Those
+              numbers are also increasing for 2026, so restaurant and hospitality employers should
+              double-check the new tables from NY DOL.
+            </p>
+
+            <h3>Common misconceptions</h3>
+            <ul>
+              <li>“1099 contractor” labels do not automatically avoid minimum wage rules.</li>
+              <li>
+                Salaried employees may still be <em>non-exempt</em> and must receive minimum wage +
+                overtime when their salary divided by hours worked falls below the floor.
+              </li>
+              <li>
+                Paying “under the table” does not change the legal obligation and adds tax and
+                penalty risk.
+              </li>
+            </ul>
+
+            <h2>3. Employer checklist for 1 January 2026</h2>
+            <p>Use this short list to get ready before the new rates kick in:</p>
+            <ol>
+              <li>
+                <strong>Map your locations.</strong> Identify which employees are downstate ($17)
+                and which are upstate ($16).
+              </li>
+              <li>
+                <strong>Review current pay rates.</strong> Flag every worker whose base pay is below
+                the new hourly minimum.
+              </li>
+              <li>
+                <strong>Update payroll systems.</strong> Change default rates in your payroll
+                software, time-tracking tools and any manual spreadsheets.
+              </li>
+              <li>
+                <strong>Check tip credits (if any).</strong> For tipped service and food-service
+                workers, confirm the updated <span class="inline-tag">cash wage</span> and
+                <span class="inline-tag">tip credit</span> numbers and adjust menus / service fees
+                if needed.
+              </li>
+              <li>
+                <strong>Adjust posted notices.</strong> Replace old minimum wage posters with the
+                2026 version for each location.
+              </li>
+              <li>
+                <strong>Communicate new rates.</strong> Let staff know when increases take effect
+                and how they appear on pay stubs.
+              </li>
+            </ol>
+
+            <div class="callout warning">
+              <strong>Penalty risk:</strong> failure to pay at least the minimum wage can lead to
+              back-pay, liquidated damages, interest and civil penalties. Underpayments add up fast
+              when multiplied by hours, employees and years.
+            </div>
+
+            <h2>4. 2027 and beyond – automatic inflation indexing</h2>
+            <p>
+              Starting in <strong>2027</strong>, New York’s minimum wage is tied to a measure of
+              inflation (the CPI-W for the Northeast). In practice, this means:
+            </p>
+            <ul>
+              <li>Small increases most years instead of big jumps every few years.</li>
+              <li>
+                Employers should build <strong>annual wage adjustments</strong> into budgets and
+                multi-year contracts.
+              </li>
+              <li>
+                The state can temporarily pause increases in certain economic or budget
+                circumstances, but the default path is upward.
+              </li>
+            </ul>
+
+            <h2>5. Simple action plan for small employers</h2>
+            <p>For a small shop, restaurant or service business, keep it simple:</p>
+            <ol>
+              <li>
+                Confirm your county and 2026 minimum rate ($17 or $16) for every location where you
+                have staff.
+              </li>
+              <li>
+                Raise any sub-minimum wages to the new floor before the first 2026 payroll run that
+                covers hours worked in January.
+              </li>
+              <li>
+                Talk with your accountant about menu prices, service fees or other changes needed to
+                cover the higher payroll cost.
+              </li>
+              <li>
+                Set a reminder each autumn to check for the next year’s CPI-based adjustment from
+                2027 onwards.
+              </li>
+            </ol>
+
+            <footer>
+              This page is an independent summary based on public sources. Always confirm up-to-date
+              numbers and special industry rules with the New York State Department of Labor or your
+              legal adviser before making decisions.
+            </footer>
+          </article>
+        </section>
+
+        <!-- RIGHT -->
+        <aside class="side-panel">
+          <div class="side-section-title">Snapshot</div>
+
+          <div class="summary-card">
+            <div class="summary-title">
+              <span>Who needs this guide</span>
+              <span class="summary-badge">NY employers</span>
+            </div>
+            <p class="summary-body">
+              Owners, managers and payroll admins for any business with employees in New York State
+              – especially hospitality, retail, cleaning, delivery and personal-service companies
+              with a lot of hourly staff.
+            </p>
+          </div>
+
+          <div class="summary-card">
+            <div class="summary-title">
+              <span>2026 key numbers</span>
+            </div>
+            <ul class="summary-list">
+              <li>NYC, Long Island, Westchester: <strong>$17.00/hr</strong>.</li>
+              <li>Rest of New York State: <strong>$16.00/hr</strong>.</li>
+              <li>Effective date: <strong>Jan 1, 2026</strong>.</li>
+              <li>2027+: automatic CPI-based increases.</li>
+            </ul>
+          </div>
+
+          <div class="ref-box">
+            <strong>Official references:</strong> Check the latest wage orders, hospitality wage
+            tables and minimum wage FAQs from the New York State Department of Labor before you lock
+            in your 2026 rates.
+          </div>
+
+          <div class="download-box">
+            <div class="download-title">Download the NY Minimum Wage 2026 PDF</div>
+            <div class="download-body">
+              Get a one-page summary with the new rates, a mini compliance checklist and space to
+              note each location’s wage and poster status.
+            </div>
+            <a class="download-cta" href="#" aria-label="Download NY Minimum Wage 2026 PDF">
+              <span>Download PDF</span>
+              <small>(coming soon on Skillona.ai)</small>
+            </a>
+          </div>
+        </aside>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
