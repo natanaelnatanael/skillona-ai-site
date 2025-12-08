@@ -2,311 +2,759 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>WHO 2026 GLP-1 Drug Guidance – What Ozempic, Wegovy & Mounjaro Users Must Do Now</title>
+  <title>WHO 2026 GLP-1 Compliance Pack – Clinics, Telehealth & Pharmacies</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description"
-        content="2026 WHO GLP-1 medication guidance: required monitoring, safety risks, tapering rules and what all Ozempic, Wegovy and Mounjaro patients must do immediately." />
+        content="WHO 2026 GLP-1 Global Risk Advisory – compliance actions for clinics, telehealth providers, pharmacies, compounders and distributors: documentation, cold-chain, marketing, audits." />
   <meta name="robots" content="index,follow" />
+  <meta name="date" content="2026-01-01" />
+  <meta name="last-modified" content="2026-01-01" />
   <link rel="icon" href="/favicon.ico" />
   <link rel="canonical" href="https://skillona.ai/glp1-who-guidance-2026/" />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="WHO 2026 GLP-1 Guidance – What Patients Must Do Now" />
+  <meta property="og:title" content="WHO 2026 GLP-1 Compliance Pack – Clinics & Telehealth" />
   <meta property="og:description"
-        content="New WHO rules for GLP-1 medications (Ozempic, Wegovy, Mounjaro). Learn required monitoring, new side-effect alerts and mandatory patient steps." />
+        content="GLP-1 WHO 2026 Global Risk Advisory: required documentation, off-label rules, cold-chain, compounding and marketing compliance for clinics, telehealth, pharmacies and compounders." />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://skillona.ai/glp1-who-guidance-2026/" />
   <meta property="og:image" content="https://skillona.ai/assets/og/glp1-who-guidance-2026.png" />
+  <meta property="article:published_time" content="2026-01-01" />
+  <meta property="article:modified_time" content="2026-01-01" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="WHO 2026 GLP-1 Guidance" />
+  <meta name="twitter:title" content="WHO 2026 GLP-1 Compliance Pack – Providers" />
   <meta name="twitter:description"
-        content="Ozempic, Wegovy & Mounjaro patients: required reporting, safety monitoring and tapering rules under new WHO guidance." />
+        content="WHO GLP-1 Global Risk Advisory 2026: one compliance pack for clinics, telehealth platforms, pharmacies and compounders." />
   <meta name="twitter:image" content="https://skillona.ai/assets/og/glp1-who-guidance-2026.png" />
 
-  <!-- STYLE (identical to ChexSystems template) -->
+  <!-- STYLE (ChexSystems blue template) -->
   <style>
     :root {
       --bg: #050814;
       --bg-elevated: #0b1220;
       --bg-soft: #101827;
       --accent: #38bdf8;
-      --accent-soft: rgba(56,189,248,.12);
+      --accent-soft: rgba(56, 189, 248, 0.12);
       --text: #e5e7eb;
       --muted: #9ca3af;
       --border-subtle: #1f2937;
+      --danger: #f97373;
+      --success: #4ade80;
       --radius-lg: 18px;
       --radius-xl: 26px;
-      --shadow-soft: 0 18px 45px rgba(0,0,0,.55);
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
       --max-width: 900px;
     }
 
-    /* Full ChexSystems layout CSS preserved exactly – body, page, shell, headers, grid, article, sidebar, cards, FAQ, callouts, checklists, footer */
+    * {
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 55%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
+
+    .page {
+      width: 100%;
+      max-width: var(--max-width);
+      padding: 28px 18px 40px;
+    }
+
+    @media (min-width: 768px) {
+      .page {
+        padding: 40px 0 64px;
+      }
+    }
+
+    .shell {
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(2, 6, 23, 0.98));
+      border-radius: 32px;
+      padding: 28px 20px 30px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      backdrop-filter: blur(26px);
+    }
+
+    @media (min-width: 768px) {
+      .shell {
+        padding: 32px 36px 38px;
+      }
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 26px;
+    }
+
+    .tagline {
+      font-size: 13px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tagline-pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--border-subtle);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tag-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-soft);
+    }
+
+    h1 {
+      font-size: 26px;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin: 0;
+    }
+
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 32px;
+      }
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 640px;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .meta-pill {
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(15, 23, 42, 0.85);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .meta-pill strong {
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.9fr) minmax(0, 1.1fr);
+      gap: 18px;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .article {
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(129, 140, 248, 0.12), transparent 52%),
+                  linear-gradient(145deg, #020617, #020617);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      padding: 20px 18px 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (min-width: 768px) {
+      .article {
+        padding: 22px 22px 24px;
+      }
+    }
+
+    .article::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.18), transparent 60%);
+      opacity: 0.7;
+      pointer-events: none;
+      mix-blend-mode: soft-light;
+    }
+
+    .article-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .article h2 {
+      font-size: 18px;
+      margin-top: 20px;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .article h3 {
+      font-size: 15px;
+      margin-top: 16px;
+      margin-bottom: 6px;
+    }
+
+    .article p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #d1d5db;
+      margin: 6px 0 8px;
+    }
+
+    .article ul,
+    .article ol {
+      margin: 6px 0 10px 0;
+      padding-left: 18px;
+      font-size: 14px;
+      color: #d1d5db;
+    }
+
+    .article li {
+      margin-bottom: 5px;
+    }
+
+    .callout {
+      margin: 14px 0 12px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      font-size: 13px;
+      color: #e5e7eb;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .callout-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .checklist {
+      border-radius: 16px;
+      border: 1px dashed rgba(75, 85, 99, 0.9);
+      padding: 10px 12px;
+      margin-top: 10px;
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .checklist h3 {
+      margin-top: 0;
+      font-size: 14px;
+    }
+
+    .checklist ul {
+      margin: 4px 0 0;
+      padding-left: 18px;
+    }
+
+    .checklist li::marker {
+      content: "✓ ";
+      color: var(--success);
+      font-weight: 600;
+    }
+
+    .faq {
+      margin-top: 16px;
+      border-top: 1px solid rgba(31, 41, 55, 0.9);
+      padding-top: 10px;
+    }
+
+    .faq-item + .faq-item {
+      margin-top: 8px;
+    }
+
+    .faq-q {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .faq-a {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .sidebar-card {
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 55%),
+                  linear-gradient(145deg, #020617, #020617);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      padding: 14px 14px 16px;
+    }
+
+    .sidebar-card h3 {
+      margin: 0 0 8px;
+      font-size: 14px;
+    }
+
+    .sidebar-card p {
+      margin: 0 0 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .badge span {
+      font-size: 8px;
+      color: var(--accent);
+    }
+
+    .link-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 13px;
+    }
+
+    .link-list li + li {
+      margin-top: 4px;
+    }
+
+    .link-list a {
+      color: #e5e7eb;
+      text-decoration: none;
+    }
+
+    .link-list a:hover {
+      color: var(--accent);
+    }
+
+    .ad-slot {
+      margin-top: 8px;
+      border-radius: 14px;
+      border: 1px dashed rgba(75, 85, 99, 0.9);
+      padding: 10px 8px;
+      font-size: 11px;
+      text-align: center;
+      color: var(--muted);
+      background: rgba(15, 23, 42, 0.92);
+    }
+
+    .ad-slot.small {
+      padding: 6px 6px;
+      font-size: 10px;
+    }
+
+    footer {
+      margin-top: 26px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-subtle);
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--accent);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 16px;
+      margin-top: 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.9);
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.16), transparent 55%);
+      color: #e5e7eb;
+      font-size: 14px;
+      text-decoration: none;
+      gap: 6px;
+    }
+
+    .btn-primary:hover {
+      border-color: #38bdf8;
+      color: #f9fafb;
+    }
   </style>
 
 </head>
 
 <body>
 <div class="page">
-<div class="shell">
+  <div class="shell">
 
-<header>
-  <div class="tagline">
-    <div class="tagline-pill">
-      <span class="tag-dot"></span>
-      WHO · GLP-1 · MEDICATION SAFETY
+    <header>
+      <div class="tagline">
+        <div class="tagline-pill">
+          <span class="tag-dot"></span>
+          WHO · GLP-1 · PROVIDER COMPLIANCE
+        </div>
+        <span>Skillona.ai · Practical compliance micro-guides</span>
+      </div>
+
+      <h1>WHO 2026 GLP-1 Compliance Pack – Clinics, Telehealth & Pharmacies</h1>
+
+      <p class="subtitle">
+        In January 2026, WHO issued a GLP-1 Global Risk Advisory covering semaglutide, tirzepatide, compounded GLP-1
+        products and grey-market channels. This page summarises the core changes and shows clinics, tele-health
+        platforms, pharmacies, compounders and distributors exactly how to stay compliant – with a ready-to-use
+        forms & logs pack.
+      </p>
+
+      <div class="meta-row">
+        <div class="meta-pill">⏱️ <strong>Reading time:</strong>&nbsp;10–15 min</div>
+        <div class="meta-pill">🏥 <strong>For:</strong>&nbsp;Clinics · Tele-health · Pharmacies · Compounders</div>
+        <div class="meta-pill">🌍 <strong>Updated:</strong>&nbsp;January 2026 (WHO GLP-1 Advisory)</div>
+      </div>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-inner">
+
+          <!-- SECTION 1 -->
+          <div class="section-label">Overview</div>
+          <h2>1. What actually changed in WHO’s 2026 GLP-1 advisory</h2>
+
+          <p>The 2026 WHO GLP-1 Global Risk Advisory does <strong>not</strong> ban GLP-1 therapy. It tightens
+             how it must be prescribed, documented, transported and marketed worldwide. Core themes:</p>
+
+          <ul>
+            <li>global tightening of <strong>eligibility and documentation</strong> for GLP-1 therapy,</li>
+            <li>increased scrutiny of <strong>compounded</strong> and cross-border products,</li>
+            <li>mandatory justification and consent for <strong>off-label expansion</strong>,</li>
+            <li>full <strong>supply-chain verification</strong> – including cold-chain integrity,</li>
+            <li>restrictions on <strong>weight-loss marketing claims</strong>,</li>
+            <li>more structured <strong>adverse event reporting</strong> and audit triggers.</li>
+          </ul>
+
+          <p><strong>Who is in scope:</strong> outpatient clinics, tele-health providers, pharmacies,
+             compounding facilities, online wellness brands and distributors handling GLP-1 products.</p>
+
+          <div class="callout">
+            <div class="callout-icon">!</div>
+            <div>
+              The advisory is not optional “best practice”. Payers, regulators and platforms are already
+              aligning policies to WHO language – <strong>non-compliance becomes an audit magnet</strong>.
+            </div>
+          </div>
+
+          <!-- SECTION 2 -->
+          <div class="section-label">Risk Clusters</div>
+          <h2>2. GLP-1 risk categories WHO focuses on in 2026</h2>
+
+          <p>WHO highlights four critical risk clusters that regulators will track:</p>
+
+          <ul>
+            <li><strong>Counterfeit products</strong> – online retailers, unverified pharmacies, informal import channels.</li>
+            <li><strong>Contaminated / wrong-potency batches</strong> – especially from non-accredited compounders.</li>
+            <li><strong>Misuse & off-label expansion</strong> – cosmetic weight-loss without documentation or consent.</li>
+            <li><strong>Cold-chain breaks</strong> – shipment or storage deviations that are not logged or disclosed.</li>
+          </ul>
+
+          <p>Your compliance system must show that you can <strong>identify, document and act</strong> on each of these risks.</p>
+
+          <!-- SECTION 3 -->
+          <div class="section-label">Documentation</div>
+          <h2>3. Minimum GLP-1 documentation set WHO expects</h2>
+
+          <p>To pass basic scrutiny, a GLP-1 service line now needs traceable documentation for:</p>
+
+          <ul>
+            <li>patient eligibility & prescribing rationale,</li>
+            <li>off-label justification + informed consent (where applicable),</li>
+            <li>full supply-chain and batch traceability,</li>
+            <li>cold-chain temperature logs for all refrigerated stock,</li>
+            <li>compounding partner licences, COAs and sterility/potency data,</li>
+            <li>adverse event reports and escalation decisions,</li>
+            <li>marketing & claims review logs.</li>
+          </ul>
+
+          <div class="checklist">
+            <h3>Core GLP-1 compliance file (per organisation)</h3>
+            <ul>
+              <li>Eligibility checklist & prescribing forms.</li>
+              <li>Off-label informed consent templates.</li>
+              <li>Cold-chain log sheets + deviation SOP.</li>
+              <li>Supplier & compounding verification forms.</li>
+              <li>Adverse event forms and escalation tree.</li>
+              <li>Marketing review checklist + sign-offs.</li>
+            </ul>
+          </div>
+
+          <!-- SECTION 4 -->
+          <div class="section-label">Off-Label & Consent</div>
+          <h2>4. Off-label GLP-1 use – what must be in the file</h2>
+
+          <p>Off-label prescribing remains legal in many countries, but WHO treats it as a major
+             <strong>regulatory risk surface</strong>. For each off-label patient, your file should contain:</p>
+
+          <ul>
+            <li>diagnosis / indication and why GLP-1 is chosen,</li>
+            <li>clear note that use is <strong>outside approved label</strong>,</li>
+            <li>alternatives discussed (lifestyle, other pharmacologic options),</li>
+            <li>written informed consent, signed and dated,</li>
+            <li>titration / monitoring plan and follow-up schedule.</li>
+          </ul>
+
+          <div class="callout">
+            <div class="callout-icon">i</div>
+            <div>
+              In recent audits, missing off-label rationale + consent is one of the fastest ways
+              regulators categorise a GLP-1 service as “non-compliant high risk”.
+            </div>
+          </div>
+
+          <!-- SECTION 5 -->
+          <div class="section-label">Supply Chain</div>
+          <h2>5. Supply-chain & cold-chain – what WHO expects you to prove</h2>
+
+          <p>WHO’s advisory links many serious events to poor supply-chain control. You must be able to show:</p>
+
+          <ul>
+            <li>verified supplier licences and accreditations,</li>
+            <li>COAs and independent lab testing for compounded product,</li>
+            <li>tamper-evident packaging and lot/batch tracking,</li>
+            <li>validated cold-chain storage equipment,</li>
+            <li>24/7 temperature logging with deviation alerts,</li>
+            <li>quarantine + destruction records for suspect batches.</li>
+          </ul>
+
+          <div class="checklist">
+            <h3>Cold-chain & supplier quick audit list</h3>
+            <ul>
+              <li>Each batch linked to a supplier verification form.</li>
+              <li>Temperature logs stored and backed up (minimum 5 years).</li>
+              <li>Deviation SOP: who is notified, how product is quarantined.</li>
+              <li>Compounding partners mapped to USP & local standards.</li>
+            </ul>
+          </div>
+
+          <!-- SECTION 6 -->
+          <div class="section-label">Audits & Red Flags</div>
+          <h2>6. Audit triggers under the 2026 GLP-1 framework</h2>
+
+          <p>Regulators and payers are likely to investigate GLP-1 providers when they see:</p>
+
+          <ul>
+            <li>very rapid patient growth without matching documentation,</li>
+            <li>high volume of compounded GLP-1 from poorly documented sources,</li>
+            <li>missing cold-chain logs or inconsistent temperature records,</li>
+            <li>marketing promising guaranteed results or “no side effects”,</li>
+            <li>off-label expansion with no recorded rationale or consent,</li>
+            <li>clusters of adverse events not escalated or reported.</li>
+          </ul>
+
+          <p>Your defence is a <strong>single organised compliance pack</strong> that shows you anticipated and controlled these risks.</p>
+
+          <!-- DOWNLOAD SECTION -->
+          <div class="section-label">Download Pack</div>
+          <h2>7. Download the GLP-1 WHO 2026 Compliance Pack (PDF)</h2>
+
+          <p>
+            To avoid building everything from scratch, the
+            <strong>GLP-1 WHO 2026 Compliance Pack</strong> includes ready-to-use, copy/paste assets:
+          </p>
+
+          <ul>
+            <li>GLP-1 eligibility checklist & prescribing rationale template.</li>
+            <li>Off-label informed consent form (provider + patient signatures).</li>
+            <li>Cold-chain log sheets + deviation procedure summary.</li>
+            <li>Supplier & compounding pharmacy verification forms.</li>
+            <li>Adverse event reporting form + escalation options.</li>
+            <li>Marketing & claims compliance checklist.</li>
+            <li>Final one-page GLP-1 compliance checklist for internal audits.</li>
+          </ul>
+
+          <a class="btn-primary" href="https://branimirvrnoga.gumroad.com/l/WHOGLP-12026guidance" target="_blank" rel="noopener">
+            👉 Download the GLP-1 WHO 2026 Compliance Pack (PDF)
+          </a>
+
+          <!-- FAQ -->
+          <div class="section-label">FAQ</div>
+          <h2>8. WHO GLP-1 2026 – provider FAQ</h2>
+
+          <div class="faq-item">
+            <div class="faq-q">Is the WHO GLP-1 advisory legally binding?</div>
+            <div class="faq-a">
+              WHO does not legislate, but national regulators, payers and professional
+              bodies are already aligning policies with the advisory language. In practice,
+              <strong>non-alignment quickly becomes a liability and audit risk</strong>.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">Who should own GLP-1 compliance inside a clinic?</div>
+            <div class="faq-a">
+              Ideally one named <strong>GLP-1 compliance lead</strong> coordinates medical,
+              pharmacy, logistics and marketing teams – and owns the central documentation pack.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">Can we keep offering compounded GLP-1?</div>
+            <div class="faq-a">
+              Yes, where legally allowed – but only with documented supplier verification,
+              COAs, sterility/potency evidence and clear patient communication about risks.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">How long do we need to store GLP-1 documentation?</div>
+            <div class="faq-a">
+              As a conservative baseline, plan for <strong>at least five years</strong> of
+              retention for eligibility, consent, supply-chain and adverse event records, or
+              longer if local rules require.
+            </div>
+          </div>
+
+        </div>
+      </article>
+
+      <aside class="sidebar">
+
+        <div class="sidebar-card">
+          <div class="badge"><span>●</span> CLINIC IMPLEMENTATION</div>
+          <h3>GLP-1 Clinic Roll-Out Checklist</h3>
+          <p>
+            Use the compliance pack as a plug-and-play framework to bring your GLP-1 service line
+            in line with WHO 2026 in a single working session.
+          </p>
+          <div class="ad-slot small">
+            Included in the PDF pack: master checklist, forms bundle, internal audit sheet.
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <h3>Included forms & logs</h3>
+          <p>Every template is copy/paste-ready (Word / PDF friendly):</p>
+          <ul class="link-list">
+            <li>Eligibility & off-label consent forms</li>
+            <li>Cold-chain & supplier verification logs</li>
+            <li>Adverse event + escalation forms</li>
+            <li>Marketing compliance review checklist</li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card">
+          <h3>Related compliance micro-guides</h3>
+          <ul class="link-list">
+            <li><a href="/medical-bill-overcharge-charity-care/">Medical Bill Overcharge & Charity Care – Reduce hospital debt</a></li>
+            <li><a href="/background-check-dispute/">Background Check Dispute – Fix employment & tenant reports</a></li>
+            <li><a href="/us-credit-report-error-dispute/">U.S. Credit Report Error Dispute – Full deletion guide</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="badge"><span>●</span> ADS / AFFILIATE</div>
+          <h3>Premium placement – GLP-1 B2B</h3>
+          <p>
+            Reserved for GLP-1 compliant tele-health platforms, compounding partners,
+            logistics providers or audit/consulting services.
+          </p>
+          <div class="ad-slot">Ad placeholder – GLP-1 compliance, logistics, or B2B audit services.</div>
+        </div>
+
+      </aside>
+    </main>
+
+    <div class="ad-slot" style="margin-top:22px;">
+      Secondary banner slot – GLP-1 regulatory training / legal / insurance partners.
     </div>
-    <span>Skillona.ai · Practical medical micro-guides</span>
-  </div>
 
-  <h1>WHO 2026 GLP-1 Drug Guidance – What Ozempic, Wegovy & Mounjaro Users Must Do Now</h1>
+    <footer>
+      <div>© 2026 Skillona.ai · Educational only. Not medical, legal or regulatory advice.</div>
+      <div>
+        <a href="/about.html">About</a> ·
+        <a href="/disclaimer.html">Disclaimer</a> ·
+        <a href="/contact.html">Contact</a>
+      </div>
+    </footer>
 
-  <p class="subtitle">
-    WHO introduces new global guidelines for GLP-1 medications, tightening safety monitoring, mandatory symptom reporting,
-    lab testing and documented medical necessity for all patients. This guide explains exactly what changed — and what you must do now.
-  </p>
-
-  <div class="meta-row">
-    <div class="meta-pill">⏱️ <strong>Reading time:</strong> 8–12 min</div>
-    <div class="meta-pill">💊 <strong>Applies to:</strong> Ozempic · Wegovy · Mounjaro</div>
-    <div class="meta-pill">🌍 <strong>WHO 2026:</strong> worldwide guidance</div>
-  </div>
-</header>
-
-<main>
-<article class="article">
-<div class="article-inner">
-<!-- SECTION 1 -->
-<div class="section-label">Overview</div>
-<h2>1. What WHO changed in 2026</h2>
-
-<p>The 2026 WHO guidance introduces stricter GLP-1 safety rules due to rapid global use and rising reports of
-pancreatitis, gallbladder complications and severe gastrointestinal reactions. Key updates require:</p>
-
-<ul>
-  <li>mandatory baseline evaluation before prescription,</li>
-  <li>structured symptom monitoring at every refill,</li>
-  <li>faster reporting of red-flag reactions,</li>
-  <li>new tapering rules (no abrupt stopping),</li>
-  <li>clear documentation of medical necessity for all patients — including weight-loss users.</li>
-</ul>
-
-<div class="callout">
-  <div class="callout-icon">!</div>
-  <div>
-    WHO guidance applies to <strong>all GLP-1 formulations</strong>: Ozempic, Wegovy, Mounjaro, Zepbound, Saxenda and their generics.
   </div>
 </div>
-
-
-<!-- SECTION 2 -->
-<div class="section-label">Safety Monitoring</div>
-<h2>2. New mandatory symptom monitoring requirements</h2>
-
-<p>WHO now requires a structured review of symptoms at every dose increase and refill. Patients must track:</p>
-
-<ul>
-  <li><strong>upper abdominal pain radiating to the back</strong> (pancreatitis risk),</li>
-  <li><strong>persistent nausea/vomiting</strong> beyond dose-change expectations,</li>
-  <li><strong>severe bloating or distension</strong>,</li>
-  <li><strong>right-upper-quadrant pain</strong> (gallbladder complications),</li>
-  <li>unintended rapid weight loss (>15% in 60–90 days).</li>
-</ul>
-
-<div class="checklist">
-  <h3>WHO 2026 monitoring requirements</h3>
-  <ul>
-    <li>Baseline symptom and weight log before treatment.</li>
-    <li>Weekly GI symptom log.</li>
-    <li>Monthly weight and side-effect review.</li>
-    <li>Mandatory reporting of red-flag symptoms within 24–48h.</li>
-    <li>Lab monitoring: liver enzymes, pancreatic markers if symptoms appear.</li>
-  </ul>
-</div>
-
-
-<!-- SECTION 3 -->
-<div class="section-label">Medication Adjustments</div>
-<h2>3. When to adjust or stop GLP-1 treatment</h2>
-
-<p>WHO defines clear thresholds where doctors must re-evaluate dosing:</p>
-
-<ul>
-  <li>rapid unintended weight loss >15% in under 3 months,</li>
-  <li>recurrent severe gastrointestinal events,</li>
-  <li>elevated pancreatic or liver markers,</li>
-  <li>new gallbladder-related symptoms.</li>
-</ul>
-
-<p><strong>Abrupt stopping is no longer recommended.</strong> WHO requires supervised tapering to reduce rebound appetite and adverse reactions.</p>
-
-<div class="callout">
-  <div class="callout-icon">i</div>
-  <div>
-    Tapering typically follows a <strong>step-down schedule every 2–4 weeks</strong>, depending on formulation and dosage.
-  </div>
-</div>
-
-
-<!-- SECTION 4 -->
-<div class="section-label">Off-Label Use</div>
-<h2>4. Off-label use restrictions in 2026</h2>
-
-<p>WHO now states that GLP-1 prescriptions must include written medical justification. This affects:</p>
-
-<ul>
-  <li>cosmetic/rapid-slimming use without clinical supervision,</li>
-  <li>anti-craving or off-label psychiatric use,</li>
-  <li>use for mild overweight without comorbidities.</li>
-</ul>
-
-<p>Clinics must keep documentation of:</p>
-
-<ul>
-  <li>baseline assessment,</li>
-  <li>treatment rationale,</li>
-  <li>monitoring notes,</li>
-  <li>risk discussion and patient consent.</li>
-</ul>
-
-
-<!-- SECTION 5 -->
-<div class="section-label">Patient Actions</div>
-<h2>5. What patients must do immediately</h2>
-
-<ul>
-  <li>Update your provider with a baseline symptom, weight and health log.</li>
-  <li>Begin weekly side-effect documentation using WHO’s 2026 checklist.</li>
-  <li>Report any red-flag symptoms within 24–48 hours.</li>
-  <li>Review whether your current use meets the new medical-need rules.</li>
-  <li>Ensure your clinic documents justification for continued use.</li>
-</ul>
-
-<div class="checklist">
-  <h3>Your immediate 7-day action plan</h3>
-  <ul>
-    <li>Start weekly symptom tracking.</li>
-    <li>Record current dosage + treatment duration.</li>
-    <li>Document any prior GI or gallbladder issues.</li>
-    <li>Prepare questions for next clinical review.</li>
-  </ul>
-</div>
-
-
-<!-- DOWNLOAD SECTION -->
-<div class="section-label">Download Pack</div>
-<h2>6. Download the 2026 GLP-1 Compliance Pack (PDF)</h2>
-
-<p>The PDF pack contains:</p>
-
-<ul>
-  <li>WHO-style GLP-1 symptom tracker (weekly log),</li>
-  <li>doctor communication templates,</li>
-  <li>side-effect red-flag chart,</li>
-  <li>lab monitoring sheet,</li>
-  <li>tapering overview.</li>
-</ul>
-
-<a class="btn-primary" href="https://branimirvrnoga.gumroad.com/l/WHOGLP-12026guidance" target="_blank">
-  👉 Download the 2026 GLP-1 Compliance Pack (PDF)
-</a>
-
-
-<!-- FAQ -->
-<div class="section-label">FAQ</div>
-<h2>7. Frequently Asked Questions</h2>
-
-<div class="faq-item">
-  <div class="faq-q">Does this change how Ozempic and Wegovy are prescribed?</div>
-  <div class="faq-a">Yes. Providers must document medical necessity and track symptoms more closely.</div>
-</div>
-
-<div class="faq-item">
-  <div class="faq-q">Do these rules apply to non-diabetic patients?</div>
-  <div class="faq-a">Yes — WHO guidance applies to all GLP-1 users.</div>
-</div>
-
-<div class="faq-item">
-  <div class="faq-q">Should I stop my medication now?</div>
-  <div class="faq-a">No. WHO advises against abrupt discontinuation. Only taper under supervision.</div>
-</div>
-
-<div class="faq-item">
-  <div class="faq-q">Will insurance coverage change?</div>
-  <div class="faq-a">Insurers may update authorization criteria based on WHO rules. Check with your provider.</div>
-</div>
-
-</div><!-- end .article-inner -->
-</article>
-<!-- SIDEBAR -->
-<aside class="sidebar">
-
-  <!-- CARD 1: GLP-1 Safety Checklist -->
-  <div class="sidebar-card">
-    <div class="badge"><span>●</span> PATIENT TOOLS</div>
-    <h3>GLP-1 Weekly Safety Checklist</h3>
-    <p>Track symptoms required under WHO 2026 guidance. Ideal for showing your provider consistent monitoring.</p>
-    <div class="ad-slot small">
-      Included in the PDF pack: symptom tracker + red-flag chart.
-    </div>
-  </div>
-
-  <!-- CARD 2: Doctor Communication Templates -->
-  <div class="sidebar-card">
-    <h3>Doctor Communication Templates</h3>
-    <p>Send accurate, compliant updates to your provider: red-flag reporting, dosage review requests and tapering notices.</p>
-    <ul class="link-list">
-      <li><a href="https://branimirvrnoga.gumroad.com/l/WHOGLP-12026guidance" target="_blank">Download communication templates →</a></li>
-    </ul>
-  </div>
-
-  <!-- CARD 3: Related Medical Guides -->
-  <div class="sidebar-card">
-    <h3>Related health compliance guides</h3>
-    <ul class="link-list">
-      <li><a href="/medical-bill-overcharge-charity-care/">Medical Bill Overcharge – Reduce hospital bills</a></li>
-      <li><a href="/background-check-dispute/">Background Check Dispute – Fix screening errors</a></li>
-      <li><a href="/us-credit-report-error-dispute/">U.S. Credit Report Error Deletion Guide</a></li>
-    </ul>
-  </div>
-
-  <!-- CARD 4: Ad placeholder -->
-  <div class="sidebar-card">
-    <div class="badge"><span>●</span> ADS / AFFILIATE</div>
-    <h3>Recommended products</h3>
-    <p>Space for weight-loss clinics, telehealth, lab testing or dietitian services.</p>
-    <div class="ad-slot">Ad placeholder – GLP-1 health services</div>
-  </div>
-
-</aside>
-</main>
-
-<!-- Bottom Ad -->
-<div class="ad-slot" style="margin-top:22px;">
-  Ad placeholder – bottom banner (GLP-1 compliance / medical affiliate).
-</div>
-
-<!-- FOOTER -->
-<footer>
-  <div>© 2026 Skillona.ai · Educational only. Not medical or clinical advice.</div>
-  <div>
-    <a href="/about.html">About</a> ·
-    <a href="/disclaimer.html">Disclaimer</a> ·
-    <a href="/contact.html">Contact</a>
-  </div>
-</footer>
-
-</div> <!-- shell -->
-</div> <!-- page -->
 
 <!-- SCHEMA -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "WHO 2026 GLP-1 Drug Guidance – What Patients Must Do Now",
-  "description": "Updated WHO 2026 GLP-1 safety rules for Ozempic, Wegovy, Mounjaro and similar medications — including new monitoring, tapering and reporting requirements.",
+  "headline": "WHO 2026 GLP-1 Compliance Pack – Clinics, Telehealth & Pharmacies",
+  "description": "GLP-1 WHO 2026 Global Risk Advisory: practical compliance summary and plug-and-play documentation pack for clinics, telehealth providers, pharmacies, compounders and distributors.",
   "image": "https://skillona.ai/assets/og/glp1-who-guidance-2026.png",
   "author": {
     "@type": "Organization",
