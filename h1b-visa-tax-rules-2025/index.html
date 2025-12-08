@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>H-1B Visa Tax Rules 2025 – Resident vs Nonresident, Forms & Common Traps</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description"
+        content="2025 guide to U.S. tax rules for H-1B visa holders: resident vs nonresident status, which IRS form to file, how the substantial presence test works, and the most common mistakes to avoid." />
+  <meta name="robots" content="index,follow" />
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="H-1B Visa Tax Rules 2025 – Resident vs Nonresident" />
+  <meta property="og:description"
+        content="Clear step-by-step guide for H-1B workers on U.S. tax residency, forms 1040 vs 1040-NR, and the substantial presence test." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://skillona.ai/guides/h1b-visa-tax-rules-2025" />
+
+  <style>
+    :root {
+      --bg-main: #020617;
+      --bg-card: #0b1220;
+      --bg-light: #f9fafb;
+      --border-subtle: rgba(148, 163, 184, 0.35);
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --accent: #1d4ed8;
+      --accent-soft: rgba(37, 99, 235, 0.12);
+      --accent-strong: #1e40af;
+      --badge-bg: rgba(15, 118, 110, 0.08);
+      --badge-text: #0369a1;
+      --danger: #b91c1c;
+      --success: #15803d;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.45);
+      --radius-lg: 18px;
+      --radius-xl: 26px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      color: var(--text-main);
+      background: radial-gradient(circle at top left, #0f172a 0, #020617 45%, #000 100%);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page-shell {
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 32px 16px 48px;
+    }
+
+    @media (min-width: 768px) {
+      .page-shell {
+        padding: 40px 24px 64px;
+      }
+    }
+
+    .guide {
+      width: 100%;
+      max-width: 980px;
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.96));
+      border-radius: 32px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      overflow: hidden;
+    }
+
+    .guide-header {
+      padding: 26px 20px 18px;
+      border-bottom: 1px solid rgba(51, 65, 85, 0.7);
+      background:
+        radial-gradient(circle at 0 0, rgba(59, 130, 246, 0.25), transparent 60%),
+        radial-gradient(circle at 100% 0, rgba(129, 140, 248, 0.22), transparent 55%),
+        linear-gradient(135deg, #020617, #020617);
+    }
+
+    @media (min-width: 768px) {
+      .guide-header {
+        padding: 30px 32px 20px;
+      }
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+      align-items: center;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: #e5e7eb;
+    }
+
+    .pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+    }
+
+    .guide-title {
+      font-size: 26px;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      color: #f9fafb;
+      margin: 0 0 10px;
+    }
+
+    @media (min-width: 768px) {
+      .guide-title {
+        font-size: 32px;
+      }
+    }
+
+    .guide-subtitle {
+      margin: 0;
+      color: #cbd5f5;
+      font-size: 14px;
+      max-width: 640px;
+    }
+
+    .meta-row {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .meta-row span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .meta-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.8);
+    }
+
+    .guide-body {
+      padding: 18px 18px 22px;
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.96));
+      color: #e5e7eb;
+    }
+
+    @media (min-width: 768px) {
+      .guide-body {
+        padding: 22px 28px 26px;
+      }
+    }
+
+    .intro-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    @media (min-width: 900px) {
+      .intro-grid {
+        grid-template-columns: minmax(0, 3fr) minmax(0, 2.3fr);
+        align-items: flex-start;
+      }
+    }
+
+    .lead-text p {
+      margin: 0 0 10px;
+      font-size: 14px;
+      color: #e5e7eb;
+    }
+
+    .lead-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .highlight-box {
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      padding: 14px 14px 12px;
+    }
+
+    .highlight-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #bfdbfe;
+      margin-bottom: 8px;
+    }
+
+    .highlight-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 13px;
+      color: #e5e7eb;
+    }
+
+    .highlight-list li {
+      display: flex;
+      gap: 8px;
+      padding: 6px 0;
+      border-bottom: 1px dashed rgba(51, 65, 85, 0.9);
+    }
+
+    .highlight-list li:last-child {
+      border-bottom: none;
+    }
+
+    .hl-label {
+      width: 110px;
+      flex-shrink: 0;
+      color: #9ca3af;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .hl-value {
+      font-weight: 500;
+      color: #e5e7eb;
+    }
+
+    .section {
+      margin-top: 26px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(51, 65, 85, 0.9);
+    }
+
+    .section:first-of-type {
+      margin-top: 20px;
+    }
+
+    .section-kicker {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #93c5fd;
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      margin: 0 0 8px;
+      font-size: 18px;
+      letter-spacing: -0.03em;
+      color: #eff6ff;
+    }
+
+    .section p {
+      margin: 0 0 10px;
+      font-size: 14px;
+      color: #e5e7eb;
+    }
+
+    .section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .tagline {
+      font-size: 13px;
+      color: #cbd5f5;
+      margin-top: 4px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .badge {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(129, 140, 248, 0.7);
+      background: rgba(23, 37, 84, 0.9);
+      color: #e5e7eb;
+    }
+
+    .credit-grid {
+      display: grid;
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    @media (min-width: 840px) {
+      .credit-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .credit-card {
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148, 163, 184, 0.75);
+      padding: 12px 12px 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .credit-tag {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.16);
+      border: 1px solid rgba(59, 130, 246, 0.7);
+      color: #bfdbfe;
+    }
+
+    .credit-name {
+      margin: 0 0 6px;
+      font-size: 15px;
+      letter-spacing: -0.02em;
+      color: #e5e7eb;
+    }
+
+    .credit-meta {
+      font-size: 12px;
+      color: #bfdbfe;
+      margin-bottom: 4px;
+    }
+
+    .credit-list {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 13px;
+      color: #e5e7eb;
+    }
+
+    .credit-list li {
+      margin-bottom: 4px;
+    }
+
+    .steps-list {
+      margin: 6px 0 0;
+      padding-left: 18px;
+      font-size: 13px;
+      color: #e5e7eb;
+    }
+
+    .steps-list li {
+      margin-bottom: 4px;
+    }
+
+    .callout {
+      margin-top: 18px;
+      padding: 11px 12px 10px;
+      border-radius: var(--radius-lg);
+      border: 1px dashed rgba(129, 140, 248, 0.9);
+      background: radial-gradient(circle at 0 0, rgba(37, 99, 235, 0.22), rgba(15, 23, 42, 0.98));
+      font-size: 13px;
+      color: #e5e7eb;
+    }
+
+    .callout strong {
+      color: #bfdbfe;
+    }
+
+    .checklist-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 10px;
+      font-size: 13px;
+    }
+
+    @media (min-width: 720px) {
+      .checklist-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .checklist-card {
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      background: rgba(15, 23, 42, 0.98);
+      padding: 10px 11px 9px;
+    }
+
+    .checklist-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #93c5fd;
+      margin-bottom: 4px;
+    }
+
+    .checklist-card ul {
+      margin: 0;
+      padding-left: 16px;
+      color: #e5e7eb;
+    }
+
+    .checklist-card li {
+      margin-bottom: 4px;
+    }
+
+    .cta {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px dashed rgba(51, 65, 85, 0.9);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      justify-content: space-between;
+    }
+
+    .cta-text {
+      font-size: 13px;
+      color: #dbeafe;
+      max-width: 520px;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 7px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.12s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color: #eff6ff;
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 40px rgba(37, 99, 235, 0.55);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: #bfdbfe;
+      border: 1px solid rgba(129, 140, 248, 0.9);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(30, 64, 175, 0.4);
+    }
+
+    .disclaimer {
+      margin-top: 12px;
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .disclaimer strong {
+      color: #e5e7eb;
+    }
+
+    .legal-note {
+      margin-top: 4px;
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    a {
+      color: #93c5fd;
+    }
+
+    a:hover {
+      color: #bfdbfe;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <article class="guide">
+      <header class="guide-header">
+        <div class="pill-row">
+          <span class="pill">
+            <span class="pill-dot"></span>
+            Skillona.ai · H-1B Tax 2025
+          </span>
+          <span class="pill">Resident vs nonresident · ~8 min read</span>
+        </div>
+        <h1 class="guide-title">
+          H-1B Visa Tax Rules 2025: Resident vs Nonresident, Forms & Common Traps
+        </h1>
+        <p class="guide-subtitle">
+          Clear, step-by-step guide for H-1B workers on U.S. tax residency, which form to file
+          (1040 vs 1040-NR), how the substantial presence test works, and what mistakes get
+          foreigners in trouble.
+        </p>
+        <div class="meta-row">
+          <span><span class="meta-dot"></span> For H-1B employees and recent F-1 / OPT transitions</span>
+          <span><span class="meta-dot"></span> Focus on federal income tax rules</span>
+          <span><span class="meta-dot"></span> Not about immigration status or visas themselves</span>
+        </div>
+      </header>
+
+      <div class="guide-body">
+        <!-- Intro + Quick Facts -->
+        <section class="intro-grid">
+          <div class="lead-text">
+            <p>
+              On an H-1B visa you are a “non-immigrant” for immigration purposes, but the IRS
+              does <strong>not</strong> use that label. For U.S. taxes you are either a
+              <strong>resident alien</strong> or a <strong>nonresident alien</strong>, and the
+              difference changes your:
+            </p>
+            <p>
+              <strong>1)</strong> worldwide vs U.S.-source income that’s taxed,  
+              <strong>2)</strong> deductions and credits you can claim, and  
+              <strong>3)</strong> correct form: <strong>1040</strong> or <strong>1040-NR</strong>.
+            </p>
+            <p>
+              This guide gives you a practical checklist so you don’t guess, don’t mix up forms,
+              and don’t accidentally under- or over-pay U.S. tax as an H-1B worker.
+            </p>
+          </div>
+
+          <aside class="highlight-box">
+            <div class="highlight-title">Quick snapshot</div>
+            <ul class="highlight-list">
+              <li>
+                <span class="hl-label">Main decision</span>
+                <span class="hl-value">Are you a <strong>resident</strong> or <strong>nonresident</strong> for tax?</span>
+              </li>
+              <li>
+                <span class="hl-label">Key tool</span>
+                <span class="hl-value">Substantial Presence Test (SPT)</span>
+              </li>
+              <li>
+                <span class="hl-label">Common forms</span>
+                <span class="hl-value">1040, 1040-NR, sometimes dual-status return</span>
+              </li>
+              <li>
+                <span class="hl-label">Risk points</span>
+                <span class="hl-value">Wrong form, double taxation, missed treaty benefits</span>
+              </li>
+            </ul>
+          </aside>
+        </section>
+
+        <!-- Section: classification -->
+        <section class="section">
+          <div class="section-kicker">Step 1</div>
+          <h2 class="section-title">Figure out your U.S. tax residency status first</h2>
+          <p>
+            For most H-1B holders, residency is decided by the <strong>Substantial Presence Test (SPT)</strong>.
+            Very simplified:
+          </p>
+          <ul class="steps-list">
+            <li>You count days you were physically in the U.S. in the current year.</li>
+            <li>You may also count some portion of days from the two prior years.</li>
+            <li>Certain visa types (e.g. some F-1 periods) can be <strong>exempt</strong> from the count.</li>
+          </ul>
+          <p class="tagline">
+            Result: you are either treated as a <strong>U.S. tax resident</strong> (Form 1040, worldwide income)
+            or a <strong>nonresident</strong> (Form 1040-NR, mainly U.S.-source income).
+          </p>
+          <div class="badge-row">
+            <span class="badge">Immigration status ≠ tax status</span>
+            <span class="badge">SPT depends on days of presence</span>
+            <span class="badge">F-1 to H-1B transition is a common edge case</span>
+          </div>
+        </section>
+
+        <!-- Section: Resident vs Nonresident comparison -->
+        <section class="section">
+          <div class="section-kicker">Step 2</div>
+          <h2 class="section-title">Resident vs nonresident: what changes for your taxes</h2>
+          <p>
+            Once you know your status, the rest follows more logically. Here is the practical
+            difference for an H-1B worker:
+          </p>
+
+          <div class="credit-grid">
+            <article class="credit-card">
+              <span class="credit-tag">Resident alien</span>
+              <h3 class="credit-name">You file like a U.S. citizen (Form 1040)</h3>
+              <p class="credit-meta">Typical after you’ve been in the U.S. long enough under SPT.</p>
+              <ul class="credit-list">
+                <li><strong>Income:</strong> worldwide income generally taxable in the U.S.</li>
+                <li><strong>Deductions:</strong> can use standard deduction; many credits are available.</li>
+                <li><strong>Filing status:</strong> can often file jointly with spouse if they also elect residency.</li>
+                <li><strong>Foreign taxes:</strong> may use foreign tax credit to avoid double taxation.</li>
+              </ul>
+              <ul class="steps-list">
+                <li>Confirm you pass SPT and do not qualify for a valid treaty exception.</li>
+                <li>Use Form <strong>1040</strong> and the standard U.S. tax software flow.</li>
+                <li>Declare foreign income if required and consider foreign tax credits.</li>
+              </ul>
+            </article>
+
+            <article class="credit-card">
+              <span class="credit-tag">Nonresident alien</span>
+              <h3 class="credit-name">You file as a nonresident (Form 1040-NR)</h3>
+              <p class="credit-meta">More common in your first H-1B year or when presence days are low.</p>
+              <ul class="credit-list">
+                <li><strong>Income:</strong> generally only U.S.-source income is taxed.</li>
+                <li><strong>Deductions:</strong> limited; no standard deduction for most, only specific items.</li>
+                <li><strong>Filing status:</strong> usually “single” or “married filing separately”.</li>
+                <li><strong>Bank interest:</strong> often not taxable for nonresidents (check rules).</li>
+              </ul>
+              <ul class="steps-list">
+                <li>Verify you <strong>do not</strong> pass SPT for the year.</li>
+                <li>File Form <strong>1040-NR</strong>; do not mix 1040 and 1040-NR in the same year unless dual-status applies.</li>
+                <li>Review tax treaty between your home country and the U.S. for special rules.</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="callout">
+            <strong>Key warning:</strong> filing a full resident return (1040) when you’re
+            clearly nonresident, or the opposite, is a very common H-1B mistake. It can impact
+            refunds, future audits, and sometimes immigration paperwork if numbers don’t match.
+          </div>
+        </section>
+
+        <!-- Section: F-1 / OPT to H-1B transition -->
+        <section class="section">
+          <div class="section-kicker">Step 3</div>
+          <h2 class="section-title">Special case: moving from F-1 / OPT to H-1B</h2>
+          <p>
+            Many H-1B workers spent earlier years on F-1 (student) or OPT. Some of those days
+            can be <strong>exempt from the presence test</strong>, which changes when you first
+            become a resident for tax purposes.
+          </p>
+          <ul class="steps-list">
+            <li>Check how many years of F-1 you can treat as “exempt individual” for SPT.</li>
+            <li>In the year you switch to H-1B, you may have a <strong>dual-status year</strong>.</li>
+            <li>Dual-status means part of the year as nonresident, part as resident.</li>
+          </ul>
+          <p class="tagline">
+            In a dual-status year, the filing is more complex: you usually file a statement
+            plus either 1040-NR or 1040 as your main return for the year.
+          </p>
+          <div class="badge-row">
+            <span class="badge">Dual-status year = extra paperwork</span>
+            <span class="badge">Software may not handle this well</span>
+            <span class="badge">Worth checking with a specialist</span>
+          </div>
+        </section>
+
+        <!-- Section: Practical checklist -->
+        <section class="section">
+          <div class="section-kicker">Execution</div>
+          <h2 class="section-title">Practical H-1B tax filing checklist for 2025</h2>
+          <p>
+            Use this as a simple sequence so you don’t miss anything important:
+          </p>
+
+          <div class="checklist-grid">
+            <div class="checklist-card">
+              <div class="checklist-title">1. Before you file</div>
+              <ul>
+                <li>List every day you were physically in the U.S. for the last 3 years.</li>
+                <li>Note your visa types and exact dates (F-1, OPT, H-1B, etc.).</li>
+                <li>Collect U.S. income forms (W-2, 1099, etc.).</li>
+                <li>Collect foreign income info if you might be treated as resident.</li>
+              </ul>
+            </div>
+
+            <div class="checklist-card">
+              <div class="checklist-title">2. Decide status & form</div>
+              <ul>
+                <li>Apply the substantial presence test using your day counts.</li>
+                <li>Check if student / teacher “exempt” rules apply to earlier years.</li>
+                <li>Determine if this is a full resident, full nonresident, or dual-status year.</li>
+                <li>Pick the correct primary form: 1040 or 1040-NR.</li>
+              </ul>
+            </div>
+
+            <div class="checklist-card">
+              <div class="checklist-title">3. While filing</div>
+              <ul>
+                <li>Use software that supports nonresident or dual-status returns, if needed.</li>
+                <li>Enter home-country treaty benefits carefully, if applicable.</li>
+                <li>Check that your W-2 and reported U.S. wages match.</li>
+                <li>Save a full PDF copy of your filed return and confirmations.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="callout">
+            <strong>Tip for H-1B investors:</strong> if you invest in U.S. or foreign assets
+            (stocks, real estate, crypto), tax treatment can differ between resident and
+            nonresident status. Before large moves, confirm how your current year status
+            affects reporting and withholding.
+          </div>
+        </section>
+
+        <!-- Section: Common mistakes -->
+        <section class="section">
+          <div class="section-kicker">Avoid problems</div>
+          <h2 class="section-title">5 common H-1B tax mistakes (and how to avoid them)</h2>
+          <p>
+            The same errors show up again and again in H-1B tax situations:
+          </p>
+          <ul class="steps-list">
+            <li><strong>1. Wrong form:</strong> filing a resident 1040 when you clearly do not meet SPT, or the reverse.</li>
+            <li><strong>2. Ignoring foreign income:</strong> once you’re a resident for tax purposes, you generally must consider worldwide income.</li>
+            <li><strong>3. Assuming all software supports nonresidents:</strong> some popular tools do not handle 1040-NR or dual-status returns correctly.</li>
+            <li><strong>4. Misusing tax treaties:</strong> claiming benefits that don’t apply to H-1B or to your specific situation.</li>
+            <li><strong>5. No documentation:</strong> having no record of travel days, visa changes, or how you decided residency status.</li>
+          </ul>
+          <p class="legal-note">
+            Simple protection: keep a one-page summary in your files with your day counts,
+            visa timeline, and a short note on why you filed as resident or nonresident each year.
+          </p>
+        </section>
+
+        <!-- CTA + disclaimer -->
+        <section class="cta">
+          <div class="cta-text">
+            Need a clean template to track your days in the U.S., visa changes, and residency
+            status decisions for each year? Download the H-1B Tax Residency Tracker PDF and keep
+            it with your immigration and tax documents.
+          </div>
+          <div class="cta-actions">
+            <a href="/downloads/h1b-tax-residency-tracker-2025.pdf" class="btn btn-primary">
+              Download H-1B tracker (PDF)
+            </a>
+            <a href="/newsletter" class="btn btn-ghost">
+              Get future H-1B tax updates
+            </a>
+          </div>
+        </section>
+
+        <p class="disclaimer">
+          <strong>Important:</strong> This guide is for general educational purposes only and does
+          not constitute tax, legal, or immigration advice. U.S. rules for non-U.S. persons are
+          complex and may change. Your specific situation can be different from the examples here.
+        </p>
+        <p class="legal-note">
+          Always confirm current requirements on IRS.gov and, where necessary, speak with a tax
+          professional experienced in nonresident and H-1B cases before filing or amending returns.
+        </p>
+      </div>
+    </article>
+  </div>
+</body>
+</html>
