@@ -1,0 +1,19 @@
+{
+  "redirects": [
+    {
+      "source": "/guides/:slug*",
+      "destination": "/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/:slug.html",
+      "destination": "/:slug/",
+      "permanent": true
+    },
+    {
+      "source": "/:parent/YOUR_GUMROAD_LINK_HERE",
+      "destination": "/:parent/",
+      "permanent": true
+    }
+  ]
+}
