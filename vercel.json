@@ -1,6 +1,8 @@
 {
   "redirects": [
-    { "source": "/:path((?!.*\\.).*)", "destination": "/:path/", "permanent": true },
+    { "source": "/social-security-2026-rewrite-guide", "destination": "/social-security-2026-rewrite-guide/", "permanent": true },
+    { "source": "/h1b-visa-tax-rules-2025", "destination": "/h1b-visa-tax-rules-2025/", "permanent": true },
+    { "source": "/glp1-who-guidance-2026", "destination": "/glp1-who-guidance-2026/", "permanent": true },
 
     { "source": "/guides/:slug", "destination": "/:slug/", "permanent": true },
     { "source": "/guides/:slug/", "destination": "/:slug/", "permanent": true },
@@ -9,10 +11,18 @@
     { "source": "/:slug.html", "destination": "/:slug/", "permanent": true },
 
     { "source": "/features", "destination": "/", "permanent": true },
+    { "source": "/features/", "destination": "/", "permanent": true },
+
     { "source": "/about", "destination": "/", "permanent": true },
+    { "source": "/about/", "destination": "/", "permanent": true },
+
     { "source": "/contact", "destination": "/", "permanent": true },
+    { "source": "/contact/", "destination": "/", "permanent": true },
+
     { "source": "/testimonials", "destination": "/", "permanent": true },
+    { "source": "/testimonials/", "destination": "/", "permanent": true },
 
     { "source": "/:parent/YOUR_GUMROAD_LINK_HERE", "destination": "/:parent/", "permanent": true }
   ]
 }
+
