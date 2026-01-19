@@ -1,19 +1,16 @@
 {
   "redirects": [
-    {
-      "source": "/guides/:slug*",
-      "destination": "/:slug",
-      "permanent": true
-    },
-    {
-      "source": "/:slug.html",
-      "destination": "/:slug/",
-      "permanent": true
-    },
-    {
-      "source": "/:parent/YOUR_GUMROAD_LINK_HERE",
-      "destination": "/:parent/",
-      "permanent": true
-    }
+    { "source": "/guides/:slug", "destination": "/:slug/", "permanent": true },
+    { "source": "/guides/:slug/", "destination": "/:slug/", "permanent": true },
+    { "source": "/guides/:slug.html", "destination": "/:slug/", "permanent": true },
+
+    { "source": "/:slug.html", "destination": "/:slug/", "permanent": true },
+
+    { "source": "/features", "destination": "/", "permanent": true },
+    { "source": "/about", "destination": "/", "permanent": true },
+    { "source": "/contact", "destination": "/", "permanent": true },
+    { "source": "/testimonials", "destination": "/", "permanent": true },
+
+    { "source": "/:parent/YOUR_GUMROAD_LINK_HERE", "destination": "/:parent/", "permanent": true }
   ]
 }
