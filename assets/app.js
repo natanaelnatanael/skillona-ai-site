@@ -517,12 +517,17 @@
     const box = document.getElementById("inquiryBox");
     if (!box) return;
     box.hidden = false;
+    const contactBtn = document.getElementById("contactSeller");
+    if (contactBtn) contactBtn.hidden = true;
     // Prefill for signed-in users
     if (state.session) {
       const emailInput = document.getElementById("inquiryEmail");
       if (emailInput && !emailInput.value) emailInput.value = state.session.user.email || "";
     }
-    document.getElementById("cancelInquiry").onclick = () => { box.hidden = true; };
+    document.getElementById("cancelInquiry").onclick = () => {
+      box.hidden = true;
+      if (contactBtn) contactBtn.hidden = false;
+    };
     document.getElementById("sendInquiry").onclick = () => sendInquiry(listing);
     document.getElementById("inquiryMessage").focus();
   }
