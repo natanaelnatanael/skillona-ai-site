@@ -19,7 +19,7 @@
     dataSource: null,
     allListings: [],
     visibleListings: [],
-    favorites: new Set(readStorage("skillona-favorites", [])),
+    favorites: new Set(),
     selectedId: null,
     searchTerm: "",
     session: null,
@@ -531,13 +531,27 @@
     state.selectedId = null;
   }
 
+  function favoritesKey() {
+    return state.session ? `skillona-favorites-${state.session.user.id}` : "skillona-favorites-anon";
+  }
+
+  function isRemoteListingId(id) {
+    return state.allListings.some(l => String(l.id) === String(id) && l.remote);
+  }
+
+  function persistLocalFavorites() {
+    // Demo (seed) listings don't exist in the database, so they are kept
+    // in a per-user local list; real listings live in the favorites table.
+    const demoIds = [...state.favorites].filter(id => !isRemoteListingId(id));
+    localStorage.setItem(favoritesKey(), JSON.stringify(demoIds));
+  }
+
   async function toggleFavorite(id, keepDetailOpen = false) {
     const adding = !state.favorites.has(id);
     if (adding) state.favorites.add(id);
     else state.favorites.delete(id);
 
-    const isRemoteListing = state.allListings.some(l => String(l.id) === String(id) && l.remote);
-    if (sb && state.session && isRemoteListing) {
+    if (sb && state.session && isRemoteListingId(id)) {
       try {
         if (adding) {
           await sb.from("favorites").upsert({ user_id: state.session.user.id, listing_id: id });
@@ -547,9 +561,8 @@
       } catch (err) {
         console.error("Saving favorite failed:", err);
       }
-    } else {
-      localStorage.setItem("skillona-favorites", JSON.stringify([...state.favorites]));
     }
+    persistLocalFavorites();
 
     updateFavoriteCount();
     renderListingCards(state.visibleListings);
@@ -558,17 +571,20 @@
   }
 
   async function loadFavorites() {
+    // Start from this user's local list (demo listings; legacy key kept for old saves)
+    const local = readStorage(favoritesKey(), []);
+    const legacy = state.session ? [] : readStorage("skillona-favorites", []);
+    state.favorites = new Set([...local, ...legacy]);
+
+    // Add account favorites from the database when signed in
     if (sb && state.session) {
       try {
         const { data, error } = await sb.from("favorites").select("listing_id").eq("user_id", state.session.user.id);
         if (error) throw error;
-        state.favorites = new Set((data || []).map(row => row.listing_id));
+        (data || []).forEach(row => state.favorites.add(row.listing_id));
       } catch (err) {
         console.error("Loading favorites failed:", err);
-        state.favorites = new Set();
       }
-    } else {
-      state.favorites = new Set(readStorage("skillona-favorites", []));
     }
     updateFavoriteCount();
     renderListingCards(state.visibleListings);
