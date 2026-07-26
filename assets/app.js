@@ -46,11 +46,16 @@
       state.session = data && data.session ? data.session : null;
       await loadUserRole();
       updateAuthUi();
-      sb.auth.onAuthStateChange(async (_event, session) => {
+      sb.auth.onAuthStateChange((_event, session) => {
         state.session = session;
-        await loadUserRole();
         updateAuthUi();
-        refreshRemoteListings();
+        // Defer Supabase calls out of this callback: awaiting queries inside
+        // onAuthStateChange deadlocks the client (known supabase-js issue).
+        setTimeout(async () => {
+          await loadUserRole();
+          updateAuthUi();
+          refreshRemoteListings();
+        }, 0);
       });
       await refreshRemoteListings();
     }
