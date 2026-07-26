@@ -22,9 +22,10 @@ Stage 1: Functional visual prototype
 
 ## Next
 
-- [ ] Install/authorize the GitHub app for `natanaelnatanael/skillona-ai-site`
-- [ ] Push this prototype to a development branch
-- [ ] Open a draft pull request
+- [x] Push this prototype to a development branch (`globe-mvp`)
+- [x] Open a draft pull request (#1)
+- [x] Prepare Supabase + PostGIS schema (`supabase/migrations/0001_init_schema.sql`)
+- [ ] Create Supabase project and run the migration (see `docs/SUPABASE-UPUTE.md`)
 - [ ] Confirm Vercel preview deployment
 - [ ] Review UI and globe behavior
 - [ ] Build Supabase schema with PostGIS
