@@ -255,3 +255,24 @@ h1 { margin-bottom: 0; font-size: 1.55rem; line-height: 1.15; letter-spacing: -0
 .inquiry-meta a { color: #47d7b0; }
 .inquiry-message { font-size: 0.9rem; white-space: pre-wrap; }
 .inquiry-empty { font-size: 0.85rem; opacity: 0.7; margin: 0; }
+
+/* Topbar resilience at higher zoom / narrower effective widths */
+.top-actions button { white-space: nowrap; }
+#authButton { max-width: 230px; overflow: hidden; text-overflow: ellipsis; }
+
+@media (max-width: 1500px) {
+  .topbar { grid-template-columns: auto minmax(200px, 1fr) auto; gap: 12px; }
+  .brand small { display: none; }
+  #authButton { max-width: 170px; }
+}
+
+@media (max-width: 1250px) {
+  .topbar { gap: 8px; padding: 0 12px; }
+  .text-button { padding: 10px 8px; font-size: 0.9rem; }
+  .primary-button { padding: 10px 12px; }
+  #authButton { max-width: 120px; }
+}
+
+@media (max-width: 1080px) {
+  #authButton { max-width: 44px; }
+}

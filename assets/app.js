@@ -150,8 +150,8 @@
     if (!els.authButton) return;
     if (state.session && state.session.user) {
       const email = state.session.user.email || "Account";
-      els.authButton.textContent = `${email} · Sign out`;
-      els.authButton.title = "Click to sign out";
+      els.authButton.textContent = email;
+      els.authButton.title = `Signed in as ${email} — click to sign out`;
     } else {
       els.authButton.textContent = "Sign in";
       els.authButton.title = "";
