@@ -571,10 +571,18 @@
   }
 
   async function loadFavorites() {
-    // Start from this user's local list (demo listings; legacy key kept for old saves)
+    // Start from this user's local list (demo listings)
     const local = readStorage(favoritesKey(), []);
-    const legacy = state.session ? [] : readStorage("skillona-favorites", []);
-    state.favorites = new Set([...local, ...legacy]);
+    state.favorites = new Set(local);
+    // One-time migration of the old shared key, then remove it for good
+    if (!state.session) {
+      const legacy = readStorage("skillona-favorites", []);
+      if (legacy.length) {
+        legacy.forEach(id => state.favorites.add(id));
+        localStorage.setItem(favoritesKey(), JSON.stringify([...state.favorites]));
+      }
+      localStorage.removeItem("skillona-favorites");
+    }
 
     // Add account favorites from the database when signed in
     if (sb && state.session) {
