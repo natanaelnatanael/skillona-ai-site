@@ -205,3 +205,21 @@ h1 { margin-bottom: 0; font-size: 1.55rem; line-height: 1.15; letter-spacing: -0
   .detail-actions { grid-template-columns: 1fr; }
   .modal { max-height: calc(100vh - 18px); }
 }
+
+/* Moderation */
+.listing-badge.badge-status { background: #b45309; }
+.detail-status-note {
+  margin: 10px 0 0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: rgba(180, 83, 9, 0.18);
+  color: #fbbf24;
+  font-size: 0.85rem;
+}
+.admin-actions {
+  margin-top: 14px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+}
+.admin-actions strong { display: block; margin-bottom: 8px; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.75; }

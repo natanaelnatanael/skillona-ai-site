@@ -22,7 +22,8 @@
     favorites: new Set(readStorage("skillona-favorites", [])),
     selectedId: null,
     searchTerm: "",
-    session: null
+    session: null,
+    isAdmin: false
   };
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -43,24 +44,56 @@
     if (sb) {
       const { data } = await sb.auth.getSession();
       state.session = data && data.session ? data.session : null;
+      await loadUserRole();
       updateAuthUi();
-      sb.auth.onAuthStateChange((_event, session) => {
+      sb.auth.onAuthStateChange(async (_event, session) => {
         state.session = session;
+        await loadUserRole();
         updateAuthUi();
+        refreshRemoteListings();
       });
       await refreshRemoteListings();
     }
   }
 
+  async function loadUserRole() {
+    state.isAdmin = false;
+    if (!sb || !state.session) return;
+    try {
+      const { data } = await sb.from("profiles").select("account_type").eq("id", state.session.user.id).single();
+      state.isAdmin = Boolean(data && data.account_type === "admin");
+    } catch (err) {
+      console.error("Loading profile failed:", err);
+    }
+  }
+
+  function statusLabel(status) {
+    return ({
+      pending_review: "Pending review",
+      rejected: "Rejected",
+      paused: "Paused",
+      sold: "Sold",
+      rented: "Rented",
+      expired: "Expired"
+    })[status] || "";
+  }
+
   async function refreshRemoteListings() {
     if (!sb) return;
     try {
-      const { data, error } = await sb
+      let query = sb
         .from("listings")
         .select("id,title,country,city,latitude,longitude,property_type,transaction_type,price,currency,interior_area,bedrooms,bathrooms,sea_view,is_featured,published_at,created_at,description,status,user_id,listing_images(file_url,is_primary,sort_order)")
-        .in("status", ["active"])
         .order("created_at", { ascending: false })
         .limit(500);
+      if (state.isAdmin) {
+        query = query.in("status", ["active", "pending_review"]);
+      } else if (state.session) {
+        query = query.or(`status.eq.active,user_id.eq.${state.session.user.id}`);
+      } else {
+        query = query.eq("status", "active");
+      }
+      const { data, error } = await query;
       if (error) throw error;
       const remote = (data || []).map(mapDbListing);
       state.allListings = [...remote, ...(window.SEED_LISTINGS || [])];
@@ -98,6 +131,7 @@
       image: images.length ? images[0].file_url : fallbackImage,
       description: row.description || "",
       remote: true,
+      status: row.status,
       ownerId: row.user_id
     };
   }
@@ -325,7 +359,7 @@
       <article class="listing-card" data-id="${escapeHtml(listing.id)}" tabindex="0" role="button" aria-label="Open ${escapeHtml(listing.title)}">
         <div class="listing-image-wrap">
           <img class="listing-image" src="${escapeHtml(listing.image || fallbackImage)}" alt="" loading="lazy" onerror="this.onerror=null;this.src='${fallbackImage}'" />
-          <span class="listing-badge">${listing.transaction === "rent" ? "For rent" : listing.featured ? "Featured" : "For sale"}</span>
+          <span class="listing-badge ${listing.status && listing.status !== "active" ? "badge-status" : ""}">${listing.status && listing.status !== "active" ? statusLabel(listing.status) : listing.transaction === "rent" ? "For rent" : listing.featured ? "Featured" : "For sale"}</span>
           <button class="favorite-card ${state.favorites.has(listing.id) ? "is-favorite" : ""}" data-favorite="${escapeHtml(listing.id)}" type="button" aria-label="Save property">♥</button>
         </div>
         <div class="listing-card-content">
@@ -418,6 +452,16 @@
           <button class="primary-button" id="contactSeller" type="button">Contact seller</button>
           <button class="ghost-button" id="saveDetail" type="button">${state.favorites.has(listing.id) ? "♥ Saved" : "♡ Save"}</button>
         </div>
+        ${listing.status && listing.status !== "active" ? `<p class="detail-status-note">Status: ${statusLabel(listing.status)}${listing.status === "pending_review" ? " — visible only to you and the moderators until approved." : ""}</p>` : ""}
+        ${state.isAdmin && listing.remote ? `
+          <div class="admin-actions">
+            <strong>Moderation</strong>
+            <div class="detail-actions">
+              ${listing.status !== "active" ? `<button class="primary-button" data-moderate="approve" type="button">Approve</button>` : ""}
+              ${listing.status !== "rejected" ? `<button class="secondary-button" data-moderate="reject" type="button">Reject</button>` : ""}
+              <button class="ghost-button" data-moderate="delete" type="button">Delete</button>
+            </div>
+          </div>` : ""}
         <p class="detail-disclaimer">Prototype listing. Skillona Globe is an advertising platform and does not verify ownership, legal status or listing accuracy in this demo.</p>
       </div>
     `;
@@ -425,7 +469,39 @@
     els.detailPanel.setAttribute("aria-hidden", "false");
     document.getElementById("contactSeller").addEventListener("click", () => showToast("Seller messaging will be connected in the account stage"));
     document.getElementById("saveDetail").addEventListener("click", () => toggleFavorite(listing.id, true));
+    els.detailContent.querySelectorAll("[data-moderate]").forEach(btn => {
+      btn.addEventListener("click", () => moderateListing(listing, btn.dataset.moderate));
+    });
     if (fly) flyTo(listing.longitude, listing.latitude, 75000);
+  }
+
+  async function moderateListing(listing, action) {
+    if (!sb || !state.isAdmin) return;
+    try {
+      if (action === "delete") {
+        if (!window.confirm("Permanently delete this listing?")) return;
+        const { error } = await sb.from("listings").delete().eq("id", listing.id);
+        if (error) throw error;
+        showToast("Listing deleted");
+        closeDetails();
+      } else if (action === "approve") {
+        const { error } = await sb.from("listings")
+          .update({ status: "active", published_at: new Date().toISOString() })
+          .eq("id", listing.id);
+        if (error) throw error;
+        showToast("Listing approved and published");
+      } else if (action === "reject") {
+        const { error } = await sb.from("listings").update({ status: "rejected" }).eq("id", listing.id);
+        if (error) throw error;
+        showToast("Listing rejected");
+        closeDetails();
+      }
+      await refreshRemoteListings();
+      if (action === "approve") openDetails(listing.id);
+    } catch (err) {
+      console.error("Moderation failed:", err);
+      showToast(`Action failed: ${String(err && err.message || err).slice(0, 120)}`);
+    }
   }
 
   function closeDetails() {
@@ -600,8 +676,7 @@
         bathrooms: Number(form.get("bathrooms") || 0),
         sea_view: form.get("coastal") === "on",
         description: String(form.get("description")).trim(),
-        status: "active",
-        published_at: new Date().toISOString()
+        status: "pending_review"
       }).select("id").single();
       if (insErr) throw insErr;
 
@@ -621,7 +696,7 @@
       await refreshRemoteListings();
       resetFilters();
       openDetails(inserted.id, true);
-      showToast("Listing published on the globe");
+      showToast("Listing submitted — it goes live after moderator approval");
     } catch (err) {
       console.error("Publishing failed:", err);
       showToast(`Publishing failed: ${String(err && err.message || err).slice(0, 120)}`);
