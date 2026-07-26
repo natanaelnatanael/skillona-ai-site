@@ -36,8 +36,21 @@
 
   document.addEventListener("DOMContentLoaded", init);
 
+  function announcePaymentReturn() {
+    const params = new URLSearchParams(window.location.search);
+    const payment = params.get("payment");
+    if (!payment) return;
+    history.replaceState(null, "", window.location.pathname);
+    setTimeout(() => {
+      showToast(payment === "success"
+        ? "Payment received — the promotion activates within a few seconds"
+        : "Payment cancelled");
+    }, 800);
+  }
+
   async function init() {
     cacheElements();
+    announcePaymentReturn();
     state.allListings = loadLocalListings();
     bindEvents();
     updateFavoriteCount();
@@ -136,6 +149,7 @@
       bathrooms: Number(row.bathrooms || 0),
       coastal: Boolean(row.sea_view),
       featured: Boolean(row.is_featured),
+      isPremium: Boolean(row.is_premium),
       createdAt: String(row.published_at || row.created_at || "").slice(0, 10),
       image: images.length ? images[0].file_url : fallbackImage,
       description: row.description || "",
@@ -483,6 +497,15 @@
           <button class="primary-button" id="sendInquiry" type="button">Send inquiry</button>
         </div>` : ""}
         <div id="ownerInquiries" class="owner-inquiries" hidden></div>
+        ${listing.remote && state.session && listing.ownerId === state.session.user.id ? `
+        <div class="promote-box">
+          <strong>Promote this listing</strong>
+          <div class="detail-actions">
+            ${!listing.featured ? `<button class="secondary-button" data-promote="featured" type="button">★ Featured — €9</button>` : `<span class="promote-active">★ Featured active</span>`}
+            ${!listing.isPremium ? `<button class="secondary-button" data-promote="premium" type="button">⬆ Premium — €15</button>` : `<span class="promote-active">⬆ Premium active</span>`}
+          </div>
+          <span class="promote-note">Test mode — use card 4242 4242 4242 4242, any future date, any CVC.</span>
+        </div>` : ""}
         ${listing.status && listing.status !== "active" ? `<p class="detail-status-note">Status: ${statusLabel(listing.status)}${listing.status === "pending_review" ? " — visible only to you and the moderators until approved." : ""}</p>` : ""}
         ${state.isAdmin && listing.remote ? `
           <div class="admin-actions">
@@ -503,6 +526,9 @@
     loadOwnerInquiries(listing);
     els.detailContent.querySelectorAll("[data-moderate]").forEach(btn => {
       btn.addEventListener("click", () => moderateListing(listing, btn.dataset.moderate));
+    });
+    els.detailContent.querySelectorAll("[data-promote]").forEach(btn => {
+      btn.addEventListener("click", () => startPromotion(listing, btn.dataset.promote, btn));
     });
     if (fly) flyTo(listing.longitude, listing.latitude, 75000);
   }
@@ -576,6 +602,30 @@
         </div>`).join("");
     } catch (err) {
       console.error("Loading inquiries failed:", err);
+    }
+  }
+
+  async function startPromotion(listing, product, button) {
+    if (!sb || !state.session) { openAuth("Sign in to promote your listing."); return; }
+    button.disabled = true;
+    const originalText = button.textContent;
+    button.textContent = "Opening checkout…";
+    try {
+      const { data, error } = await sb.functions.invoke("create-checkout", {
+        body: {
+          listing_id: listing.id,
+          product,
+          return_url: window.location.origin
+        }
+      });
+      if (error) throw error;
+      if (!data || !data.url) throw new Error(data && data.error ? data.error : "Checkout could not be created");
+      window.location.href = data.url;
+    } catch (err) {
+      console.error("Starting checkout failed:", err);
+      showToast(`Checkout failed: ${String(err && err.message || err).slice(0, 120)}`);
+      button.disabled = false;
+      button.textContent = originalText;
     }
   }
 

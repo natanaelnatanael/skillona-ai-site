@@ -276,3 +276,17 @@ h1 { margin-bottom: 0; font-size: 1.55rem; line-height: 1.15; letter-spacing: -0
 @media (max-width: 1080px) {
   #authButton { max-width: 44px; }
 }
+
+/* Promotion */
+.promote-box {
+  margin-top: 14px;
+  padding: 12px;
+  border: 1px solid rgba(71, 215, 176, 0.35);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.promote-box strong { font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.75; }
+.promote-note { font-size: 0.75rem; opacity: 0.6; }
+.promote-active { padding: 10px 14px; color: var(--accent-strong); font-weight: 700; }
