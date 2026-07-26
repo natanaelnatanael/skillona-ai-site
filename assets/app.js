@@ -473,6 +473,17 @@
           <button class="primary-button" id="contactSeller" type="button">Contact seller</button>
           <button class="ghost-button" id="saveDetail" type="button">${state.favorites.has(listing.id) ? "♥ Saved" : "♡ Save"}</button>
         </div>
+        <div id="inquiryBox" class="inquiry-box" hidden>
+          <strong>Send an inquiry to the seller</strong>
+          <input id="inquiryName" type="text" maxlength="80" placeholder="Your name" />
+          <input id="inquiryEmail" type="email" maxlength="120" placeholder="Your email" />
+          <textarea id="inquiryMessage" rows="3" maxlength="1000" placeholder="Hi, I'm interested in this property…"></textarea>
+          <div class="detail-actions">
+            <button class="primary-button" id="sendInquiry" type="button">Send inquiry</button>
+            <button class="ghost-button" id="cancelInquiry" type="button">Cancel</button>
+          </div>
+        </div>
+        <div id="ownerInquiries" class="owner-inquiries" hidden></div>
         ${listing.status && listing.status !== "active" ? `<p class="detail-status-note">Status: ${statusLabel(listing.status)}${listing.status === "pending_review" ? " — visible only to you and the moderators until approved." : ""}</p>` : ""}
         ${state.isAdmin && listing.remote ? `
           <div class="admin-actions">
@@ -488,12 +499,92 @@
     `;
     els.detailPanel.classList.add("is-open");
     els.detailPanel.setAttribute("aria-hidden", "false");
-    document.getElementById("contactSeller").addEventListener("click", () => showToast("Seller messaging will be connected in the account stage"));
+    document.getElementById("contactSeller").addEventListener("click", () => openInquiryBox(listing));
     document.getElementById("saveDetail").addEventListener("click", () => toggleFavorite(listing.id, true));
+    loadOwnerInquiries(listing);
     els.detailContent.querySelectorAll("[data-moderate]").forEach(btn => {
       btn.addEventListener("click", () => moderateListing(listing, btn.dataset.moderate));
     });
     if (fly) flyTo(listing.longitude, listing.latitude, 75000);
+  }
+
+  function openInquiryBox(listing) {
+    if (!listing.remote) {
+      showToast("This is a demo listing — inquiries work on real listings");
+      return;
+    }
+    if (!sb) { showToast("Database is not configured"); return; }
+    const box = document.getElementById("inquiryBox");
+    if (!box) return;
+    box.hidden = false;
+    // Prefill for signed-in users
+    if (state.session) {
+      const emailInput = document.getElementById("inquiryEmail");
+      if (emailInput && !emailInput.value) emailInput.value = state.session.user.email || "";
+    }
+    document.getElementById("cancelInquiry").onclick = () => { box.hidden = true; };
+    document.getElementById("sendInquiry").onclick = () => sendInquiry(listing);
+    document.getElementById("inquiryMessage").focus();
+  }
+
+  async function sendInquiry(listing) {
+    const name = document.getElementById("inquiryName").value.trim();
+    const email = document.getElementById("inquiryEmail").value.trim();
+    const message = document.getElementById("inquiryMessage").value.trim();
+    if (!message) { showToast("Write a message for the seller"); return; }
+    if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { showToast("Enter a valid email so the seller can reply"); return; }
+    const button = document.getElementById("sendInquiry");
+    button.disabled = true;
+    button.textContent = "Sending…";
+    try {
+      const { error } = await sb.from("inquiries").insert({
+        listing_id: listing.id,
+        sender_user_id: state.session ? state.session.user.id : null,
+        sender_name: name || null,
+        sender_email: email,
+        message
+      });
+      if (error) throw error;
+      document.getElementById("inquiryBox").hidden = true;
+      showToast("Inquiry sent to the seller");
+    } catch (err) {
+      console.error("Sending inquiry failed:", err);
+      showToast(`Sending failed: ${String(err && err.message || err).slice(0, 120)}`);
+    } finally {
+      button.disabled = false;
+      button.textContent = "Send inquiry";
+    }
+  }
+
+  async function loadOwnerInquiries(listing) {
+    // Only the listing owner (or an admin) can read these — enforced by RLS too
+    if (!sb || !state.session || !listing.remote) return;
+    const isOwner = listing.ownerId === state.session.user.id;
+    if (!isOwner && !state.isAdmin) return;
+    try {
+      const { data, error } = await sb
+        .from("inquiries")
+        .select("sender_name,sender_email,message,created_at")
+        .eq("listing_id", listing.id)
+        .order("created_at", { ascending: false })
+        .limit(50);
+      if (error) throw error;
+      const box = document.getElementById("ownerInquiries");
+      if (!box) return;
+      if (!data || !data.length) {
+        box.hidden = false;
+        box.innerHTML = `<strong>Inquiries for your listing</strong><p class="inquiry-empty">No inquiries yet.</p>`;
+        return;
+      }
+      box.hidden = false;
+      box.innerHTML = `<strong>Inquiries for your listing (${data.length})</strong>` + data.map(q => `
+        <div class="inquiry-item">
+          <div class="inquiry-meta">${escapeHtml(q.sender_name || "Anonymous")} · <a href="mailto:${escapeHtml(q.sender_email || "")}">${escapeHtml(q.sender_email || "")}</a> · ${escapeHtml(String(q.created_at || "").slice(0, 10))}</div>
+          <div class="inquiry-message">${escapeHtml(q.message)}</div>
+        </div>`).join("");
+    } catch (err) {
+      console.error("Loading inquiries failed:", err);
+    }
   }
 
   async function moderateListing(listing, action) {
