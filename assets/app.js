@@ -146,6 +146,7 @@
   }
 
   function updateAuthUi() {
+    if (els.myListingsButton) els.myListingsButton.hidden = !state.session;
     if (!els.authButton) return;
     if (state.session && state.session.user) {
       const email = state.session.user.email || "Account";
@@ -165,7 +166,7 @@
       "addListingModal", "modalBackdrop", "addListingForm", "toast", "favoriteCount", "favoritesButton",
       "resetGlobe", "locateMediterranean", "loadingState", "sidebar", "openSidebar", "closeSidebar",
       "authButton", "authModal", "closeAuth", "authForm", "authMessage", "signUpButton", "publishButton",
-      "pickLocationButton", "pickedLocationText"
+      "pickLocationButton", "pickedLocationText", "myListingsButton"
     ].forEach(id => { els[id] = document.getElementById(id); });
   }
 
@@ -202,6 +203,7 @@
     els.resetGlobe.addEventListener("click", viewWorld);
     els.locateMediterranean.addEventListener("click", () => flyTo(17.5, 38.5, 4200000));
     els.favoritesButton.addEventListener("click", showFavorites);
+    if (els.myListingsButton) els.myListingsButton.addEventListener("click", showMyListings);
     els.openSidebar.addEventListener("click", () => els.sidebar.classList.add("is-open"));
     els.closeSidebar.addEventListener("click", () => els.sidebar.classList.remove("is-open"));
     if (els.authButton) els.authButton.addEventListener("click", handleAuthButton);
@@ -470,19 +472,16 @@
         </div>
         <p class="detail-description">${escapeHtml(listing.description)}</p>
         <div class="detail-actions">
-          <button class="primary-button" id="contactSeller" type="button">Contact seller</button>
           <button class="ghost-button" id="saveDetail" type="button">${state.favorites.has(listing.id) ? "♥ Saved" : "♡ Save"}</button>
         </div>
-        <div id="inquiryBox" class="inquiry-box" hidden>
-          <strong>Send an inquiry to the seller</strong>
+        ${listing.remote && !(state.session && listing.ownerId === state.session.user.id) ? `
+        <div id="inquiryBox" class="inquiry-box">
+          <strong>Contact the seller</strong>
           <input id="inquiryName" type="text" maxlength="80" placeholder="Your name" />
           <input id="inquiryEmail" type="email" maxlength="120" placeholder="Your email" />
           <textarea id="inquiryMessage" rows="3" maxlength="1000" placeholder="Hi, I'm interested in this property…"></textarea>
-          <div class="detail-actions">
-            <button class="primary-button" id="sendInquiry" type="button">Send inquiry</button>
-            <button class="ghost-button" id="cancelInquiry" type="button">Cancel</button>
-          </div>
-        </div>
+          <button class="primary-button" id="sendInquiry" type="button">Send inquiry</button>
+        </div>` : ""}
         <div id="ownerInquiries" class="owner-inquiries" hidden></div>
         ${listing.status && listing.status !== "active" ? `<p class="detail-status-note">Status: ${statusLabel(listing.status)}${listing.status === "pending_review" ? " — visible only to you and the moderators until approved." : ""}</p>` : ""}
         ${state.isAdmin && listing.remote ? `
@@ -499,8 +498,8 @@
     `;
     els.detailPanel.classList.add("is-open");
     els.detailPanel.setAttribute("aria-hidden", "false");
-    document.getElementById("contactSeller").addEventListener("click", () => openInquiryBox(listing));
     document.getElementById("saveDetail").addEventListener("click", () => toggleFavorite(listing.id, true));
+    initInquiryBox(listing);
     loadOwnerInquiries(listing);
     els.detailContent.querySelectorAll("[data-moderate]").forEach(btn => {
       btn.addEventListener("click", () => moderateListing(listing, btn.dataset.moderate));
@@ -508,28 +507,16 @@
     if (fly) flyTo(listing.longitude, listing.latitude, 75000);
   }
 
-  function openInquiryBox(listing) {
-    if (!listing.remote) {
-      showToast("This is a demo listing — inquiries work on real listings");
-      return;
-    }
-    if (!sb) { showToast("Database is not configured"); return; }
+  function initInquiryBox(listing) {
     const box = document.getElementById("inquiryBox");
     if (!box) return;
-    box.hidden = false;
-    const contactBtn = document.getElementById("contactSeller");
-    if (contactBtn) contactBtn.hidden = true;
+    if (!sb) { box.hidden = true; return; }
     // Prefill for signed-in users
     if (state.session) {
       const emailInput = document.getElementById("inquiryEmail");
       if (emailInput && !emailInput.value) emailInput.value = state.session.user.email || "";
     }
-    document.getElementById("cancelInquiry").onclick = () => {
-      box.hidden = true;
-      if (contactBtn) contactBtn.hidden = false;
-    };
     document.getElementById("sendInquiry").onclick = () => sendInquiry(listing);
-    document.getElementById("inquiryMessage").focus();
   }
 
   async function sendInquiry(listing) {
@@ -550,7 +537,7 @@
         message
       });
       if (error) throw error;
-      document.getElementById("inquiryBox").hidden = true;
+      document.getElementById("inquiryMessage").value = "";
       showToast("Inquiry sent to the seller");
     } catch (err) {
       console.error("Sending inquiry failed:", err);
@@ -692,6 +679,22 @@
     }
     updateFavoriteCount();
     renderListingCards(state.visibleListings);
+  }
+
+  function showMyListings() {
+    if (!state.session) {
+      openAuth("Sign in to see your listings.");
+      return;
+    }
+    state.searchTerm = "";
+    els.searchInput.value = "";
+    const mine = state.allListings.filter(item => item.remote && item.ownerId === state.session.user.id);
+    state.visibleListings = mine;
+    renderListingCards(mine);
+    renderGlobeListings(mine);
+    els.resultCount.textContent = `${mine.length} ${mine.length === 1 ? "listing" : "listings"}`;
+    els.resultContext.textContent = "published by you";
+    if (window.innerWidth <= 980) els.sidebar.classList.add("is-open");
   }
 
   function showFavorites() {
