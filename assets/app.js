@@ -23,7 +23,9 @@
     selectedId: null,
     searchTerm: "",
     session: null,
-    isAdmin: false
+    isAdmin: false,
+    pickingLocation: false,
+    pickEntity: null
   };
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -45,6 +47,7 @@
       const { data } = await sb.auth.getSession();
       state.session = data && data.session ? data.session : null;
       await loadUserRole();
+      await loadFavorites();
       updateAuthUi();
       sb.auth.onAuthStateChange((_event, session) => {
         state.session = session;
@@ -53,6 +56,7 @@
         // onAuthStateChange deadlocks the client (known supabase-js issue).
         setTimeout(async () => {
           await loadUserRole();
+          await loadFavorites();
           updateAuthUi();
           refreshRemoteListings();
         }, 0);
@@ -160,7 +164,8 @@
       "resultContext", "detailPanel", "detailContent", "closeDetail", "openAddListing", "closeAddListing",
       "addListingModal", "modalBackdrop", "addListingForm", "toast", "favoriteCount", "favoritesButton",
       "resetGlobe", "locateMediterranean", "loadingState", "sidebar", "openSidebar", "closeSidebar",
-      "authButton", "authModal", "closeAuth", "authForm", "authMessage", "signUpButton", "publishButton"
+      "authButton", "authModal", "closeAuth", "authForm", "authMessage", "signUpButton", "publishButton",
+      "pickLocationButton", "pickedLocationText"
     ].forEach(id => { els[id] = document.getElementById(id); });
   }
 
@@ -203,6 +208,7 @@
     if (els.closeAuth) els.closeAuth.addEventListener("click", closeAuth);
     if (els.authForm) els.authForm.addEventListener("submit", event => handleAuth(event, "signin"));
     if (els.signUpButton) els.signUpButton.addEventListener("click", event => handleAuth(event, "signup"));
+    if (els.pickLocationButton) els.pickLocationButton.addEventListener("click", startLocationPick);
     window.addEventListener("keydown", event => {
       if (event.key === "Escape") {
         closeDetails();
@@ -272,6 +278,16 @@
 
       const clickHandler = new Cesium.ScreenSpaceEventHandler(state.viewer.scene.canvas);
       clickHandler.setInputAction(movement => {
+        if (state.pickingLocation) {
+          const cartesian = state.viewer.camera.pickEllipsoid(movement.position, state.viewer.scene.globe.ellipsoid);
+          if (!cartesian) return;
+          const carto = Cesium.Cartographic.fromCartesian(cartesian);
+          finishLocationPick(
+            Number(Cesium.Math.toDegrees(carto.latitude).toFixed(6)),
+            Number(Cesium.Math.toDegrees(carto.longitude).toFixed(6))
+          );
+          return;
+        }
         const picked = state.viewer.scene.pick(movement.position);
         if (!Cesium.defined(picked)) return;
         const id = picked.id?.properties?.listingId?.getValue?.() || picked.id?.listingId;
@@ -515,14 +531,47 @@
     state.selectedId = null;
   }
 
-  function toggleFavorite(id, keepDetailOpen = false) {
-    if (state.favorites.has(id)) state.favorites.delete(id);
-    else state.favorites.add(id);
-    localStorage.setItem("skillona-favorites", JSON.stringify([...state.favorites]));
+  async function toggleFavorite(id, keepDetailOpen = false) {
+    const adding = !state.favorites.has(id);
+    if (adding) state.favorites.add(id);
+    else state.favorites.delete(id);
+
+    const isRemoteListing = state.allListings.some(l => String(l.id) === String(id) && l.remote);
+    if (sb && state.session && isRemoteListing) {
+      try {
+        if (adding) {
+          await sb.from("favorites").upsert({ user_id: state.session.user.id, listing_id: id });
+        } else {
+          await sb.from("favorites").delete().eq("user_id", state.session.user.id).eq("listing_id", id);
+        }
+      } catch (err) {
+        console.error("Saving favorite failed:", err);
+      }
+    } else {
+      localStorage.setItem("skillona-favorites", JSON.stringify([...state.favorites]));
+    }
+
     updateFavoriteCount();
     renderListingCards(state.visibleListings);
     if (keepDetailOpen && state.selectedId) openDetails(state.selectedId, false);
-    showToast(state.favorites.has(id) ? "Property saved" : "Property removed from saved list");
+    showToast(adding ? "Property saved" : "Property removed from saved list");
+  }
+
+  async function loadFavorites() {
+    if (sb && state.session) {
+      try {
+        const { data, error } = await sb.from("favorites").select("listing_id").eq("user_id", state.session.user.id);
+        if (error) throw error;
+        state.favorites = new Set((data || []).map(row => row.listing_id));
+      } catch (err) {
+        console.error("Loading favorites failed:", err);
+        state.favorites = new Set();
+      }
+    } else {
+      state.favorites = new Set(readStorage("skillona-favorites", []));
+    }
+    updateFavoriteCount();
+    renderListingCards(state.visibleListings);
   }
 
   function showFavorites() {
@@ -539,6 +588,50 @@
 
   function updateFavoriteCount() {
     els.favoriteCount.textContent = state.favorites.size;
+  }
+
+  function startLocationPick() {
+    if (!state.viewer) { showToast("The globe is still loading"); return; }
+    state.pickingLocation = true;
+    els.addListingModal.hidden = true;
+    els.modalBackdrop.hidden = true;
+    document.body.style.overflow = "";
+    els.sidebar.classList.remove("is-open");
+    state.viewer.scene.canvas.style.cursor = "crosshair";
+    showToast("Click on the globe exactly where the property is — zoom in first for accuracy");
+  }
+
+  function finishLocationPick(latitude, longitude) {
+    state.pickingLocation = false;
+    state.viewer.scene.canvas.style.cursor = "";
+    els.addListingForm.elements.latitude.value = latitude;
+    els.addListingForm.elements.longitude.value = longitude;
+    if (els.pickedLocationText) {
+      els.pickedLocationText.textContent = `Pin set: ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
+    }
+    if (state.pickEntity) state.viewer.entities.remove(state.pickEntity);
+    state.pickEntity = state.viewer.entities.add({
+      position: Cesium.Cartesian3.fromDegrees(longitude, latitude),
+      point: {
+        pixelSize: 14,
+        color: Cesium.Color.fromCssColorString("#f59e0b"),
+        outlineColor: Cesium.Color.WHITE,
+        outlineWidth: 2,
+        disableDepthTestDistance: Number.POSITIVE_INFINITY
+      }
+    });
+    state.viewer.scene.requestRender();
+    els.modalBackdrop.hidden = false;
+    els.addListingModal.hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+
+  function clearPickEntity() {
+    if (state.pickEntity && state.viewer) {
+      state.viewer.entities.remove(state.pickEntity);
+      state.pickEntity = null;
+      state.viewer.scene.requestRender();
+    }
   }
 
   function handleAuthButton() {
@@ -697,6 +790,8 @@
       }
 
       formEl.reset();
+      if (els.pickedLocationText) els.pickedLocationText.textContent = "";
+      clearPickEntity();
       closeAddListing();
       await refreshRemoteListings();
       resetFilters();

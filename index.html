@@ -163,14 +163,13 @@
           <span>City / area</span>
           <input name="city" required placeholder="Paros" />
         </label>
-        <label>
-          <span>Latitude</span>
-          <input name="latitude" required type="number" step="any" placeholder="37.0856" />
-        </label>
-        <label>
-          <span>Longitude</span>
-          <input name="longitude" required type="number" step="any" placeholder="25.1489" />
-        </label>
+        <div class="full-width location-picker">
+          <span>Location</span>
+          <button id="pickLocationButton" class="secondary-button" type="button">📍 Pick location on the globe</button>
+          <span id="pickedLocationText" class="picked-location-text"></span>
+          <input name="latitude" required type="number" step="any" class="coord-input" placeholder="Latitude (or pick on the globe)" />
+          <input name="longitude" required type="number" step="any" class="coord-input" placeholder="Longitude (or pick on the globe)" />
+        </div>
         <label>
           <span>Property type</span>
           <select name="type" required>
