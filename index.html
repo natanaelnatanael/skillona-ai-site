@@ -31,7 +31,9 @@
       </div>
 
       <nav class="top-actions" aria-label="Primary navigation">
+        <button id="myListingsButton" class="text-button" type="button" hidden>My listings</button>
         <button id="favoritesButton" class="text-button" type="button">Saved <span id="favoriteCount">0</span></button>
+        <button id="authButton" class="text-button" type="button">Sign in</button>
         <button id="openAddListing" class="primary-button" type="button">+ List a property</button>
       </nav>
     </header>
@@ -162,14 +164,13 @@
           <span>City / area</span>
           <input name="city" required placeholder="Paros" />
         </label>
-        <label>
-          <span>Latitude</span>
-          <input name="latitude" required type="number" step="any" placeholder="37.0856" />
-        </label>
-        <label>
-          <span>Longitude</span>
-          <input name="longitude" required type="number" step="any" placeholder="25.1489" />
-        </label>
+        <div class="full-width location-picker">
+          <span>Location</span>
+          <button id="pickLocationButton" class="secondary-button" type="button">📍 Pick location on the globe</button>
+          <span id="pickedLocationText" class="picked-location-text"></span>
+          <input name="latitude" required type="number" step="any" class="coord-input" placeholder="Latitude (or pick on the globe)" />
+          <input name="longitude" required type="number" step="any" class="coord-input" placeholder="Longitude (or pick on the globe)" />
+        </div>
         <label>
           <span>Property type</span>
           <select name="type" required>
@@ -189,7 +190,7 @@
         </label>
         <label>
           <span>Price (EUR)</span>
-          <input name="price" required type="number" min="1" step="1000" placeholder="450000" />
+          <input name="price" required type="number" min="0" step="any" placeholder="450000" />
         </label>
         <label>
           <span>Interior area (m²)</span>
@@ -212,18 +213,44 @@
           <textarea name="description" required rows="4" maxlength="700" placeholder="Describe the property, location, condition and key features."></textarea>
         </label>
         <label class="full-width">
-          <span>Image URL</span>
+          <span>Photo</span>
+          <input name="photo" type="file" accept="image/jpeg,image/png,image/webp" />
+        </label>
+        <label class="full-width">
+          <span>Image URL (optional, if no photo file)</span>
           <input name="image" type="url" placeholder="https://images.unsplash.com/..." />
         </label>
       </div>
-      <p class="form-note">Prototype: the listing is stored only in this browser. Account, moderation, photo uploads and payments come in the next development stage.</p>
-      <button class="primary-button full-width" type="submit">Publish test listing</button>
+      <p class="form-note">Your listing is saved to the live database and appears on the globe for everyone after moderator approval. Sign in required.</p>
+      <button id="publishButton" class="primary-button full-width" type="submit">Publish listing</button>
+    </form>
+  </section>
+
+  <section id="authModal" class="modal auth-modal" role="dialog" aria-modal="true" aria-labelledby="authTitle" hidden>
+    <header class="modal-header">
+      <h2 id="authTitle">Sign in</h2>
+      <button id="closeAuth" class="icon-button" type="button" aria-label="Close sign in">×</button>
+    </header>
+    <form id="authForm" class="listing-form">
+      <label class="full-width">
+        <span>Email</span>
+        <input name="email" type="email" required autocomplete="email" placeholder="you@example.com" />
+      </label>
+      <label class="full-width">
+        <span>Password</span>
+        <input name="password" type="password" required minlength="6" autocomplete="current-password" placeholder="At least 6 characters" />
+      </label>
+      <p id="authMessage" class="form-note" aria-live="polite"></p>
+      <button id="signInButton" class="primary-button full-width" type="submit">Sign in</button>
+      <button id="signUpButton" class="secondary-button full-width" type="button">Create account</button>
     </form>
   </section>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/cesium@1.124.0/Build/Cesium/Cesium.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script src="./assets/supabase-config.js"></script>
   <script src="./data/listings.js"></script>
   <script src="./assets/app.js"></script>
 </body>

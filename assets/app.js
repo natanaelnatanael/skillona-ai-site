@@ -10,14 +10,22 @@
     }
   }
 
+  const sb = (window.supabase && window.SUPABASE_URL && window.SUPABASE_ANON_KEY)
+    ? window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY)
+    : null;
+
   const state = {
     viewer: null,
     dataSource: null,
     allListings: [],
     visibleListings: [],
-    favorites: new Set(readStorage("skillona-favorites", [])),
+    favorites: new Set(),
     selectedId: null,
-    searchTerm: ""
+    searchTerm: "",
+    session: null,
+    isAdmin: false,
+    pickingLocation: false,
+    pickEntity: null
   };
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -28,13 +36,140 @@
 
   document.addEventListener("DOMContentLoaded", init);
 
-  function init() {
+  function announcePaymentReturn() {
+    const params = new URLSearchParams(window.location.search);
+    const payment = params.get("payment");
+    if (!payment) return;
+    history.replaceState(null, "", window.location.pathname);
+    setTimeout(() => {
+      showToast(payment === "success"
+        ? "Payment received — the promotion activates within a few seconds"
+        : "Payment cancelled");
+    }, 800);
+  }
+
+  async function init() {
     cacheElements();
-    state.allListings = loadListings();
+    announcePaymentReturn();
+    state.allListings = loadLocalListings();
     bindEvents();
     updateFavoriteCount();
     initGlobe();
     applyFilters();
+    if (sb) {
+      const { data } = await sb.auth.getSession();
+      state.session = data && data.session ? data.session : null;
+      await loadUserRole();
+      await loadFavorites();
+      updateAuthUi();
+      sb.auth.onAuthStateChange((_event, session) => {
+        state.session = session;
+        updateAuthUi();
+        // Defer Supabase calls out of this callback: awaiting queries inside
+        // onAuthStateChange deadlocks the client (known supabase-js issue).
+        setTimeout(async () => {
+          await loadUserRole();
+          await loadFavorites();
+          updateAuthUi();
+          refreshRemoteListings();
+        }, 0);
+      });
+      await refreshRemoteListings();
+    }
+  }
+
+  async function loadUserRole() {
+    state.isAdmin = false;
+    if (!sb || !state.session) return;
+    try {
+      const { data } = await sb.from("profiles").select("account_type").eq("id", state.session.user.id).single();
+      state.isAdmin = Boolean(data && data.account_type === "admin");
+    } catch (err) {
+      console.error("Loading profile failed:", err);
+    }
+  }
+
+  function statusLabel(status) {
+    return ({
+      pending_review: "Pending review",
+      rejected: "Rejected",
+      paused: "Paused",
+      sold: "Sold",
+      rented: "Rented",
+      expired: "Expired"
+    })[status] || "";
+  }
+
+  async function refreshRemoteListings() {
+    if (!sb) return;
+    try {
+      let query = sb
+        .from("listings")
+        .select("id,title,country,city,latitude,longitude,property_type,transaction_type,price,currency,interior_area,bedrooms,bathrooms,sea_view,is_featured,published_at,created_at,description,status,user_id,listing_images(file_url,is_primary,sort_order)")
+        .order("created_at", { ascending: false })
+        .limit(500);
+      if (state.isAdmin) {
+        query = query.in("status", ["active", "pending_review"]);
+      } else if (state.session) {
+        query = query.or(`status.eq.active,user_id.eq.${state.session.user.id}`);
+      } else {
+        query = query.eq("status", "active");
+      }
+      const { data, error } = await query;
+      if (error) throw error;
+      const remote = (data || []).map(mapDbListing);
+      state.allListings = [...remote, ...(window.SEED_LISTINGS || [])];
+      applyFilters();
+      if (state.selectedId) {
+        const stillThere = state.allListings.some(l => String(l.id) === String(state.selectedId));
+        if (!stillThere) closeDetails();
+      }
+    } catch (err) {
+      console.error("Loading listings from database failed:", err);
+      showToast("Live database unavailable — showing demo listings");
+    }
+  }
+
+  function mapDbListing(row) {
+    const images = Array.isArray(row.listing_images) ? [...row.listing_images] : [];
+    images.sort((a, b) => Number(b.is_primary) - Number(a.is_primary) || (a.sort_order || 0) - (b.sort_order || 0));
+    return {
+      id: row.id,
+      title: row.title,
+      country: row.country || "",
+      city: row.city || "",
+      latitude: Number(row.latitude),
+      longitude: Number(row.longitude),
+      type: row.property_type,
+      transaction: row.transaction_type === "sale" ? "sale" : "rent",
+      price: Number(row.price || 0),
+      currency: row.currency || "EUR",
+      area: Number(row.interior_area || 0),
+      bedrooms: Number(row.bedrooms || 0),
+      bathrooms: Number(row.bathrooms || 0),
+      coastal: Boolean(row.sea_view),
+      featured: Boolean(row.is_featured),
+      isPremium: Boolean(row.is_premium),
+      createdAt: String(row.published_at || row.created_at || "").slice(0, 10),
+      image: images.length ? images[0].file_url : fallbackImage,
+      description: row.description || "",
+      remote: true,
+      status: row.status,
+      ownerId: row.user_id
+    };
+  }
+
+  function updateAuthUi() {
+    if (els.myListingsButton) els.myListingsButton.hidden = !state.session;
+    if (!els.authButton) return;
+    if (state.session && state.session.user) {
+      const email = state.session.user.email || "Account";
+      els.authButton.textContent = email;
+      els.authButton.title = `Signed in as ${email} — click to sign out`;
+    } else {
+      els.authButton.textContent = "Sign in";
+      els.authButton.title = "";
+    }
   }
 
   function cacheElements() {
@@ -43,11 +178,13 @@
       "coastalFilter", "applyFilters", "resetFilters", "sortSelect", "listingResults", "resultCount",
       "resultContext", "detailPanel", "detailContent", "closeDetail", "openAddListing", "closeAddListing",
       "addListingModal", "modalBackdrop", "addListingForm", "toast", "favoriteCount", "favoritesButton",
-      "resetGlobe", "locateMediterranean", "loadingState", "sidebar", "openSidebar", "closeSidebar"
+      "resetGlobe", "locateMediterranean", "loadingState", "sidebar", "openSidebar", "closeSidebar",
+      "authButton", "authModal", "closeAuth", "authForm", "authMessage", "signUpButton", "publishButton",
+      "pickLocationButton", "pickedLocationText", "myListingsButton"
     ].forEach(id => { els[id] = document.getElementById(id); });
   }
 
-  function loadListings() {
+  function loadLocalListings() {
     const userListings = readStorage("skillona-user-listings", []);
     return [...(window.SEED_LISTINGS || []), ...userListings];
   }
@@ -75,17 +212,24 @@
     els.closeDetail.addEventListener("click", closeDetails);
     els.openAddListing.addEventListener("click", openAddListing);
     els.closeAddListing.addEventListener("click", closeAddListing);
-    els.modalBackdrop.addEventListener("click", closeAddListing);
+    els.modalBackdrop.addEventListener("click", () => { closeAddListing(); closeAuth(); });
     els.addListingForm.addEventListener("submit", submitListing);
     els.resetGlobe.addEventListener("click", viewWorld);
     els.locateMediterranean.addEventListener("click", () => flyTo(17.5, 38.5, 4200000));
     els.favoritesButton.addEventListener("click", showFavorites);
+    if (els.myListingsButton) els.myListingsButton.addEventListener("click", showMyListings);
     els.openSidebar.addEventListener("click", () => els.sidebar.classList.add("is-open"));
     els.closeSidebar.addEventListener("click", () => els.sidebar.classList.remove("is-open"));
+    if (els.authButton) els.authButton.addEventListener("click", handleAuthButton);
+    if (els.closeAuth) els.closeAuth.addEventListener("click", closeAuth);
+    if (els.authForm) els.authForm.addEventListener("submit", event => handleAuth(event, "signin"));
+    if (els.signUpButton) els.signUpButton.addEventListener("click", event => handleAuth(event, "signup"));
+    if (els.pickLocationButton) els.pickLocationButton.addEventListener("click", startLocationPick);
     window.addEventListener("keydown", event => {
       if (event.key === "Escape") {
         closeDetails();
         closeAddListing();
+        closeAuth();
         els.sidebar.classList.remove("is-open");
       }
     });
@@ -150,6 +294,16 @@
 
       const clickHandler = new Cesium.ScreenSpaceEventHandler(state.viewer.scene.canvas);
       clickHandler.setInputAction(movement => {
+        if (state.pickingLocation) {
+          const cartesian = state.viewer.camera.pickEllipsoid(movement.position, state.viewer.scene.globe.ellipsoid);
+          if (!cartesian) return;
+          const carto = Cesium.Cartographic.fromCartesian(cartesian);
+          finishLocationPick(
+            Number(Cesium.Math.toDegrees(carto.latitude).toFixed(6)),
+            Number(Cesium.Math.toDegrees(carto.longitude).toFixed(6))
+          );
+          return;
+        }
         const picked = state.viewer.scene.pick(movement.position);
         if (!Cesium.defined(picked)) return;
         const id = picked.id?.properties?.listingId?.getValue?.() || picked.id?.listingId;
@@ -242,7 +396,7 @@
       <article class="listing-card" data-id="${escapeHtml(listing.id)}" tabindex="0" role="button" aria-label="Open ${escapeHtml(listing.title)}">
         <div class="listing-image-wrap">
           <img class="listing-image" src="${escapeHtml(listing.image || fallbackImage)}" alt="" loading="lazy" onerror="this.onerror=null;this.src='${fallbackImage}'" />
-          <span class="listing-badge">${listing.transaction === "rent" ? "For rent" : listing.featured ? "Featured" : "For sale"}</span>
+          <span class="listing-badge ${listing.status && listing.status !== "active" ? "badge-status" : ""}">${listing.status && listing.status !== "active" ? statusLabel(listing.status) : listing.transaction === "rent" ? "For rent" : listing.featured ? "Featured" : "For sale"}</span>
           <button class="favorite-card ${state.favorites.has(listing.id) ? "is-favorite" : ""}" data-favorite="${escapeHtml(listing.id)}" type="button" aria-label="Save property">♥</button>
         </div>
         <div class="listing-card-content">
@@ -332,17 +486,176 @@
         </div>
         <p class="detail-description">${escapeHtml(listing.description)}</p>
         <div class="detail-actions">
-          <button class="primary-button" id="contactSeller" type="button">Contact seller</button>
           <button class="ghost-button" id="saveDetail" type="button">${state.favorites.has(listing.id) ? "♥ Saved" : "♡ Save"}</button>
         </div>
+        ${listing.remote && !(state.session && listing.ownerId === state.session.user.id) ? `
+        <div id="inquiryBox" class="inquiry-box">
+          <strong>Contact the seller</strong>
+          <input id="inquiryName" type="text" maxlength="80" placeholder="Your name" />
+          <input id="inquiryEmail" type="email" maxlength="120" placeholder="Your email" />
+          <textarea id="inquiryMessage" rows="3" maxlength="1000" placeholder="Hi, I'm interested in this property…"></textarea>
+          <button class="primary-button" id="sendInquiry" type="button">Send inquiry</button>
+        </div>` : ""}
+        <div id="ownerInquiries" class="owner-inquiries" hidden></div>
+        ${listing.remote && state.session && listing.ownerId === state.session.user.id ? `
+        <div class="promote-box">
+          <strong>Promote this listing</strong>
+          <div class="detail-actions">
+            ${!listing.featured ? `<button class="secondary-button" data-promote="featured" type="button">★ Featured — €9</button>` : `<span class="promote-active">★ Featured active</span>`}
+            ${!listing.isPremium ? `<button class="secondary-button" data-promote="premium" type="button">⬆ Premium — €15</button>` : `<span class="promote-active">⬆ Premium active</span>`}
+          </div>
+          <span class="promote-note">Test mode — use card 4242 4242 4242 4242, any future date, any CVC.</span>
+        </div>` : ""}
+        ${listing.status && listing.status !== "active" ? `<p class="detail-status-note">Status: ${statusLabel(listing.status)}${listing.status === "pending_review" ? " — visible only to you and the moderators until approved." : ""}</p>` : ""}
+        ${state.isAdmin && listing.remote ? `
+          <div class="admin-actions">
+            <strong>Moderation</strong>
+            <div class="detail-actions">
+              ${listing.status !== "active" ? `<button class="primary-button" data-moderate="approve" type="button">Approve</button>` : ""}
+              ${listing.status !== "rejected" ? `<button class="secondary-button" data-moderate="reject" type="button">Reject</button>` : ""}
+              <button class="ghost-button" data-moderate="delete" type="button">Delete</button>
+            </div>
+          </div>` : ""}
         <p class="detail-disclaimer">Prototype listing. Skillona Globe is an advertising platform and does not verify ownership, legal status or listing accuracy in this demo.</p>
       </div>
     `;
     els.detailPanel.classList.add("is-open");
     els.detailPanel.setAttribute("aria-hidden", "false");
-    document.getElementById("contactSeller").addEventListener("click", () => showToast("Seller messaging will be connected in the account stage"));
     document.getElementById("saveDetail").addEventListener("click", () => toggleFavorite(listing.id, true));
+    initInquiryBox(listing);
+    loadOwnerInquiries(listing);
+    els.detailContent.querySelectorAll("[data-moderate]").forEach(btn => {
+      btn.addEventListener("click", () => moderateListing(listing, btn.dataset.moderate));
+    });
+    els.detailContent.querySelectorAll("[data-promote]").forEach(btn => {
+      btn.addEventListener("click", () => startPromotion(listing, btn.dataset.promote, btn));
+    });
     if (fly) flyTo(listing.longitude, listing.latitude, 75000);
+  }
+
+  function initInquiryBox(listing) {
+    const box = document.getElementById("inquiryBox");
+    if (!box) return;
+    if (!sb) { box.hidden = true; return; }
+    // Prefill for signed-in users
+    if (state.session) {
+      const emailInput = document.getElementById("inquiryEmail");
+      if (emailInput && !emailInput.value) emailInput.value = state.session.user.email || "";
+    }
+    document.getElementById("sendInquiry").onclick = () => sendInquiry(listing);
+  }
+
+  async function sendInquiry(listing) {
+    const name = document.getElementById("inquiryName").value.trim();
+    const email = document.getElementById("inquiryEmail").value.trim();
+    const message = document.getElementById("inquiryMessage").value.trim();
+    if (!message) { showToast("Write a message for the seller"); return; }
+    if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { showToast("Enter a valid email so the seller can reply"); return; }
+    const button = document.getElementById("sendInquiry");
+    button.disabled = true;
+    button.textContent = "Sending…";
+    try {
+      const { error } = await sb.from("inquiries").insert({
+        listing_id: listing.id,
+        sender_user_id: state.session ? state.session.user.id : null,
+        sender_name: name || null,
+        sender_email: email,
+        message
+      });
+      if (error) throw error;
+      document.getElementById("inquiryMessage").value = "";
+      showToast("Inquiry sent to the seller");
+    } catch (err) {
+      console.error("Sending inquiry failed:", err);
+      showToast(`Sending failed: ${String(err && err.message || err).slice(0, 120)}`);
+    } finally {
+      button.disabled = false;
+      button.textContent = "Send inquiry";
+    }
+  }
+
+  async function loadOwnerInquiries(listing) {
+    // Only the listing owner (or an admin) can read these — enforced by RLS too
+    if (!sb || !state.session || !listing.remote) return;
+    const isOwner = listing.ownerId === state.session.user.id;
+    if (!isOwner && !state.isAdmin) return;
+    try {
+      const { data, error } = await sb
+        .from("inquiries")
+        .select("sender_name,sender_email,message,created_at")
+        .eq("listing_id", listing.id)
+        .order("created_at", { ascending: false })
+        .limit(50);
+      if (error) throw error;
+      const box = document.getElementById("ownerInquiries");
+      if (!box) return;
+      if (!data || !data.length) {
+        box.hidden = false;
+        box.innerHTML = `<strong>Inquiries for your listing</strong><p class="inquiry-empty">No inquiries yet.</p>`;
+        return;
+      }
+      box.hidden = false;
+      box.innerHTML = `<strong>Inquiries for your listing (${data.length})</strong>` + data.map(q => `
+        <div class="inquiry-item">
+          <div class="inquiry-meta">${escapeHtml(q.sender_name || "Anonymous")} · <a href="mailto:${escapeHtml(q.sender_email || "")}">${escapeHtml(q.sender_email || "")}</a> · ${escapeHtml(String(q.created_at || "").slice(0, 10))}</div>
+          <div class="inquiry-message">${escapeHtml(q.message)}</div>
+        </div>`).join("");
+    } catch (err) {
+      console.error("Loading inquiries failed:", err);
+    }
+  }
+
+  async function startPromotion(listing, product, button) {
+    if (!sb || !state.session) { openAuth("Sign in to promote your listing."); return; }
+    button.disabled = true;
+    const originalText = button.textContent;
+    button.textContent = "Opening checkout…";
+    try {
+      const { data, error } = await sb.functions.invoke("create-checkout", {
+        body: {
+          listing_id: listing.id,
+          product,
+          return_url: window.location.origin
+        }
+      });
+      if (error) throw error;
+      if (!data || !data.url) throw new Error(data && data.error ? data.error : "Checkout could not be created");
+      window.location.href = data.url;
+    } catch (err) {
+      console.error("Starting checkout failed:", err);
+      showToast(`Checkout failed: ${String(err && err.message || err).slice(0, 120)}`);
+      button.disabled = false;
+      button.textContent = originalText;
+    }
+  }
+
+  async function moderateListing(listing, action) {
+    if (!sb || !state.isAdmin) return;
+    try {
+      if (action === "delete") {
+        if (!window.confirm("Permanently delete this listing?")) return;
+        const { error } = await sb.from("listings").delete().eq("id", listing.id);
+        if (error) throw error;
+        showToast("Listing deleted");
+        closeDetails();
+      } else if (action === "approve") {
+        const { error } = await sb.from("listings")
+          .update({ status: "active", published_at: new Date().toISOString() })
+          .eq("id", listing.id);
+        if (error) throw error;
+        showToast("Listing approved and published");
+      } else if (action === "reject") {
+        const { error } = await sb.from("listings").update({ status: "rejected" }).eq("id", listing.id);
+        if (error) throw error;
+        showToast("Listing rejected");
+        closeDetails();
+      }
+      await refreshRemoteListings();
+      if (action === "approve") openDetails(listing.id);
+    } catch (err) {
+      console.error("Moderation failed:", err);
+      showToast(`Action failed: ${String(err && err.message || err).slice(0, 120)}`);
+    }
   }
 
   function closeDetails() {
@@ -351,14 +664,87 @@
     state.selectedId = null;
   }
 
-  function toggleFavorite(id, keepDetailOpen = false) {
-    if (state.favorites.has(id)) state.favorites.delete(id);
-    else state.favorites.add(id);
-    localStorage.setItem("skillona-favorites", JSON.stringify([...state.favorites]));
+  function favoritesKey() {
+    return state.session ? `skillona-favorites-${state.session.user.id}` : "skillona-favorites-anon";
+  }
+
+  function isRemoteListingId(id) {
+    return state.allListings.some(l => String(l.id) === String(id) && l.remote);
+  }
+
+  function persistLocalFavorites() {
+    // Demo (seed) listings don't exist in the database, so they are kept
+    // in a per-user local list; real listings live in the favorites table.
+    const demoIds = [...state.favorites].filter(id => !isRemoteListingId(id));
+    localStorage.setItem(favoritesKey(), JSON.stringify(demoIds));
+  }
+
+  async function toggleFavorite(id, keepDetailOpen = false) {
+    const adding = !state.favorites.has(id);
+    if (adding) state.favorites.add(id);
+    else state.favorites.delete(id);
+
+    if (sb && state.session && isRemoteListingId(id)) {
+      try {
+        if (adding) {
+          await sb.from("favorites").upsert({ user_id: state.session.user.id, listing_id: id });
+        } else {
+          await sb.from("favorites").delete().eq("user_id", state.session.user.id).eq("listing_id", id);
+        }
+      } catch (err) {
+        console.error("Saving favorite failed:", err);
+      }
+    }
+    persistLocalFavorites();
+
     updateFavoriteCount();
     renderListingCards(state.visibleListings);
     if (keepDetailOpen && state.selectedId) openDetails(state.selectedId, false);
-    showToast(state.favorites.has(id) ? "Property saved" : "Property removed from saved list");
+    showToast(adding ? "Property saved" : "Property removed from saved list");
+  }
+
+  async function loadFavorites() {
+    // Start from this user's local list (demo listings)
+    const local = readStorage(favoritesKey(), []);
+    state.favorites = new Set(local);
+    // One-time migration of the old shared key, then remove it for good
+    if (!state.session) {
+      const legacy = readStorage("skillona-favorites", []);
+      if (legacy.length) {
+        legacy.forEach(id => state.favorites.add(id));
+        localStorage.setItem(favoritesKey(), JSON.stringify([...state.favorites]));
+      }
+      localStorage.removeItem("skillona-favorites");
+    }
+
+    // Add account favorites from the database when signed in
+    if (sb && state.session) {
+      try {
+        const { data, error } = await sb.from("favorites").select("listing_id").eq("user_id", state.session.user.id);
+        if (error) throw error;
+        (data || []).forEach(row => state.favorites.add(row.listing_id));
+      } catch (err) {
+        console.error("Loading favorites failed:", err);
+      }
+    }
+    updateFavoriteCount();
+    renderListingCards(state.visibleListings);
+  }
+
+  function showMyListings() {
+    if (!state.session) {
+      openAuth("Sign in to see your listings.");
+      return;
+    }
+    state.searchTerm = "";
+    els.searchInput.value = "";
+    const mine = state.allListings.filter(item => item.remote && item.ownerId === state.session.user.id);
+    state.visibleListings = mine;
+    renderListingCards(mine);
+    renderGlobeListings(mine);
+    els.resultCount.textContent = `${mine.length} ${mine.length === 1 ? "listing" : "listings"}`;
+    els.resultContext.textContent = "published by you";
+    if (window.innerWidth <= 980) els.sidebar.classList.add("is-open");
   }
 
   function showFavorites() {
@@ -377,7 +763,120 @@
     els.favoriteCount.textContent = state.favorites.size;
   }
 
+  function startLocationPick() {
+    if (!state.viewer) { showToast("The globe is still loading"); return; }
+    state.pickingLocation = true;
+    els.addListingModal.hidden = true;
+    els.modalBackdrop.hidden = true;
+    document.body.style.overflow = "";
+    els.sidebar.classList.remove("is-open");
+    state.viewer.scene.canvas.style.cursor = "crosshair";
+    showToast("Click on the globe exactly where the property is — zoom in first for accuracy");
+  }
+
+  function finishLocationPick(latitude, longitude) {
+    state.pickingLocation = false;
+    state.viewer.scene.canvas.style.cursor = "";
+    els.addListingForm.elements.latitude.value = latitude;
+    els.addListingForm.elements.longitude.value = longitude;
+    if (els.pickedLocationText) {
+      els.pickedLocationText.textContent = `Pin set: ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
+    }
+    if (state.pickEntity) state.viewer.entities.remove(state.pickEntity);
+    state.pickEntity = state.viewer.entities.add({
+      position: Cesium.Cartesian3.fromDegrees(longitude, latitude),
+      point: {
+        pixelSize: 14,
+        color: Cesium.Color.fromCssColorString("#f59e0b"),
+        outlineColor: Cesium.Color.WHITE,
+        outlineWidth: 2,
+        disableDepthTestDistance: Number.POSITIVE_INFINITY
+      }
+    });
+    state.viewer.scene.requestRender();
+    els.modalBackdrop.hidden = false;
+    els.addListingModal.hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+
+  function clearPickEntity() {
+    if (state.pickEntity && state.viewer) {
+      state.viewer.entities.remove(state.pickEntity);
+      state.pickEntity = null;
+      state.viewer.scene.requestRender();
+    }
+  }
+
+  function handleAuthButton() {
+    if (state.session) {
+      sb.auth.signOut();
+      showToast("Signed out");
+      return;
+    }
+    openAuth();
+  }
+
+  function openAuth(message) {
+    if (!sb) { showToast("Database is not configured"); return; }
+    els.modalBackdrop.hidden = false;
+    els.authModal.hidden = false;
+    els.authMessage.textContent = message || "";
+    document.body.style.overflow = "hidden";
+    setTimeout(() => els.authForm.elements.email.focus(), 10);
+  }
+
+  function closeAuth() {
+    if (!els.authModal) return;
+    els.authModal.hidden = true;
+    if (els.addListingModal.hidden) els.modalBackdrop.hidden = true;
+    document.body.style.overflow = "";
+  }
+
+  async function handleAuth(event, mode) {
+    event.preventDefault();
+    const email = els.authForm.elements.email.value.trim();
+    const password = els.authForm.elements.password.value;
+    if (!email || password.length < 6) {
+      els.authMessage.textContent = "Enter your email and a password of at least 6 characters.";
+      return;
+    }
+    els.authMessage.textContent = mode === "signup" ? "Creating account…" : "Signing in…";
+    try {
+      if (mode === "signup") {
+        const { data, error } = await sb.auth.signUp({ email, password });
+        if (error) throw error;
+        if (data.session) {
+          els.authForm.reset();
+          closeAuth();
+          showToast("Account created — you are signed in");
+        } else {
+          els.authMessage.textContent = "Check your email and confirm your address, then sign in here.";
+        }
+      } else {
+        const { error } = await sb.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+        els.authForm.reset();
+        closeAuth();
+        showToast("Signed in");
+      }
+    } catch (err) {
+      els.authMessage.textContent = friendlyAuthError(err);
+    }
+  }
+
+  function friendlyAuthError(err) {
+    const msg = String(err && err.message || err);
+    if (/invalid login credentials/i.test(msg)) return "Wrong email or password, or the account does not exist yet.";
+    if (/email not confirmed/i.test(msg)) return "Confirm your email first — check your inbox.";
+    if (/already registered/i.test(msg)) return "This email already has an account — use Sign in.";
+    return msg;
+  }
+
   function openAddListing() {
+    if (sb && !state.session) {
+      openAuth("Sign in or create an account to publish a listing.");
+      return;
+    }
     els.modalBackdrop.hidden = false;
     els.addListingModal.hidden = false;
     document.body.style.overflow = "hidden";
@@ -390,45 +889,94 @@
     document.body.style.overflow = "";
   }
 
-  function submitListing(event) {
+  async function submitListing(event) {
     event.preventDefault();
-    const form = new FormData(event.currentTarget);
-    const listing = {
-      id: `user-${Date.now()}`,
-      title: form.get("title").trim(),
-      country: form.get("country").trim(),
-      city: form.get("city").trim(),
-      latitude: Number(form.get("latitude")),
-      longitude: Number(form.get("longitude")),
-      type: form.get("type"),
-      transaction: form.get("transaction"),
-      price: Number(form.get("price")),
-      currency: "EUR",
-      area: Number(form.get("area")),
-      bedrooms: Number(form.get("bedrooms") || 0),
-      bathrooms: Number(form.get("bathrooms") || 0),
-      coastal: form.get("coastal") === "on",
-      featured: false,
-      createdAt: new Date().toISOString().slice(0, 10),
-      image: form.get("image").trim() || fallbackImage,
-      description: form.get("description").trim()
-    };
+    const formEl = event.currentTarget;
+    const form = new FormData(formEl);
+    const latitude = Number(form.get("latitude"));
+    const longitude = Number(form.get("longitude"));
 
-    if (!Number.isFinite(listing.latitude) || listing.latitude < -90 || listing.latitude > 90
-      || !Number.isFinite(listing.longitude) || listing.longitude < -180 || listing.longitude > 180) {
+    if (!Number.isFinite(latitude) || latitude < -90 || latitude > 90
+      || !Number.isFinite(longitude) || longitude < -180 || longitude > 180) {
       showToast("Enter valid latitude and longitude coordinates");
       return;
     }
 
-    const userListings = JSON.parse(localStorage.getItem("skillona-user-listings") || "[]");
-    userListings.push(listing);
-    localStorage.setItem("skillona-user-listings", JSON.stringify(userListings));
-    state.allListings.push(listing);
-    event.currentTarget.reset();
-    closeAddListing();
-    resetFilters();
-    openDetails(listing.id, true);
-    showToast("Test listing published on the globe");
+    if (!sb) {
+      showToast("Database is not configured");
+      return;
+    }
+    if (!state.session) {
+      openAuth("Sign in to publish a listing.");
+      return;
+    }
+
+    const userId = state.session.user.id;
+    els.publishButton.disabled = true;
+    els.publishButton.textContent = "Publishing…";
+
+    try {
+      // 1) Upload photo if provided
+      let imageUrl = String(form.get("image") || "").trim();
+      const photo = form.get("photo");
+      if (photo && photo.size > 0) {
+        if (photo.size > 8 * 1024 * 1024) throw new Error("Photo is too large (max 8 MB).");
+        const ext = (photo.name.split(".").pop() || "jpg").toLowerCase().replace(/[^a-z0-9]/g, "") || "jpg";
+        const path = `${userId}/${Date.now()}.${ext}`;
+        const { error: upErr } = await sb.storage.from("listing-photos").upload(path, photo, {
+          contentType: photo.type || "image/jpeg",
+          upsert: false
+        });
+        if (upErr) throw upErr;
+        imageUrl = sb.storage.from("listing-photos").getPublicUrl(path).data.publicUrl;
+      }
+
+      // 2) Insert the listing (location as WKT point; latitude/longitude are computed by the database)
+      const { data: inserted, error: insErr } = await sb.from("listings").insert({
+        user_id: userId,
+        title: String(form.get("title")).trim(),
+        country: String(form.get("country")).trim(),
+        city: String(form.get("city")).trim(),
+        location: `SRID=4326;POINT(${longitude} ${latitude})`,
+        property_type: form.get("type"),
+        transaction_type: form.get("transaction") === "sale" ? "sale" : "long_term_rent",
+        price: Number(form.get("price")),
+        currency: "EUR",
+        interior_area: Number(form.get("area")),
+        bedrooms: Number(form.get("bedrooms") || 0),
+        bathrooms: Number(form.get("bathrooms") || 0),
+        sea_view: form.get("coastal") === "on",
+        description: String(form.get("description")).trim(),
+        status: "pending_review"
+      }).select("id").single();
+      if (insErr) throw insErr;
+
+      // 3) Attach the image
+      if (imageUrl) {
+        const { error: imgErr } = await sb.from("listing_images").insert({
+          listing_id: inserted.id,
+          file_url: imageUrl,
+          is_primary: true,
+          sort_order: 0
+        });
+        if (imgErr) console.error("Image record failed:", imgErr);
+      }
+
+      formEl.reset();
+      if (els.pickedLocationText) els.pickedLocationText.textContent = "";
+      clearPickEntity();
+      closeAddListing();
+      await refreshRemoteListings();
+      resetFilters();
+      openDetails(inserted.id, true);
+      showToast("Listing submitted — it goes live after moderator approval");
+    } catch (err) {
+      console.error("Publishing failed:", err);
+      showToast(`Publishing failed: ${String(err && err.message || err).slice(0, 120)}`);
+    } finally {
+      els.publishButton.disabled = false;
+      els.publishButton.textContent = "Publish listing";
+    }
   }
 
   function flyTo(longitude, latitude, height) {
