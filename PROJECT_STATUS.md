@@ -25,7 +25,9 @@ Stage 1: Functional visual prototype
 - [x] Push this prototype to a development branch (`globe-mvp`)
 - [x] Open a draft pull request (#1)
 - [x] Prepare Supabase + PostGIS schema (`supabase/migrations/0001_init_schema.sql`)
-- [ ] Create Supabase project and run the migration (see `docs/SUPABASE-UPUTE.md`)
+- [x] Create Supabase project and run migration 0001
+- [ ] Run migration 0002 in the SQL Editor (coords + photo upload permissions)
+- [x] Connect the globe to the live database: auth, listing publication, photo upload
 - [ ] Confirm Vercel preview deployment
 - [ ] Review UI and globe behavior
 - [ ] Build Supabase schema with PostGIS

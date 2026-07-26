@@ -10,6 +10,10 @@
     }
   }
 
+  const sb = (window.supabase && window.SUPABASE_URL && window.SUPABASE_ANON_KEY)
+    ? window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY)
+    : null;
+
   const state = {
     viewer: null,
     dataSource: null,
@@ -17,7 +21,8 @@
     visibleListings: [],
     favorites: new Set(readStorage("skillona-favorites", [])),
     selectedId: null,
-    searchTerm: ""
+    searchTerm: "",
+    session: null
   };
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -28,13 +33,85 @@
 
   document.addEventListener("DOMContentLoaded", init);
 
-  function init() {
+  async function init() {
     cacheElements();
-    state.allListings = loadListings();
+    state.allListings = loadLocalListings();
     bindEvents();
     updateFavoriteCount();
     initGlobe();
     applyFilters();
+    if (sb) {
+      const { data } = await sb.auth.getSession();
+      state.session = data && data.session ? data.session : null;
+      updateAuthUi();
+      sb.auth.onAuthStateChange((_event, session) => {
+        state.session = session;
+        updateAuthUi();
+      });
+      await refreshRemoteListings();
+    }
+  }
+
+  async function refreshRemoteListings() {
+    if (!sb) return;
+    try {
+      const { data, error } = await sb
+        .from("listings")
+        .select("id,title,country,city,latitude,longitude,property_type,transaction_type,price,currency,interior_area,bedrooms,bathrooms,sea_view,is_featured,published_at,created_at,description,status,user_id,listing_images(file_url,is_primary,sort_order)")
+        .in("status", ["active"])
+        .order("created_at", { ascending: false })
+        .limit(500);
+      if (error) throw error;
+      const remote = (data || []).map(mapDbListing);
+      state.allListings = [...remote, ...(window.SEED_LISTINGS || [])];
+      applyFilters();
+      if (state.selectedId) {
+        const stillThere = state.allListings.some(l => String(l.id) === String(state.selectedId));
+        if (!stillThere) closeDetails();
+      }
+    } catch (err) {
+      console.error("Loading listings from database failed:", err);
+      showToast("Live database unavailable — showing demo listings");
+    }
+  }
+
+  function mapDbListing(row) {
+    const images = Array.isArray(row.listing_images) ? [...row.listing_images] : [];
+    images.sort((a, b) => Number(b.is_primary) - Number(a.is_primary) || (a.sort_order || 0) - (b.sort_order || 0));
+    return {
+      id: row.id,
+      title: row.title,
+      country: row.country || "",
+      city: row.city || "",
+      latitude: Number(row.latitude),
+      longitude: Number(row.longitude),
+      type: row.property_type,
+      transaction: row.transaction_type === "sale" ? "sale" : "rent",
+      price: Number(row.price || 0),
+      currency: row.currency || "EUR",
+      area: Number(row.interior_area || 0),
+      bedrooms: Number(row.bedrooms || 0),
+      bathrooms: Number(row.bathrooms || 0),
+      coastal: Boolean(row.sea_view),
+      featured: Boolean(row.is_featured),
+      createdAt: String(row.published_at || row.created_at || "").slice(0, 10),
+      image: images.length ? images[0].file_url : fallbackImage,
+      description: row.description || "",
+      remote: true,
+      ownerId: row.user_id
+    };
+  }
+
+  function updateAuthUi() {
+    if (!els.authButton) return;
+    if (state.session && state.session.user) {
+      const email = state.session.user.email || "Account";
+      els.authButton.textContent = `${email} · Sign out`;
+      els.authButton.title = "Click to sign out";
+    } else {
+      els.authButton.textContent = "Sign in";
+      els.authButton.title = "";
+    }
   }
 
   function cacheElements() {
@@ -43,11 +120,12 @@
       "coastalFilter", "applyFilters", "resetFilters", "sortSelect", "listingResults", "resultCount",
       "resultContext", "detailPanel", "detailContent", "closeDetail", "openAddListing", "closeAddListing",
       "addListingModal", "modalBackdrop", "addListingForm", "toast", "favoriteCount", "favoritesButton",
-      "resetGlobe", "locateMediterranean", "loadingState", "sidebar", "openSidebar", "closeSidebar"
+      "resetGlobe", "locateMediterranean", "loadingState", "sidebar", "openSidebar", "closeSidebar",
+      "authButton", "authModal", "closeAuth", "authForm", "authMessage", "signUpButton", "publishButton"
     ].forEach(id => { els[id] = document.getElementById(id); });
   }
 
-  function loadListings() {
+  function loadLocalListings() {
     const userListings = readStorage("skillona-user-listings", []);
     return [...(window.SEED_LISTINGS || []), ...userListings];
   }
@@ -75,17 +153,22 @@
     els.closeDetail.addEventListener("click", closeDetails);
     els.openAddListing.addEventListener("click", openAddListing);
     els.closeAddListing.addEventListener("click", closeAddListing);
-    els.modalBackdrop.addEventListener("click", closeAddListing);
+    els.modalBackdrop.addEventListener("click", () => { closeAddListing(); closeAuth(); });
     els.addListingForm.addEventListener("submit", submitListing);
     els.resetGlobe.addEventListener("click", viewWorld);
     els.locateMediterranean.addEventListener("click", () => flyTo(17.5, 38.5, 4200000));
     els.favoritesButton.addEventListener("click", showFavorites);
     els.openSidebar.addEventListener("click", () => els.sidebar.classList.add("is-open"));
     els.closeSidebar.addEventListener("click", () => els.sidebar.classList.remove("is-open"));
+    if (els.authButton) els.authButton.addEventListener("click", handleAuthButton);
+    if (els.closeAuth) els.closeAuth.addEventListener("click", closeAuth);
+    if (els.authForm) els.authForm.addEventListener("submit", event => handleAuth(event, "signin"));
+    if (els.signUpButton) els.signUpButton.addEventListener("click", event => handleAuth(event, "signup"));
     window.addEventListener("keydown", event => {
       if (event.key === "Escape") {
         closeDetails();
         closeAddListing();
+        closeAuth();
         els.sidebar.classList.remove("is-open");
       }
     });
@@ -377,7 +460,76 @@
     els.favoriteCount.textContent = state.favorites.size;
   }
 
+  function handleAuthButton() {
+    if (state.session) {
+      sb.auth.signOut();
+      showToast("Signed out");
+      return;
+    }
+    openAuth();
+  }
+
+  function openAuth(message) {
+    if (!sb) { showToast("Database is not configured"); return; }
+    els.modalBackdrop.hidden = false;
+    els.authModal.hidden = false;
+    els.authMessage.textContent = message || "";
+    document.body.style.overflow = "hidden";
+    setTimeout(() => els.authForm.elements.email.focus(), 10);
+  }
+
+  function closeAuth() {
+    if (!els.authModal) return;
+    els.authModal.hidden = true;
+    if (els.addListingModal.hidden) els.modalBackdrop.hidden = true;
+    document.body.style.overflow = "";
+  }
+
+  async function handleAuth(event, mode) {
+    event.preventDefault();
+    const email = els.authForm.elements.email.value.trim();
+    const password = els.authForm.elements.password.value;
+    if (!email || password.length < 6) {
+      els.authMessage.textContent = "Enter your email and a password of at least 6 characters.";
+      return;
+    }
+    els.authMessage.textContent = mode === "signup" ? "Creating account…" : "Signing in…";
+    try {
+      if (mode === "signup") {
+        const { data, error } = await sb.auth.signUp({ email, password });
+        if (error) throw error;
+        if (data.session) {
+          els.authForm.reset();
+          closeAuth();
+          showToast("Account created — you are signed in");
+        } else {
+          els.authMessage.textContent = "Check your email and confirm your address, then sign in here.";
+        }
+      } else {
+        const { error } = await sb.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+        els.authForm.reset();
+        closeAuth();
+        showToast("Signed in");
+      }
+    } catch (err) {
+      els.authMessage.textContent = friendlyAuthError(err);
+    }
+  }
+
+  function friendlyAuthError(err) {
+    const msg = String(err && err.message || err);
+    if (/invalid login credentials/i.test(msg)) return "Wrong email or password, or the account does not exist yet.";
+    if (/email not confirmed/i.test(msg)) return "Confirm your email first — check your inbox.";
+    if (/already registered/i.test(msg)) return "This email already has an account — use Sign in.";
+    return msg;
+  }
+
   function openAddListing() {
+    if (sb && !state.session) {
+      openAuth("Sign in or create an account to publish a listing.");
+      return;
+    }
     els.modalBackdrop.hidden = false;
     els.addListingModal.hidden = false;
     document.body.style.overflow = "hidden";
@@ -390,45 +542,93 @@
     document.body.style.overflow = "";
   }
 
-  function submitListing(event) {
+  async function submitListing(event) {
     event.preventDefault();
-    const form = new FormData(event.currentTarget);
-    const listing = {
-      id: `user-${Date.now()}`,
-      title: form.get("title").trim(),
-      country: form.get("country").trim(),
-      city: form.get("city").trim(),
-      latitude: Number(form.get("latitude")),
-      longitude: Number(form.get("longitude")),
-      type: form.get("type"),
-      transaction: form.get("transaction"),
-      price: Number(form.get("price")),
-      currency: "EUR",
-      area: Number(form.get("area")),
-      bedrooms: Number(form.get("bedrooms") || 0),
-      bathrooms: Number(form.get("bathrooms") || 0),
-      coastal: form.get("coastal") === "on",
-      featured: false,
-      createdAt: new Date().toISOString().slice(0, 10),
-      image: form.get("image").trim() || fallbackImage,
-      description: form.get("description").trim()
-    };
+    const formEl = event.currentTarget;
+    const form = new FormData(formEl);
+    const latitude = Number(form.get("latitude"));
+    const longitude = Number(form.get("longitude"));
 
-    if (!Number.isFinite(listing.latitude) || listing.latitude < -90 || listing.latitude > 90
-      || !Number.isFinite(listing.longitude) || listing.longitude < -180 || listing.longitude > 180) {
+    if (!Number.isFinite(latitude) || latitude < -90 || latitude > 90
+      || !Number.isFinite(longitude) || longitude < -180 || longitude > 180) {
       showToast("Enter valid latitude and longitude coordinates");
       return;
     }
 
-    const userListings = JSON.parse(localStorage.getItem("skillona-user-listings") || "[]");
-    userListings.push(listing);
-    localStorage.setItem("skillona-user-listings", JSON.stringify(userListings));
-    state.allListings.push(listing);
-    event.currentTarget.reset();
-    closeAddListing();
-    resetFilters();
-    openDetails(listing.id, true);
-    showToast("Test listing published on the globe");
+    if (!sb) {
+      showToast("Database is not configured");
+      return;
+    }
+    if (!state.session) {
+      openAuth("Sign in to publish a listing.");
+      return;
+    }
+
+    const userId = state.session.user.id;
+    els.publishButton.disabled = true;
+    els.publishButton.textContent = "Publishing…";
+
+    try {
+      // 1) Upload photo if provided
+      let imageUrl = String(form.get("image") || "").trim();
+      const photo = form.get("photo");
+      if (photo && photo.size > 0) {
+        if (photo.size > 8 * 1024 * 1024) throw new Error("Photo is too large (max 8 MB).");
+        const ext = (photo.name.split(".").pop() || "jpg").toLowerCase().replace(/[^a-z0-9]/g, "") || "jpg";
+        const path = `${userId}/${Date.now()}.${ext}`;
+        const { error: upErr } = await sb.storage.from("listing-photos").upload(path, photo, {
+          contentType: photo.type || "image/jpeg",
+          upsert: false
+        });
+        if (upErr) throw upErr;
+        imageUrl = sb.storage.from("listing-photos").getPublicUrl(path).data.publicUrl;
+      }
+
+      // 2) Insert the listing (location as WKT point; latitude/longitude are computed by the database)
+      const { data: inserted, error: insErr } = await sb.from("listings").insert({
+        user_id: userId,
+        title: String(form.get("title")).trim(),
+        country: String(form.get("country")).trim(),
+        city: String(form.get("city")).trim(),
+        location: `SRID=4326;POINT(${longitude} ${latitude})`,
+        property_type: form.get("type"),
+        transaction_type: form.get("transaction") === "sale" ? "sale" : "long_term_rent",
+        price: Number(form.get("price")),
+        currency: "EUR",
+        interior_area: Number(form.get("area")),
+        bedrooms: Number(form.get("bedrooms") || 0),
+        bathrooms: Number(form.get("bathrooms") || 0),
+        sea_view: form.get("coastal") === "on",
+        description: String(form.get("description")).trim(),
+        status: "active",
+        published_at: new Date().toISOString()
+      }).select("id").single();
+      if (insErr) throw insErr;
+
+      // 3) Attach the image
+      if (imageUrl) {
+        const { error: imgErr } = await sb.from("listing_images").insert({
+          listing_id: inserted.id,
+          file_url: imageUrl,
+          is_primary: true,
+          sort_order: 0
+        });
+        if (imgErr) console.error("Image record failed:", imgErr);
+      }
+
+      formEl.reset();
+      closeAddListing();
+      await refreshRemoteListings();
+      resetFilters();
+      openDetails(inserted.id, true);
+      showToast("Listing published on the globe");
+    } catch (err) {
+      console.error("Publishing failed:", err);
+      showToast(`Publishing failed: ${String(err && err.message || err).slice(0, 120)}`);
+    } finally {
+      els.publishButton.disabled = false;
+      els.publishButton.textContent = "Publish listing";
+    }
   }
 
   function flyTo(longitude, latitude, height) {

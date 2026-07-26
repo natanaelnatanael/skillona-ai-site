@@ -45,8 +45,15 @@ update public.profiles set account_type = 'admin'
 where id = (select id from auth.users where email = 'TVOJ-EMAIL');
 ```
 
-## Sljedeći korak nakon ovoga
+## Druga migracija
 
-Kad mi javiš `Project URL` i `anon` ključ, spajam prototip globusa na
-stvarnu bazu: registracija, objava oglasa s markerom na globusu i
-fotografije umjesto localStorage verzije.
+Kad se pojavi datoteka `supabase/migrations/0002_coords_and_storage.sql`,
+ponovi isti postupak u SQL Editoru (kopiraj sadržaj → Run). Ona dodaje
+koordinate za čitanje i dozvole za upload fotografija.
+
+## Brže testiranje registracije (opcionalno)
+
+Supabase po zadanom traži potvrdu e-maila pri registraciji. Za brže
+testiranje možeš to privremeno isključiti:
+**Authentication → Sign In / Up → Email → isključi "Confirm email"**.
+Prije javnog lansiranja ponovno uključi.
